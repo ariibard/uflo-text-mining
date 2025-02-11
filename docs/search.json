@@ -4,10 +4,10 @@
     "href": "clase1.html",
     "title": "Clase 1 Introducción al Text Mining",
     "section": "",
-    "text": "Temas de la Unidad\nEn esta unidad abordaremos los fundamentos y conceptos de Text Mining. Datos estructurados y no estructurados. Análisis textual y documental. Flujo de trabajo en un proyecto de text mining. Text mining en el contexto de la investigación cualitativa y cuantitativa. Usos y aplicaciones en ciencias sociales.",
+    "text": "Objetivo de la clase\nEn esta clase realizaremos la presentación de la materia. Se buscará introducir el concepto de minería de texto y la diferencia entre datos estructurados y no estructurados.",
     "crumbs": [
       "**Unidad 1. La minería de texto (text-mining) y la investigación social**",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Clase 1 Introducción al *Text Mining*</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Clase 1 Introducción al *Text Mining*</span>"
     ]
   },
   {
@@ -18,7 +18,7 @@
     "text": "Presentación",
     "crumbs": [
       "**Unidad 1. La minería de texto (text-mining) y la investigación social**",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Clase 1 Introducción al *Text Mining*</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Clase 1 Introducción al *Text Mining*</span>"
     ]
   },
   {
@@ -30,6 +30,16 @@
     "crumbs": [
       "**Unidad 1. La minería de texto (text-mining) y la investigación social**",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Summary</span>"
+    ]
+  },
+  {
+    "objectID": "programa.html",
+    "href": "programa.html",
+    "title": "Programa",
+    "section": "",
+    "text": "En esta sección se puede ver y descargar el programa de la materia:",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Programa</span>"
     ]
   }
 ]

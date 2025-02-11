@@ -1,14 +1,17 @@
 # Clase 1 Introducción al *Text Mining*
 
-## Temas de la Unidad
+## Objetivo de la clase
 
-En esta unidad abordaremos los fundamentos y conceptos de Text Mining. Datos estructurados y no estructurados. Análisis textual y documental. Flujo de trabajo en un proyecto de text mining. Text mining en el contexto de la investigación cualitativa y cuantitativa. Usos y aplicaciones en ciencias sociales.
+En esta clase realizaremos la presentación de la materia. Se buscará introducir el concepto de minería de texto y la diferencia entre datos estructurados y no estructurados. 
+
 
 ## Presentación
 
 <iframe src="presentaciones/clase_1/intro_tm.html" width="100%" height="600px">
 
 </iframe>
+
+
 
 # Bibliografía
 

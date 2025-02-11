@@ -4,3 +4,15 @@ editor:
   markdown: 
     wrap: 72
 ---
+
+Este libro sirve como material de apoyo para la materia Taller de
+Investigación IV de la Lic. en Sociología de la Universidad de Flores
+(UFLO)
+
+## Programa 
+
+En esta sección se puede ver y descargar el programa de la materia:
+
+<iframe src="https://docs.google.com/document/d/1wvIiqL3jCLXhu9fbi92XlS4TlM62-6xT/edit?usp=sharing&amp;ouid=109888532601556427161&amp;rtpof=true&amp;sd=true" width="100%" height="600px">
+
+</iframe>
