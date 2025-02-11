@@ -1,0 +1,228 @@
+---
+lightbox: true
+format: 
+  revealjs:
+    theme: [default, custom.scss]
+    width: 1600
+    height: 900
+    # logo: imagenes/logo.png
+    # css: logo.css
+    fig.align: "left"
+embed-resources: true
+---
+
+##  {.title}
+
+Taller de Investigación IV 
+
+::: r-fit-text
+[Text Mining]{.flow} 
+
+Para las Cs. Sociales
+:::
+
+
+
+
+# Taller de Investigación IV
+
+::: incremental
+-   📑 Introducirlos en el análisis de datos no estructurados
+
+-   🕵️‍♀️ Metodología cualitativa + Análisis Estadístico
+
+-   💻 Procesamiento de lenguaje Natural
+:::
+
+
+# Herramientas <img src="https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/Earth.gif?raw=true" width="40"/> {.title}
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/182px-R_logo.svg.png){fig-align="center"}
+
+<!-- # Apoyan <img src="https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/Rocket.gif?raw=true" width="40"/> {.title} -->
+
+<!-- ![](imagenes/apoyan.png){fig-align="center"} -->
+
+<!-- # R Ladies Buenos Aires <img src="https://i.gifer.com/YVP8.gif" width="120px"/> {.ladies} -->
+
+<!-- ::::: columns -->
+
+<!-- ::: {.column width="30%"} -->
+
+<!-- ![](https://rladiesba.netlify.app/author/rladies-buenos-aires/avatar_huae50964fd4ece6c135015c99a5e9a56e_144270_270x270_fill_lanczos_center_2.png){width="500"} -->
+
+<!-- ::: -->
+
+<!-- ::: {.column width="70%"} -->
+
+<!-- <br> Capítulo local de RLadies global, una organización mundial que promueve la Diversidad de Género en la comunidad R. Su meta es crear una atmósfera amigable para personas interesadas en programar en R en Buenos Aires que se identifiquen con géneros menos representados en la comunidad de R (que incluye pero no se limita a mujeres cis/trans, hombres trans, personas no binarias, género fluído o agénero). -->
+
+<!-- ::: -->
+
+<!-- ::::: -->
+
+<!-- ## Organizadoras 📝 {.rladies} -->
+
+<!-- ![](imagenes/rladies_organizadoras.png){fig-alt="organizadoras" fig-align="center"} -->
+
+<!-- # R en Buenos Aires <img src="https://media.giphy.com/media/ObNTw8Uzwy6KQ/giphy.gif" width="50px"/> -->
+
+<!-- ::::: columns -->
+
+<!-- ::: {.column width="30%"} -->
+
+<!-- ![](imagenes/renba.png){width="500"} -->
+
+<!-- ::: -->
+
+<!-- ::: {.column width="70%"} -->
+
+<!-- <br> Este grupo surge con la misión de conectar a quienes usan el lenguaje de programación R en Buenos Aires, independientemente de su grado de conocimiento y el ámbito de aplicación del mismo. El objetivo es promover el uso R, el aprendizaje continuo y favorecer la creación de proyectos interdisciplinarios. -->
+
+<!-- ::: -->
+
+<!-- ::::: -->
+
+<!-- # Organizadoras 📝 -->
+
+<!-- ::::: columns -->
+
+<!-- ::: {.column width="50%" style="text-align: center;"} -->
+
+<!-- ![](https://avatars.githubusercontent.com/u/45582182?v=4){width="50%" style="border-radius: 80%; aling: left;"} -->
+
+<!-- **Andrea Gomez Vargas** -->
+
+<!-- ::: -->
+
+<!-- ::: {.column width="50%" style="text-align: center;"} -->
+
+<!-- ![](imagenes/ari.jpg){width="50%" style="border-radius: 80%; aling: left;"} -->
+
+<!-- **Ariana Bardauil** -->
+
+<!-- ::: -->
+
+<!-- ::::: -->
+
+<!-- # Colaboradores <img src="https://media.giphy.com/media/qjqUcgIyRjsl2/giphy.gif" width="90"/> -->
+
+<!-- :::::: columns -->
+
+<!-- ::: {.column width="33%"} -->
+
+<!-- ![](https://avatars.githubusercontent.com/u/64991969?v=4){style="border-radius: 80%;" width="305"} -->
+
+<!-- **Emanuel Ciardullo** -->
+
+<!-- ::: -->
+
+<!-- ::: {.column width="33%"} -->
+
+<!-- ![](imagenes/cande.jpg){style="border-radius: 100%; aling: center;" width="316"} -->
+
+<!-- **Candela Villalonga** -->
+
+<!-- ::: -->
+
+<!-- ::: {.column width="33%"} -->
+
+<!-- ![](imagenes/jose.png){style="border-radius: 80%; aling: center;"} -->
+
+<!-- **Jose García Tácite** -->
+
+<!-- ::: -->
+
+<!-- :::::: -->
+
+<!-- ##  {.rladies background-image="https://i.gifer.com/2yqT.gif" background-size="600px" background-repeat="repeat"} -->
+
+<!-- ::: r-fit-text -->
+
+<!-- ¿Cómo fue -->
+
+<!-- nuestro 2024? -->
+
+<!-- ::: -->
+
+<!-- ## R Ladies BA <img src="https://raw.githubusercontent.com/innng/innng/master/assets/soulgem-homura.gif" width="60"/> {.rladies} -->
+
+<!-- ![](imagenes/2.png){fig-align="center"} -->
+
+<!-- ## R Ladies BA <img src="https://raw.githubusercontent.com/ShahriarShafin/ShahriarShafin/main/Assets/handshake.gif" width="56"/> Rladies Usuahia {.rladies} -->
+
+<!-- ![](imagenes/3.png){fig-align="center"} -->
+
+<!-- ## <img src="https://media.giphy.com/media/7TcdtHOCxo3meUvPgj/giphy.gif" width="42"/> R en Buenos Aires <img src="https://raw.githubusercontent.com/ShahriarShafin/ShahriarShafin/main/Assets/handshake.gif" width="56"/> NIS {.title} -->
+
+<!-- ![](imagenes/5.png){fig-align="center" width="1137"} -->
+
+<!-- ## <img src="https://media2.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif?cid=ecf05e47a0n3gi1bfqntqmob8g9aid1oyj2wr3ds3mg700bl&amp;rid=giphy.gif" width="38"/> R en Buenos Aires <img src="https://raw.githubusercontent.com/ShahriarShafin/ShahriarShafin/main/Assets/handshake.gif" width="56"/> DLM {.title} -->
+
+<!-- ![](imagenes/4.png){fig-align="center"} -->
+
+<!-- ##  {.title} -->
+
+<!-- ::: r-fit-text -->
+
+<!-- [2025]{.hexs} -->
+
+<!-- ::: -->
+
+<!-- # **Club de Lectura de Shiny** {.title} -->
+
+<!-- ::::: columns -->
+
+<!-- ::: {.column width="60%"} -->
+
+<!-- <!-- <br> <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExODBmNzZ2Nm8zNXc3bHZqaXhycTMyOHJ0b2Vma2FmNnZmMnl0czkycSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JEhCPFfqi2Hy8/giphy.gif" width="150%"/> -->
+
+--\>
+
+<!-- ![](imagenes/club_lectura.png) -->
+
+<!-- ::: -->
+
+<!-- ::: {.column width="40%"} -->
+
+<!-- 🗓️ Marzo 2025 -->
+
+<!-- 📚[Mastering Shiny](https://mastering-shiny.org/) -->
+
+<!-- 💟 Junto con [R-Ladies BA](https://rladiesba.netlify.app/) & -->
+
+<!-- [R-Ladies Resistencia-Corrientes](https://twitter.com/rladies_rciacte) -->
+
+<!-- ::: -->
+
+<!-- ::::: -->
+
+<!-- ## Seguinos para enterarte de las novedades 👇🏻👇🏻 {.title} -->
+
+<!-- ![](imagenes/6.png){fig-align="center"} -->
+
+<!-- # 🗓️ Agenda -->
+
+<!-- <br> -->
+
+<!-- +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+ -->
+
+<!-- | <br> ![](https://github.com/SoyAndrea/arcenso/blob/master/man/figures/logo.png?raw=true){width="573" fig-align="center"}                                                                               | **Andrea Gomez Vargas y Emanuel Ciardullo** nos estarán presentando avances y primeros pasos en su experiencia desarrollando el paquete [ARcenso](https://soyandrea.github.io/arcenso/) para la gestión de datos de los censos nacionales de población como parte del programa de campeones y campeonas del software de rOpenSci. | -->
+
+<!-- +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+ -->
+
+<!-- | <br> <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmxxZnJzNXg2enJwNXc5cHFudHF0azZubGpqdzlpMzA3eTR6dHdyZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YnBntKOgnUSBkV7bQH/giphy.gif" width="531"/> | **María Nanton, Jesica Formoso y Betsy Cohen** nos van a presentar diferentes experiencias y oportunidades de becas, conferencias y experiencias de trabajo dentro de la comunidad de R a nivel local como internacional.                                                                                                         | -->
+
+<!-- +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+ -->
+
+<!-- | <img src="https://github.com/seanprashad/slackmoji/blob/master/emoji/blob/blob-wine-gif.gif?raw=true" width="298"/>                                                                                    | Brindis + sorteos                                                                                                                                                                                                                                                                                                                 | -->
+
+<!-- |                                                                                                                                                                                                        |                                                                                                                                                                                                                                                                                                                                   | -->
+
+<!-- |                                                                                                                                                                                                        | <br>                                                                                                                                                                                                                                                                                                                              | -->
+
+<!-- +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+ -->
+
+<!-- # ✨ Empezamos ✨ {.title} -->
+
+<!-- <img src="https://media.giphy.com/media/gH3LO09IOiZIqePwv9/giphy.gif"/> <img src="https://media.giphy.com/media/gH3LO09IOiZIqePwv9/giphy.gif"/> <img src="https://media.giphy.com/media/gH3LO09IOiZIqePwv9/giphy.gif"/> -->
