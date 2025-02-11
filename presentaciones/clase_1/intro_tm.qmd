@@ -13,16 +13,13 @@ embed-resources: true
 
 ##  {.title}
 
-Taller de Investigación IV 
+Taller de Investigación IV
 
 ::: r-fit-text
-[Text Mining]{.flow} 
+Text Mining
 
 Para las Cs. Sociales
 :::
-
-
-
 
 # Taller de Investigación IV
 
@@ -33,7 +30,6 @@ Para las Cs. Sociales
 
 -   💻 Procesamiento de lenguaje Natural
 :::
-
 
 # Herramientas <img src="https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/Earth.gif?raw=true" width="40"/> {.title}
 

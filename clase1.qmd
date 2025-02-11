@@ -6,12 +6,12 @@ En esta unidad abordaremos los fundamentos y conceptos de Text Mining. Datos est
 
 ## Presentación
 
+<iframe src="presentaciones/clase_1/intro_tm.html" width="100%" height="600px">
 
-<iframe src="presentaciones/clase_1/intro_tm.html"></iframe>
-
-
-
+</iframe>
 
 # Bibliografía
 
-<iframe src="bibliografia/libro.pdf" width="100%" height="600px"></iframe>
+<iframe src="bibliografia/libro.pdf" width="100%" height="600px">
+
+</iframe>
