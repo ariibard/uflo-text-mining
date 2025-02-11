@@ -1,0 +1,6 @@
+---
+title: "Sobre este libro"
+editor: 
+  markdown: 
+    wrap: 72
+---

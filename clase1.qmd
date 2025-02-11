@@ -1,0 +1,3 @@
+# Introducción al *Text Mining*
+
+En esta unidad abordaremos los fundamentos y conceptos de Text Mining. Datos estructurados y no estructurados. Análisis textual y documental. Flujo de trabajo en un proyecto de text mining. Text mining en el contexto de la investigación cualitativa y cuantitativa. Usos y aplicaciones en ciencias sociales.

@@ -1,0 +1,45 @@
+project:
+  type: book
+
+book:
+  title: "Taller de investigación IV - Minería de texto"
+  subtitle: "Licenciatura en sociología - UFLO"
+  page-footer: "Realizado con Quarto"
+  favicon: https://www.uflouniversidad.edu.ar/wp-content/uploads/2024/08/wp-home-uflo-color.webp
+  author: "Ariana Bardauil"
+  sidebar:
+    style: docked
+    background: light
+  search: true
+  repo-url: https://github.com/ariibard/uflo-text-mining
+  #repo-actions: [edit]
+  downloads: [pdf, epub]
+  sharing: [twitter, facebook]
+  
+
+
+  
+  chapters:
+    - index.qmd
+    - part: "**Unidad 1. La minería de texto (text-mining) y la investigación social**"
+      chapters:
+        - clase1.qmd
+        - summary.qmd
+    - part: "**Unidad 2. Técnicas de recolección y manipulación de datos textuales**"
+      chapters:
+      - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: Pulse
+    toc-title: "Índice"
+    number-sections: false
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+
+
+  
