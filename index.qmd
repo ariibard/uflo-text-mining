@@ -5,14 +5,15 @@ editor:
     wrap: 72
 ---
 
-Este libro sirve como material de apoyo para la materia Taller de
-Investigación IV de la Lic. en Sociología de la Universidad de Flores
-(UFLO)
+Este libro contiene los materiales y recursos para el curso de **Text
+Mining**. El curso tiene como propósito introducir al estudiante en el
+análisis de datos no estructurados en formato textual, articulando un
+enfoque teórico-práctico. Mediante la integración de metodologías de
+investigación cualitativa y análisis estadístico, se pondrá especial
+énfasis en el procesamiento de grandes volúmenes de texto utilizando
+herramientas de **Procesamiento de Lenguaje Natural (PLN)**,
+**Recuperación de Información** y **Aprendizaje Automático**, con
+énfasis en su aplicación en proyectos de investigación sociológica.
 
-## Programa
-
-En esta sección se puede ver y descargar el programa de la materia:
-
-<iframe src="https://docs.google.com/document/d/1wvIiqL3jCLXhu9fbi92XlS4TlM62-6xT/edit?usp=sharing&amp;ouid=109888532601556427161&amp;rtpof=true&amp;sd=true" width="100%" height="600px">
-
-</iframe>
+Todas las actividades prácticas y los análisis serán realizados
+utilizando el lenguaje de programación **R**.

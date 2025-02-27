@@ -1,6 +1,6 @@
 # Clase 1 Introducción al *Text Mining*
 
-## Objetivo de la clase
+## **Objetivo de la clase**
 
 En esta clase realizaremos la presentación de la materia. Se buscará introducir el concepto de minería de texto y la diferencia entre datos estructurados y no estructurados. Además, realizaremos ejercicios prácticos a través de R y R Studio
 
@@ -27,13 +27,13 @@ paquetes_lista <- c(
 install.packages(paquetes_lista)
 ```
 
-## Presentación
+## **Presentación**
 
 <iframe src="presentaciones/clase_1/intro_tm.html" width="100%" height="600px">
 
 </iframe>
 
-## Taller
+## **Taller**
 
 Para la actividad de hoy vamos a trabajar con el libro de **Harry Potter 3 - El prisionero de Azkaban de J.K Rowling**[^clase1-1]
 
@@ -41,7 +41,7 @@ Para la actividad de hoy vamos a trabajar con el libro de **Harry Potter 3 - El 
 
 ![](www/patronum.png){fig-align="center" width="593"}
 
-### **Cargamos los paquetes**
+### Los paquetes
 
 ```{r warning=FALSE, message=FALSE}
 
