@@ -90,7 +90,7 @@
     "href": "bibliografia.html",
     "title": "Bibliografía",
     "section": "",
-    "text": "Weiss, S. M., Indurkhya, N., & Zhang, T. (2015). Fundamentals of Predictive Text Mining. Capítulo 1.",
+    "text": "Text Mining\nWeiss, S. M., Indurkhya, N., & Zhang, T. (2015). Fundamentals of Predictive Text Mining. Capítulo 1 y 2",
     "crumbs": [
       "**Unidad 1. La minería de texto (text-mining) y la investigación social**",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Bibliografía</span>"
@@ -105,6 +105,17 @@
     "crumbs": [
       "**Unidad 1. La minería de texto (text-mining) y la investigación social**",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Clase 1 Introducción al *Text Mining*</span>"
+    ]
+  },
+  {
+    "objectID": "bibliografia.html#expresiones-regulares",
+    "href": "bibliografia.html#expresiones-regulares",
+    "title": "Bibliografía",
+    "section": "Expresiones regulares",
+    "text": "Expresiones regulares",
+    "crumbs": [
+      "**Unidad 1. La minería de texto (text-mining) y la investigación social**",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Bibliografía</span>"
     ]
   }
 ]
