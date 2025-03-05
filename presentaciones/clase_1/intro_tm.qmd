@@ -133,4 +133,4 @@ Dos entregas obligatorias:
 
 <img src="https://i.gifer.com/2zas.gif" width="529"/>
 
-# **Vamos a R**  <img src="https://media.giphy.com/media/7TcdtHOCxo3meUvPgj/giphy.gif" width="187"/>  {.title}
+# **Vamos a R** <img src="https://media.giphy.com/media/7TcdtHOCxo3meUvPgj/giphy.gif" width="187"/> {.title}

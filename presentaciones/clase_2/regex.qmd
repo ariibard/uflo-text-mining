@@ -1,0 +1,68 @@
+---
+format:
+  revealjs:
+    echo: true
+    theme: custom.scss
+embed-resources: true
+---
+
+# Expresiones regulares 
+
+## Clase N° 2
+
+### Expresiones regulares (`regex`)
+
+::: r-stack
+Son patrones utilizados para encontrar coincidencias dentro de 📑
+:::
+
+## ¿Qué es una expresión regular? 
+
+```{r echo = TRUE}
+library(stringr)
+library(quartomonothemer)
+#style_mono_quarto(path_scss = "custom.scss")
+texto <- "Hola mundo, hola universo"
+patron <- "mundo"
+
+# Detecta si el patrón está presente en el texto
+str_detect(texto, patron)
+
+# Extrae la coincidencia
+str_extract_all(texto, patron)
+```
+
+## ¿Qué es una expresión regular?
+
+Para que sea insensible a las mayusculas y minusculas
+
+```{r echo = TRUE}
+# Extrae la coincidencia
+str_extract_all(texto, regex(patron, ignore_case = TRUE))
+```
+
+## ¿Para qué se utilizan? 
+
+::: incremental
+-   Búsqueda avanzada en texto libre
+
+-   Validación de formularios
+
+-   Extracción de datos de grandes volúmenes de texto.
+
+-   Sustitución de patrones en textos masivos.
+:::
+
+## Librería a utilizar 
+
+::::: columns
+::: {.column width="30%"}
+![](imagenes/1_string.png){fig-align="center"}
+:::
+
+::: {.column width="70%"}
+<br> El paquete `stringr` proporciona un conjunto de funciones diseñadas para que trabajar con cadenas de texto
+:::
+:::::
+
+## Funciones
