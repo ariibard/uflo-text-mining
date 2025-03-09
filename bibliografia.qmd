@@ -1,6 +1,7 @@
-# Bibliografía 
+# Bibliografía
 
-## Text Mining 
+## Text Mining
+
 Weiss, S. M., Indurkhya, N., & Zhang, T. (2015). Fundamentals of Predictive Text Mining. Capítulo 1 y 2
 
 <iframe src="bibliografia/libro.pdf" width="100%" height="600px">
@@ -8,3 +9,9 @@ Weiss, S. M., Indurkhya, N., & Zhang, T. (2015). Fundamentals of Predictive Text
 </iframe>
 
 ## Expresiones regulares
+
+Friedl, J. E. F. (2006). Mastering regular expressions: Understand your data and be more productive (3.ª ed.). O'Reilly Media.
+
+<iframe src="bibliografia/libro_regex.pdf" width="100%" height="600px">
+
+</iframe>

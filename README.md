@@ -14,7 +14,7 @@ Todas las actividades prácticas y los análisis serán realizados utilizando el
 
 ## Cómo Contribuir
 
-Si deseas contribuir con el curso, puedes:
+Si deseas contribuir con el curso, podés:
 
 -   Proponer mejoras o agregar materiales adicionales
 

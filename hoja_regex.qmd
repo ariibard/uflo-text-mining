@@ -1,0 +1,105 @@
+---
+title: "Hoja de ruta de Expresiones Regulares en R"
+author: "Basado en la hoja de referencia de DaveChild"
+date: "`r Sys.Date()`"
+format: html
+---
+
+# Anclas
+
+| Expresión | Descripción                                                |
+|-----------|------------------------------------------------------------|
+| `^`       | Inicio de la cadena o inicio de línea en patrón multilínea |
+| `\\A`     | Inicio de la cadena                                        |
+| `$`       | Fin de la cadena o fin de línea en patrón multilínea       |
+| `\\Z`     | Fin de la cadena                                           |
+| `\\b`     | Límite de palabra                                          |
+| `\\B`     | No límite de palabra                                       |
+| `\\<`     | Inicio de palabra                                          |
+| `\\>`     | Fin de palabra                                             |
+
+# Clases de Caracteres
+
+| Expresión | Descripción            |
+|-----------|------------------------|
+| `\\c`     | Carácter de control    |
+| `\\s`     | Espacio en blanco      |
+| `\\S`     | No espacio en blanco   |
+| `\\d`     | Dígito                 |
+| `\\D`     | No dígito              |
+| `\\w`     | Carácter de palabra    |
+| `\\W`     | No carácter de palabra |
+| `\\x`     | Dígito hexadecimal     |
+| `\\O`     | Dígito octal           |
+
+# POSIX
+
+| Expresión    | Descripción                       |
+|--------------|-----------------------------------|
+| `[:upper:]`  | Letras mayúsculas                 |
+| `[:lower:]`  | Letras minúsculas                 |
+| `[:alpha:]`  | Todas las letras                  |
+| `[:alnum:]`  | Letras y números                  |
+| `[:digit:]`  | Dígitos                           |
+| `[:xdigit:]` | Dígitos hexadecimales             |
+| `[:punct:]`  | Signos de puntuación              |
+| `[:blank:]`  | Espacio y tabulación              |
+| `[:space:]`  | Caracteres en blanco              |
+| `[:cntrl:]`  | Caracteres de control             |
+| `[:graph:]`  | Caracteres imprimibles            |
+| `[:print:]`  | Caracteres imprimibles y espacios |
+| `[:word:]`   | Letras, números y guion bajo      |
+
+# Aserciones
+
+| Expresión     | Descripción                       |
+|---------------|-----------------------------------|
+| `?=`          | Aserción de anticipación          |
+| `?!`          | Aserción de anticipación negativa |
+| `?<=`         | Aserción de retroceso             |
+| `?!=` o `?!<` | Aserción de retroceso negativa    |
+| `?>`          | Subexpresión de una sola vez      |
+| `?()`         | Condición (si-entonces)           |
+| `?()|`        | Condición (si-entonces-sino)      |
+| `?#`          | Comentario                        |
+
+# Cuantificadores
+
+| Expresión | Descripción         |
+|-----------|---------------------|
+| `*`       | 0 o más veces       |
+| `{3}`     | Exactamente 3 veces |
+| `+`       | 1 o más veces       |
+| `{3,}`    | 3 o más veces       |
+| `?`       | 0 o 1 vez           |
+| `{3,5}`   | Entre 3 y 5 veces   |
+
+Para hacer un cuantificador no codicioso, agregar `?` después.
+
+# Grupos y Rangos
+
+| Expresión | Descripción                            |
+|-----------|----------------------------------------|
+| `.`       | Cualquier carácter excepto nueva línea |
+| `(a|b)`   | `a` o `b`                              |
+| `(...)`   | Grupo                                  |
+| `(?:...)` | Grupo no capturante                    |
+| `[abc]`   | `a`, `b` o `c`                         |
+| `[^abc]`  | No `a`, `b` o `c`                      |
+| `[a-q]`   | Letra minúscula de `a` a `q`           |
+| `[A-Q]`   | Letra mayúscula de `A` a `Q`           |
+| `[0-7]`   | Dígito de `0` a `7`                    |
+
+Los rangos son inclusivos. \|
+
+# Reemplazo de Cadenas
+
+| Expresión | Descripción                      |
+|-----------|----------------------------------|
+| `$n`      | `n`-ésimo grupo no pasivo        |
+| `$2`      | "xyz" en `/^(abc(xyz))$/`        |
+| `$1`      | "xyz" en `/^(?:abc)(xyz)$/`      |
+| \``$`     | Antes de la cadena coincidente   |
+| `$'`      | Después de la cadena coincidente |
+| `$+`      | Última coincidencia              |
+| `$&`      | Cadena coincidente completa      |

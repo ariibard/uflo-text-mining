@@ -25,10 +25,12 @@ book:
     - part: "**Unidad 1. La minería de texto (text-mining) y la investigación social**"
       chapters:
         - clase1.qmd
+        - clase2.qmd
+        - hoja_regex.qmd
         - bibliografia.qmd
     - part: "**Unidad 2. Técnicas de recolección y manipulación de datos textuales**"
       chapters:
-      - references.qmd
+        - clase3.qmd
 
 bibliography: references.bib
 
