@@ -3,10 +3,10 @@ project:
   output-dir: docs
 
 book:
+  favicon: "https://abs.twimg.com/emoji/v2/72x72/1f4d6.png"
   title: "Taller de investigación IV - Minería de texto"
   subtitle: "Licenciatura en sociología - UFLO"
   page-footer: "Realizado con Quarto"
-  favicon: https://www.uflouniversidad.edu.ar/wp-content/uploads/2024/08/wp-home-uflo-color.webp
   author: "Ariana Bardauil"
   sidebar:
     style: docked
@@ -36,7 +36,7 @@ bibliography: references.bib
 
 format:
   html:
-    theme: Pulse
+    theme: [Pulse, estilo.scss]
     toc-title: "Índice"
     number-sections: false
   pdf:
