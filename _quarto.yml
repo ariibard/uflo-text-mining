@@ -6,7 +6,7 @@ book:
   favicon: "https://abs.twimg.com/emoji/v2/72x72/1f4d6.png"
   title: "Taller de investigación IV - Minería de texto"
   subtitle: "Licenciatura en sociología - UFLO"
-  page-footer: "Realizado con Quarto"
+  page-footer: "© 2025 Ariana Bardauil"
   author: "Ariana Bardauil"
   sidebar:
     style: docked
@@ -25,26 +25,27 @@ book:
       href: index.qmd
     - part: "**Clase 1. Introducción a la Minería de Texto**"
       chapters:
-        - clase1_1.qmd # Tiene los requisitos para la clase
-        - clase1.qmd # La ppt
-        - clase1_2.qmd # El taller practico
+        - clases/clase1_A.qmd # Tiene los requisitos para la clase
+        - clases/clase1_C.qmd # La ppt
+        - clases/clase1_T.qmd # El taller practico
         
     - part: "**Clase 2. Expresiones regulares**"
       chapters:
-        - clase2.qmd
-        - clase2_1.qmd
-        - clase2_2.qmd
+        - clases/clase2_C.qmd
+        - clases/clase2_T.qmd
+        - clases/clase2_TP.qmd
         - hoja_regex.qmd
 
     - part: "**Clase 3. Técnicas de recolección y manipulación de datos textuales**"
       chapters:
-        - clase3_1.qmd
-        - clase3.qmd
-        - clase3_2.qmd
+        - clases/clase3_A.qmd
+        - clases/clase3_C.qmd
+        - clases/clase3_TP.qmd
         
-    - part: "**Bibliografía**"
+    - part: "**Referencias**"
       chapters:
         - bibliografia.qmd
+        - licencia.qmd
 
 
 format:

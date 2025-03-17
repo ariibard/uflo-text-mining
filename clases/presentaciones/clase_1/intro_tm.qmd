@@ -1,0 +1,136 @@
+---
+lightbox: true
+format: 
+  revealjs:
+    theme: [default, custom.scss]
+    width: 1600
+    height: 900
+    # logo: imagenes/logo.png
+    # css: logo.css
+    fig.align: "left"
+embed-resources: true
+---
+
+##  {.title}
+
+Taller de Investigación IV
+
+::: r-fit-text
+Text Mining
+
+Para las Cs. Sociales
+:::
+
+# Taller de Investigación IV
+
+::: incremental
+-   📑 Introducirlos en el análisis de datos no estructurados
+
+-   🕵️‍♀️ Metodología cualitativa + Análisis Estadístico
+
+-   💻 Procesamiento de lenguaje Natural
+:::
+
+# Herramientas <img src="https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/Earth.gif?raw=true" width="40"/> {.title}
+
+![](imagenes/R_logo.png){fig-align="center" width="402"}
+
+## ¿Por qué usamos R?
+
+-   Es un lenguaje realizado por y para estadísticos. Manipulación de bases de datos, modelado de datos (regresiones lineales, logarítmicas, estadística bayesiana), machine-learning y visualizaciones
+
+::: incremental
+-   **Es un software libre.** Es gratuito (no requiere licencias)
+-   R tiene una amplia **comunidad** y recursos disponibles
+-   Tiene un **IDE** (Integrated development enviroment) amigable que facilita el trabajo
+-   **Flexible** y **customizable**
+:::
+
+# Modalidad de las clases <img src="https://media.giphy.com/media/ObNTw8Uzwy6KQ/giphy.gif" width="50px"/> {.title}
+
+::: incremental
+-   Teorico
+
+-   Práctico
+:::
+
+# Aprobación de la materia
+
+::: incremental
+-   🙋‍♀️75% de asistencia a clase
+-   💻Realización de actividades prácticas
+-   📎Aprobación del trabajo/proyecto final
+:::
+
+## Trabajo final <img src="https://media.giphy.com/media/VgCDAzcKvsR6OM0uWg/giphy.gif" width="90"/>
+
+::: incremental
+Dos entregas obligatorias:
+
+1)  Presentación del proyecto de investigación (clase 8)
+2)  Informe final con resultados (clase 15)
+:::
+
+# ¿Dudas? / ¿consultas?
+
+<img src="https://i.gifer.com/fy34.gif" width="529"/>
+
+## 🕒 Recreo de 10 min 🕝 {.title}
+
+<img src="https://i.gifer.com/2zas.gif" width="529"/>
+
+# 💫 Text Mining 💫
+
+> **Es el proceso de analizar colecciones de materiales textuales con el fin de capturar conceptos y temas clave** y descubrir relaciones y tendencias ocultas 
+
+## *text mining* vs. *Data mining* {.title}
+
+::::: columns
+::: {.column width="50%"}
+**Datos estructurados**
+
+![](imagenes/1_estructurado.png){fig-align="center"}
+:::
+
+::: {.column width="50%"}
+**Datos** ***NO*** **estructurados**
+
+![](imagenes/2_no_estructurado.png){fig-align="center"}
+:::
+:::::
+
+## ¿Qué haremos? {.title}
+
+:::::: columns
+::: {.column width="50%"}
+![](imagenes/3_pasaje.png){fig-align="center"}
+:::
+
+:::: {.column width="50%"}
+::: incremental
+-   **Clasificación de documentos:** Asignación de categorías a textos.
+
+-   **Recuperación de información**: Búsqueda eficiente de documentos relevantes.
+
+-   **Clustering**: Agrupación de textos similares sin etiquetas predefinidas.
+
+-   **Extracción de información**: Identificación de entidades y relaciones.
+:::
+::::
+::::::
+
+## Lo primero es
+
+::: incremental
+-   **Tokenización**: División de texto en palabras o frases clave.
+
+-   **Lemmatización y stemming:** Reducción de palabras a su forma base.
+
+-   **Representación vectorial**: Bag of Words (BoW), TF-IDF, embeddings.
+:::
+
+## 🕒 Recreo de 10 min 🕝 {.title}
+
+<img src="https://i.gifer.com/2zas.gif" width="529"/>
+
+# **Vamos a R** <img src="https://media.giphy.com/media/7TcdtHOCxo3meUvPgj/giphy.gif" width="187"/> {.title}

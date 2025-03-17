@@ -4,6 +4,7 @@ editor:
   markdown:
     wrap: 72
 ---
+
 # ¡Bienvenidxs al curso de Minería de Texto aplicado a las Ciencias Sociales!
 
 ------------------------------------------------------------------------
@@ -13,8 +14,8 @@ editor:
 ![](https://i.pinimg.com/originals/cd/e0/0d/cde00de507fffde4968ae9268758d360.gif){fig-align="left"
 width="364"}
 :::
-::: {.column width="50%"}
 
+::: {.column width="50%"}
 ## Información General
 
 **Curso:** Taller de Investigación IV - UFLO\
@@ -23,7 +24,7 @@ width="364"}
 **Día y hora:** Jueves, 19:00 hs (On-line)\
 **Plataforma:** [Campus UFLO](https://campus.uflo.edu.ar/)
 :::
-::::::
+:::::
 
 Este curso tiene como objetivo introducirte en el análisis de datos no
 estructurados en formato textual. A lo largo de las semanas, aprenderás

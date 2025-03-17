@@ -1,0 +1,13 @@
+---
+title: ""
+---
+
+# 📜 Licencia
+
+Este material se publica bajo la licencia [Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA)](https://creativecommons.org/licenses/by-nc-sa/4.0/), lo que significa que:
+
+✅ **Podés usar y modificar** el contenido siempre que menciones la autoría.\
+🚫 **No se permite el uso comercial** del material.\
+🔄 **Si lo modificás, compartilo con la misma licencia**.
+
+¡Disfrutalo y usalo con responsabilidad! ✨

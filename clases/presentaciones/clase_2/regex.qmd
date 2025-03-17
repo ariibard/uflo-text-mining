@@ -1,0 +1,280 @@
+---
+format:
+  revealjs:
+    echo: true
+    theme: custom.scss
+embed-resources: true
+---
+
+# Expresiones regulares (`regex`)
+
+## Qué es una expresión regular?
+
+::: r-stack
+Son patrones utilizados para encontrar coincidencias dentro de 📑
+:::
+
+## ¿Para qué se utilizan?
+
+::: incremental
+-   Búsqueda avanzada en texto libre
+
+-   Validación de formularios
+
+-   Extracción de datos de grandes volúmenes de texto.
+
+-   Sustitución de patrones en textos masivos.
+:::
+
+## ¿Qué es una expresión regular?
+
+```{r echo = TRUE}
+#| code-line-numbers: 5
+library(stringr)
+library(tidyverse)
+#style_mono_quarto(path_scss = "custom.scss")
+texto <- "Hola mundo, hola universo"
+patron <- "mundo"
+
+# Detecta si el patrón está presente en el texto
+str_detect(texto, patron)
+```
+
+## Librería a utilizar
+
+::::: columns
+::: {.column width="30%"}
+![](imagenes/1_string.png){fig-align="center"}
+:::
+
+::: {.column width="70%"}
+<br> El paquete `stringr` proporciona un conjunto de funciones diseñadas para que trabajar con cadenas de texto
+:::
+:::::
+
+## Funciones `stringr` : coincidencia
+
+::: incremental
+-   `str_detect(texto, patron)`: Detecta si un patrón está presente en una cadena (devuelve `TRUE/FALSE`).
+
+-   `str_which(texto, patron)`: Devuelve los índices de las cadenas que coinciden con un patrón.
+
+-   `str_count(texto, patron)`: Cuenta cuántas veces aparece un patrón en cada cadena.
+:::
+
+## Funciones `stringr` : coincidencia
+
+::: incremental
+-   `str_subset(texto, patron)`: Filtra las cadenas que contienen un patrón.
+
+-   `str_match(texto, patron)`: Extrae las coincidencias del patrón con grupos de captura.
+
+-   `str_extract(texto, patronn)`: Extrae la primera coincidencia del patrón.
+
+-   `str_extract_all(texto, patron)`: Extrae **todas** las coincidencias del patrón
+:::
+
+## Funciones `stringr` : reemplazo y división
+
+::: incremental
+-   `str_replace(texto, patron, reemplazo)`: Reemplaza la primera coincidencia del patrón por otro texto.
+
+-   `tr_replace_all(texto, patron, reemplazo)`: Reemplaza todas las coincidencias del patrón.
+
+-   `str_split(string, pattern):` Divide la cadena en partes basadas en un patrón.
+:::
+
+# ¿Cómo armar expresiones regulares?
+
+## Mi primera `regex`
+
+Vamos a imaginar que tenemos un excel con las **anotaciones de las sesiones de terapia de un médico**, y en base a ese campo de "notas" tenemos que traernos aquellos **registros** que tienen determinadas características
+
+## Armando expresiones regulares
+
+La columna `id` tiene el identificador de historia clinica del paciente y `notas` las anotaciones del profesional
+
+```{r}
+notas_sesiones <- tibble::tibble(id = 1:13,
+                        nota = c("ausente", "ausente al turno", "tuvo un papa ausente", "no concurrió al turno", "su mamá estaba ausente", "no vino al turno su mama", "no vino turno", "mi hermana estaba ausente een casa","La ausencia de luz fue larga.", "se hizo un pap", "hermano concurre al turno", "DNI: 12345678", "ultima consulta en 2005"))
+
+head(notas_sesiones)
+```
+
+## Observamos la base
+
+```{r}
+DT::datatable(notas_sesiones)
+```
+
+## Expresión regular: `ausentes`
+
+Me gustaría traerme todos los id de los pacientes que estuvieron ausentes a su sesión
+
+➡️ *con poner solo **ausente** no alcanza*
+
+```{r}
+
+patron <- regex("ausente",T)
+
+notas_sesiones |>
+  filter(str_detect(nota, patron))
+
+```
+
+## Inicio de la expresión
+
+`^` indica que la expresión a buscar debe estar al **inicio** del vector o fila `|` es un "o"
+
+```{r}
+
+patron <- regex("^ausente",T)
+
+notas_sesiones |>
+  filter(str_detect(nota, patron))
+
+```
+
+## Caracteres lógicos
+
+`|` es un "o" lógico en regex\
+`()` **Agrupa expresiones** para combinarlas con `|` u otros operadores
+
+```{r}
+
+patron <- regex("^ausente|no (concurre|asiste|vino) al turno",T)
+
+notas_sesiones |>
+  filter(str_detect(nota, patron))
+
+```
+
+## ????
+
+`?` hace que lo que le siga sea opcional
+
+```{r}
+
+patron <- regex("^ausente|no (concurre|asiste|vino) ?al turno",T)
+
+notas_sesiones |>
+  filter(str_detect(nota, patron))
+
+```
+
+## Borde de palabra
+
+`\\b` limite de palabra *boundary*
+
+```{r}
+
+patron <- regex("^ausente|\\bno (concurre|asiste|vino) ?al turno",T)
+
+notas_sesiones |>
+  filter(str_detect(nota, patron))
+
+```
+
+## el punto
+
+`.` indica que podria ser cualquier caracter
+
+**Ejemplo**: Si quiero traerme todas las notas que digan `mamá`
+
+```{r}
+
+patron <- regex("mamá|papá",T)
+
+notas_sesiones |>
+  filter(str_detect(nota, patron))
+
+```
+
+## el punto
+
+`.` indica que podria ser cualquier caracter
+
+**Ejemplo**: Si quiero traerme todas las notas que digan `mamá`
+
+```{r}
+
+patron <- regex("\\bmam.\\b|\\bpap.\\b",T)
+
+notas_sesiones |>
+  filter(str_detect(nota, patron))
+
+```
+
+## Cantidad de repeticiones o catacteres
+
+`{n}` exactamente n repeticiones.
+
+`{n,}` al menos n repeticiones.
+
+`{n,m}` entre n y m repeticiones.
+
+```{r}
+patron <- regex("e{2,3}", TRUE) 
+notas_sesiones |>
+  filter(str_detect(nota, patron))
+```
+
+## Cantidad de repeticiones o catacteres
+
+Si se le pone un . antes, busca cercanía entre tantos caracteres
+
+**Ejemplo**: Busco mamá o papá que se encuentren cerca de "ausente"
+
+```{r}
+patron <- regex("(\\bmam.\\b|\\bpap.\\b).{0,15}ausent", TRUE) 
+notas_sesiones |>
+  filter(str_detect(nota, patron))
+```
+
+## Clases de caracteres
+
+`[aeiou]` busca cualquier vocal.
+
+`[0-9]` busca cualquier número.
+
+`[^aeiou]` busca cualquier letra que no sea vocal.
+
+```{r}
+patron <- regex("[0-9]", TRUE) 
+notas_sesiones |>
+  filter(str_detect(nota, patron))
+```
+
+## Clases de caracteres
+
+`\\d` busca números.
+
+`\\D` busca letras o símbolos.
+
+```{r}
+patron <- regex("\\d{8}", TRUE) #busco solo 8 digitos
+notas_sesiones |>
+  filter(str_detect(nota, patron))
+
+```
+
+## Espacios
+
+`\\s+` encuentra uno o más espacios.
+
+`\\S+` encuentra palabras sin espacios.
+
+```{r}
+patron <- regex("\\s", TRUE)  # Encuentra espacios
+
+frases <- tibble(nota = c("sinespacio", "con  espacios"))
+
+frases |>
+  filter(str_detect(nota, patron))
+```
+
+## Recursos
+
+-   [cheatsheet](https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_strings.pdf) con las funciones de stringr
+
+-   más [caracteres](https://cheatography.com/davechild/cheat-sheets/regular-expressions/) para armado de expresiones regulares

@@ -1,0 +1,25 @@
+---
+title: "C1. Antes de la clase"
+---
+
+
+## **1. Instalá R y R Studio**
+
+Descargá e instalá las últimas versiones de R y RStudio
+
+-   R 4.2.3 o superior: [https://cran.r-project.org](https://cran.r-project.org/)
+
+-   RStudio 2024.04.0 or superior: <https://posit.co/download/rstudio-desktop>
+
+## **2. Paquetes**
+
+Instalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:
+
+``` r
+
+paquetes_lista <- c(
+  "tidyverse", "janitor", "esquisse", "tm","wordcloud"
+)
+
+install.packages(paquetes_lista)
+```

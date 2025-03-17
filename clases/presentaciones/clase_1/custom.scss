@@ -1,0 +1,125 @@
+/*-- scss:defaults --*/
+
+$theme-light: #263e7e;
+$theme-yellow: #263e7e;
+$theme-red: #AD5769;
+$theme-grey:#fcfcfc;
+$theme-lightgrey: #90A1B8;
+$theme-vos: #7d2d83;
+
+$body-bg: $theme-light;
+$body-color: $theme-grey;
+$link-color:#85ddf7;
+
+
+$code-block-font-size: 1em;
+
+/*-- scss:rules --*/
+
+
+.rladies {
+  &.slide-background {
+    background: $theme-grey;
+  }
+  
+  color: $theme-vos;
+
+  h1 {
+    color: $theme-vos;
+  }
+}
+
+.reveal .rladies {
+  color:  $theme-vos;
+  
+}
+.rladies h1 {
+  color:  #7d2d83 !important; /* Violeta */
+  text-align: center;
+}
+
+.rladies h2 {
+  color:  #7d2d83 !important; /* Violeta */
+
+}
+
+.red {
+  color: $theme-red;
+  font-weight: bold;
+}
+
+.reveal pre code {
+  max-height: 1000px;
+}
+
+.reveal div.sourceCode pre code {
+    background-color: $theme-yellow;
+}
+
+.reveal .title {
+  background-color: $body-color;
+  color: $theme-yellow;
+  
+  h1 {
+    color: #263e7e; // Estilo específico para los h1
+  }
+  
+  h2 {
+    color: #263e7e; // Estilo específico para los h1
+  }
+  
+    h3 {
+    color: #263e7e; // Estilo específico para los h1
+    text-align: center;
+    font-size: 5rem;
+    margin-bottom: -10; 
+  }
+
+}
+
+.reveal .footer {
+  color: $theme-grey;
+}
+
+.textcenter {
+  text-align: center;
+}
+
+.flow {
+  background-image: url(imagenes/fondo_letras.jpg);
+  background-attachment: fixed;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+	animation: animate 40s linear infinite;
+	font-weight: 900;
+}
+
+.hexs {
+  background-image: url(imagenes/hexs.png);
+  background-attachment: fixed;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+	animation: animate 40s linear infinite;
+	font-weight: 900;
+}
+
+@keyframes animate {
+	0% {
+		background-position: left 0px top 5px;
+	}
+	40% {
+		background-position: left 800px top 10px;
+	}
+}
+
+
+
+
+.ladies {
+  &:is(.slide-background) {
+  background: $theme-vos;
+  }
+}
+
+
+
