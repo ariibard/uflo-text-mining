@@ -258,14 +258,111 @@ enlaces_normativa
 ```{r}
 
 df_normativas <- data.frame(Normativa = numeros_normativa,nro_expediente, orbitas,enlaces_normativa, stringsAsFactors = FALSE) |> 
-  mutate(fecha_publicacion = fecha_texto)
+  mutate(fecha_publicacion = fecha_texto) 
 
 df_normativas |> 
   gt()
 ```
 
+## ¿Ven algo raro en los links? 
+
+```{r}
+df_normativas |> 
+  gt()
+```
+
+
+## Agregamos el path completo
+
+```{r}
+df_normativas <- df_normativas |> 
+  mutate(enlaces_normativa = paste0("https://www.boletinoficial.gob.ar", enlaces_normativa))
+
+df_normativas |> 
+  gt()
+```
+
+# ¿Y si quisieramos analizar el contenido de cada normativa? 
+
+# ¿Qué deberíamos hacer?
+
+## Tratamos de traer el texto de una sola normativa
+
+Para ello nos quedamos con un solo link
+
+```{r}
+link_normativa_ejemplo <- df_normativas |> 
+  head(1) |> 
+  pull(enlaces_normativa)
+
+
+link_normativa_ejemplo
+```
+
+
+## 1° traemos el HTML
+Un éxito! Estaban OK los links que sustrajimos de la página web del BORA
+
+```{r}
+texto_normativa <- read_html(link_normativa_ejemplo)
+
+texto_normativa %>%
+  html_nodes("#cuerpoDetalleAviso") %>%  # Selecciona el div con ese ID
+  html_text(trim = TRUE) 
+```
+
+## 3° Aplicamos los mismos pasos dentro de un bucle
+
+```r
+links_normativas <- df_normativas |> 
+  pull(enlaces_normativa)
+
+# Armo un dataset vacío
+base_texto_normativa <- data.frame()
+
+for (i in links_normativas) {
+  link <- i
+  
+  html_normativa <- read_html(link_normativa_ejemplo)
+  
+  texto_normativa <- html_normativa %>%
+  html_nodes("#cuerpoDetalleAviso") %>%  # Selecciona el div con ese ID
+  html_text(trim = TRUE) 
+  
+  df_temp <- data.frame(enlaces_normativa = link, texto_normativa, stringsAsFactors = FALSE) 
+  
+  base_texto_normativa <- base_texto_normativa |> 
+    bind_rows(df_temp)
+  
+}
+
+
+```
+```{r include = FALSE}
+base_texto_normativa <- readRDS("base_texto_normativa.rds")
+```
+
+## 4 ° unimos todo y guardamos
+
+```{r}
+df_normativas_final <- df_normativas |> 
+  left_join(base_texto_normativa) 
+
+# Guardamos
+saveRDS(df_normativas_final, "df_normativas_final.rds")
+
+# Observamos
+df_normativas_final |> 
+  head(1) 
+
+```
+
+
 # Recreo
 
-> Volvemos en 10 minutos
+> Volvemos en 10 minutos para comenzar con el taller 
 
 ![](https://i.pinimg.com/originals/10/d2/05/10d205b912352788a8b7116a43c00230.gif){fig-align="center" style="border-radius: 100%;"}
+
+
+

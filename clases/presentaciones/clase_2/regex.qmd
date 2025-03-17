@@ -278,3 +278,9 @@ frases |>
 -   [cheatsheet](https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_strings.pdf) con las funciones de stringr
 
 -   más [caracteres](https://cheatography.com/davechild/cheat-sheets/regular-expressions/) para armado de expresiones regulares
+
+# Recreo
+
+> Volvemos en 10 minutos para comenzar con el taller
+
+![](https://i.pinimg.com/originals/10/d2/05/10d205b912352788a8b7116a43c00230.gif){fig-align="center" style="border-radius: 100%;"}

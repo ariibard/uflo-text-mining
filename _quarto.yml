@@ -43,8 +43,12 @@ book:
         - clases/clase3_TP.qmd
     - part: "**Clase 4. Webscrapping**"
       chapters:
+        - clases/clase4_A.qmd
         - clases/clase4_C.qmd
+        - clases/clase4_TP.qmd
         - clases/clase4_Z.qmd
+        
+    - part: "**Clase 5. Preprocesamiento básico: tokenización, lematización, limpieza y eliminación de ruido textual**"
         
     - part: "**Referencias**"
       chapters:

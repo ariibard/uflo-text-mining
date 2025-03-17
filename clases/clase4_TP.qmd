@@ -1,0 +1,12 @@
+---
+title: "C4. Taller práctico"
+---
+
+## Tarea: Scrapear una página web
+
+1)  Elegir una página web
+2)  generar un dataset a través de scrapeo con [{rvest}](https://rvest.tidyverse.org/)
+
+### Entregable:
+
+Archivo .R o rmd con el procesamiento
