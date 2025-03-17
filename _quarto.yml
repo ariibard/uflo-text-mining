@@ -41,6 +41,10 @@ book:
         - clases/clase3_A.qmd
         - clases/clase3_C.qmd
         - clases/clase3_TP.qmd
+    - part: "**Clase 4. Webscrapping**"
+      chapters:
+        - clases/clase4_C.qmd
+        - clases/clase4_Z.qmd
         
     - part: "**Referencias**"
       chapters:

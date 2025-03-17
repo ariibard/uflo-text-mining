@@ -12,7 +12,7 @@ Instalá los siguientes paquetes copiando y pegando el siguiente código en la c
 ``` r
 
 paquetes_lista <- c(
-  "curl", "remotes", "spotifyr", "rjson", "gt", "reticulate"
+  "curl", "remotes", "spotifyr", "rjson", "gt", "reticulate", "pdftools"
 )
 
 install.packages(paquetes_lista)
@@ -22,7 +22,11 @@ Para descargar los subtítulos de youtube necesitarás
 
 ``` r
 remotes::install_github("jooyoungseo/youtubecaption")
+```
 
+Si NO tenes el entorno de anaconda instalado tenes que correr el siguiente comando en R
+
+```r
 reticulate::install_miniconda()
 ```
 

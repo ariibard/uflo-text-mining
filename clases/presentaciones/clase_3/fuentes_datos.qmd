@@ -460,8 +460,8 @@ En esta clase vimos
 
 -   Cómo consumir APIs a través de librerías de R y CURL
 
--    Descargar subtitulos de youtube
+-   Descargar subtitulos de youtube
 
--    Trabajar con PDFs
+-   Trabajar con PDFs
 
 **De yapa:** [¿Cómo extraer tablas de un PDF?](https://rpubs.com/Fr3ddy/561713)

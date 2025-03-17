@@ -1,0 +1,11 @@
+---
+title: "C4. Datos personales & webscrapping"
+---
+
+-   Agencia de Acceso a la Información Pública (AAIP). (2023). *Declaración conjunta sobre webscraping y protección de la privacidad.* [Documento en línea](https://www.argentina.gob.ar/sites/default/files/declaracion_conjunta_aaip_datascraping.pdf).
+
+-   Corte Suprema de Justicia de la Nación. (2025). Nuevas tecnologías: Responsabilidad de los buscadores de internet. [Documento en línea](https://sj.csjn.gov.ar/homeSJ/notas/nota/189/documento)
+
+-   Office of the Privacy Commissioner of Canada (OPC). (2024). *Joint statement on data scraping and the protection of privacy.* [Declaración en línea](https://www.priv.gc.ca/en/opc-news/speeches-and-statements/2024/js-dc_20241028/).
+
+-   Information Commissioner's Office (ICO). (2024). *ICO consultation series on generative AI and data protection.* [Consulta en línea](https://ico.org.uk/about-the-ico/ico-and-stakeholder-consultations/ico-consultation-series-on-generative-ai-and-data-protection/).

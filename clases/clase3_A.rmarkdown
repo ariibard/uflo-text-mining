@@ -1,0 +1,81 @@
+---
+title: "C3. Antes de la clase"
+embed-resources: true
+---
+
+
+
+
+
+
+
+
+Antes de la clase no olvides tener los siguientes pasos hechos:
+
+# Instalar las librerías
+
+Instalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:
+
+``` r
+
+paquetes_lista <- c(
+  "curl", "remotes", "spotifyr", "rjson", "gt", "reticulate", "pdftools"
+)
+
+install.packages(paquetes_lista)
+```
+
+Para descargar los subtítulos de youtube necesitarás
+
+``` r
+remotes::install_github("jooyoungseo/youtubecaption")
+```
+
+Si NO tenes el entorno de anaconda instalado tenes que correr el siguiente comando en R
+
+
+
+
+
+
+
+
+```{r}
+reticulate::install_miniconda()
+```
+
+
+
+
+
+
+
+
+# Generar los usuario de la API de Spotify
+
+Es necesario tener generado el usuario con las **credenciales de la API de Spotify**
+
+### 1) Iniciar sesión en https://developer.spotify.com/
+
+## ![](presentaciones/clase_3/images/spotify_1.png) 2) Ingresa a la solapa de Dashboards
+
+![](presentaciones/clase_3/images/spotify_2.png)
+
+### 3) Creá una APP
+
+![](presentaciones/clase_3/images/spotify_3.png)
+
+### 4) Completá los siguientes campos
+
+-   App name: UFLO clase de APIS
+-   App description: Credenciales para clase de UFLO
+-   Redirect URL: http://localhost:1410/
+
+Clickear en **`create`**
+
+### 5) Copiar las credenciales y secrets
+
+Los encontrarás dentro de "settings"
+
+![](presentaciones/clase_3/images/spotify_4.png) ![](presentaciones/clase_3/images/spotify_5.png)
+

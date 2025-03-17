@@ -617,7 +617,7 @@
     "href": "clases/clase3_A.html",
     "title": "C3. Antes de la clase",
     "section": "",
-    "text": "Instalar las librerías\nAntes de la clase no olvides tener los siguientes pasos hechos:\nInstalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:\nPara descargar los subtítulos de youtube necesitarás",
+    "text": "Instalar las librerías\nAntes de la clase no olvides tener los siguientes pasos hechos:\nInstalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:\nPara descargar los subtítulos de youtube necesitarás\nSi NO tenes el entorno de anaconda instalado tenes que correr el siguiente comando en R",
     "crumbs": [
       "**Clase 3. Fuentes de datos textuales: APIS, Subtítulos y PDFs**",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>C3. Antes de la clase</span>"
@@ -731,6 +731,28 @@
     "crumbs": [
       "**Clase 1. Introducción a la Minería de Texto**",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>C1. Antes de la clase</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase4_C.html",
+    "href": "clases/clase4_C.html",
+    "title": "C4. Presentación",
+    "section": "",
+    "text": "En esta clase aprenderás a realizar web scrapping con R",
+    "crumbs": [
+      "**Clase 4. Webscrapping**",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>C4. Presentación</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase4_Z.html",
+    "href": "clases/clase4_Z.html",
+    "title": "C4. Datos personales & webscrapping",
+    "section": "",
+    "text": "Agencia de Acceso a la Información Pública (AAIP). (2023). Declaración conjunta sobre webscraping y protección de la privacidad. Documento en línea.\nCorte Suprema de Justicia de la Nación. (2025). Nuevas tecnologías: Responsabilidad de los buscadores de internet. Documento en línea\nOffice of the Privacy Commissioner of Canada (OPC). (2024). Joint statement on data scraping and the protection of privacy. Declaración en línea.\nInformation Commissioner’s Office (ICO). (2024). ICO consultation series on generative AI and data protection. Consulta en línea.",
+    "crumbs": [
+      "**Clase 4. Webscrapping**",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>C4. Datos personales & webscrapping</span>"
     ]
   }
 ]
