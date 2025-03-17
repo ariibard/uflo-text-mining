@@ -619,7 +619,7 @@
     "section": "",
     "text": "Instalar las librerías\nAntes de la clase no olvides tener los siguientes pasos hechos:\nInstalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:\nPara descargar los subtítulos de youtube necesitarás",
     "crumbs": [
-      "**Clase 3. Técnicas de recolección y manipulación de datos textuales**",
+      "**Clase 3. Fuentes de datos textuales: APIS, Subtítulos y PDFs**",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>C3. Antes de la clase</span>"
     ]
   },
@@ -630,7 +630,7 @@
     "section": " 2) Ingresa a la solapa de Dashboards",
     "text": "2) Ingresa a la solapa de Dashboards\n\n\n3) Creá una APP\n\n\n\n4) Completá los siguientes campos\n\nApp name: UFLO clase de APIS\nApp description: Credenciales para clase de UFLO\nRedirect URL: http://localhost:1410/\n\nClickear en create\n\n\n5) Copiar las credenciales y secrets\nLos encontrarás dentro de “settings”",
     "crumbs": [
-      "**Clase 3. Técnicas de recolección y manipulación de datos textuales**",
+      "**Clase 3. Fuentes de datos textuales: APIS, Subtítulos y PDFs**",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>C3. Antes de la clase</span>"
     ]
   },
@@ -641,7 +641,7 @@
     "section": "",
     "text": "En esta clase aprenderás a consumir APIs utilizando CURL y R. Y, a descargar y trabajar con subtítulos de YouTube.",
     "crumbs": [
-      "**Clase 3. Técnicas de recolección y manipulación de datos textuales**",
+      "**Clase 3. Fuentes de datos textuales: APIS, Subtítulos y PDFs**",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>C3. Presentación</span>"
     ]
   },
@@ -652,7 +652,7 @@
     "section": "",
     "text": "Tarea: APIs y Análisis de Datos Textuales",
     "crumbs": [
-      "**Clase 3. Técnicas de recolección y manipulación de datos textuales**",
+      "**Clase 3. Fuentes de datos textuales: APIS, Subtítulos y PDFs**",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>C3. Actividad entregable</span>"
     ]
   },
@@ -663,7 +663,7 @@
     "section": "",
     "text": "Objetivos\n\nDescargar información de Spotify sobre los artistas más escuchados.\nConsumir la API de Star Wars y descargar datos sobre los personajes.\nAnalizar subtítulos de un video de YouTube utilizando expresiones regulares.\n(Opcional) Investigar y consumir otra API de tu elección.\n\n\n\nInstrucciones\n\nParte 1: Consumiendo datos de Spotify\n\nConseguir tus artistas más escuchados:\n\nAutentícate en la API de Spotify utilizando el paquete {spotifyr} y descarga información sobre tus artistas más escuchados.\nUsa la función get_my_top_artists() para obtener esta información.\nMuestra en una tabla los siguientes datos de cada artista: nombre, género, cantidad de oyentes mensuales.\nTip: No olvides configurar las credenciales de la API de Spotify.\n\nAnálisis de álbumes:\n\nDescarga información sobre los álbumes de uno de tus artistas más escuchados utilizando la función get_artist_albums().\nMuestra en una tabla los siguientes datos: nombre del álbum, fecha de lanzamiento, tipo de álbum (ej. álbum, sencillo, etc.).\n\n\n\n\nParte 2: Consumiendo datos de Star Wars\nUtiliza la API de Star Wars (https://www.swapi.tech/) para obtener información sobre las peliculas, los planetas y las especies\n\nExtrae los datos y muestralos en una tabla\n\nRealiza una visualización con ggplot, Highcharter o librería de visualización que te guste\n\n\n\nParte 3: Análisis de subtítulos de YouTube\n\nSelecciona un video de interés\nDescargar subtítulos\nUtiliza la función get_caption() del paquete {youtubecaption}\nMuestra los subtítulos descargados en una tabla.\nRealiza un análisis básico sobre los subtítulos descargados. Buscá\n -  Palabras que se repiten con mayor frecuencia, eliminando las stopwords\n\n -  Frases o términos clave relacionados a X palabra utilizando expresiones regulares.\n\n\n\nParte 4: (Opcional) Inspeccionar otra API\nExplora alguna de las siguientes APIs abiertas y realiza un análisis similar al de la API de Star Wars. Algunas son (puede ser otra)\n\nPokémon API - Obtén información sobre Pokémon (por ejemplo, nombre, tipo, habilidades).\nThe Dog API - Obtén información sobre razas de perros, imágenes, etc.\n\n\n\n\nEntrega\n\nSube tu código y resultados en un archivo .Rmd o .R.\n\n\nNo te olvides de documentar el código explicando lo que estás haciendo en cada paso.",
     "crumbs": [
-      "**Clase 3. Técnicas de recolección y manipulación de datos textuales**",
+      "**Clase 3. Fuentes de datos textuales: APIS, Subtítulos y PDFs**",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>C3. Actividad entregable</span>"
     ]
   },
