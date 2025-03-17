@@ -48,7 +48,6 @@ book:
         - clases/clase4_TP.qmd
         - clases/clase4_Z.qmd
         
-    - part: "**Clase 5. Preprocesamiento básico: tokenización, lematización, limpieza y eliminación de ruido textual**"
         
     - part: "**Referencias**"
       chapters:
