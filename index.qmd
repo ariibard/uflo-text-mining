@@ -1,19 +1,51 @@
 ---
-title: "Sobre este libro"
-editor: 
-  markdown: 
+title: ""
+editor:
+  markdown:
     wrap: 72
 ---
+# ¡Bienvenidxs al curso de Minería de Texto aplicado a las Ciencias Sociales!
 
-Este libro contiene los materiales y recursos para el curso de **Text
-Mining**. El curso tiene como propósito introducir al estudiante en el
-análisis de datos no estructurados en formato textual, articulando un
-enfoque teórico-práctico. Mediante la integración de metodologías de
-investigación cualitativa y análisis estadístico, se pondrá especial
-énfasis en el procesamiento de grandes volúmenes de texto utilizando
-herramientas de **Procesamiento de Lenguaje Natural (PLN)**,
-**Recuperación de Información** y **Aprendizaje Automático**, con
-énfasis en su aplicación en proyectos de investigación sociológica.
+------------------------------------------------------------------------
 
-Todas las actividades prácticas y los análisis serán realizados
-utilizando el lenguaje de programación **R**.
+::::: columns
+::: {.column width="50%"}
+![](https://i.pinimg.com/originals/cd/e0/0d/cde00de507fffde4968ae9268758d360.gif){fig-align="left"
+width="364"}
+:::
+::: {.column width="50%"}
+
+## Información General
+
+**Curso:** Taller de Investigación IV - UFLO\
+**Inicio:** 20/03/2025\
+**Finaliza:** 3/06/2025\
+**Día y hora:** Jueves, 19:00 hs (On-line)\
+**Plataforma:** [Campus UFLO](https://campus.uflo.edu.ar/)
+:::
+::::::
+
+Este curso tiene como objetivo introducirte en el análisis de datos no
+estructurados en formato textual. A lo largo de las semanas, aprenderás
+a aplicar herramientas de **Text Mining**, combinando **metodologías
+cualitativas** y **análisis estadístico** para procesar grandes
+volúmenes de texto.
+
+------------------------------------------------------------------------
+
+### Propósito del Curso
+
+El curso se centra en el uso de técnicas avanzadas como el
+**Procesamiento de Lenguaje Natural (PLN)**, la **Recuperación de
+Información**, y el **Aprendizaje Automático**, con un enfoque
+específico en su aplicación a proyectos de investigación sociológica.
+
+### Herramientas y Metodologías
+
+-   **R**: Todos los análisis y actividades prácticas se realizarán
+    utilizando el lenguaje de programación **R**.
+-   **Enfoque teórico-práctico**: A lo largo del curso, combinarás
+    teoría con ejercicios prácticos para desarrollar habilidades en el
+    manejo de grandes volúmenes de datos textuales.
+
+------------------------------------------------------------------------

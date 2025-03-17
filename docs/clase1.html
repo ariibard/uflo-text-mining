@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Clase 1 Introducción al Text Mining – Taller de investigación IV - Minería de texto</title>
+<title>C1. Presentación – Taller de investigación IV - Minería de texto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -64,8 +30,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./clase2.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./clase1_2.html" rel="next">
+<link href="./clase1_1.html" rel="prev">
 <link href="./https://abs.twimg.com/emoji/v2/72x72/1f4d6.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -116,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./clase1.html"><strong>Unidad 1. La minería de texto (text-mining) y la investigación social</strong></a></li><li class="breadcrumb-item"><a href="./clase1.html"><span class="chapter-title">Clase 1 Introducción al <em>Text Mining</em></span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./clase1_1.html"><strong>Clase 1. Introducción a la Minería de Texto</strong></a></li><li class="breadcrumb-item"><a href="./clase1.html"><span class="chapter-title">C1. Presentación</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -180,13 +146,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Sobre este libro</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><strong>Inicio</strong></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>Unidad 1. La minería de texto (text-mining) y la investigación social</strong></span></a>
+ <span class="menu-text"><strong>Clase 1. Introducción a la Minería de Texto</strong></span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -194,22 +160,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clase1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Clase 1 Introducción al <em>Text Mining</em></span></a>
+  <a href="./clase1_1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">C1. Antes de la clase</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clase2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Clase 2 - Expresiones regulares</span></a>
+  <a href="./clase1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">C1. Presentación</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hoja_regex.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Hoja de ruta de Expresiones Regulares en R</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./bibliografia.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bibliografía</span></a>
+  <a href="./clase1_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">C1. Taller práctico</span></a>
   </div>
 </li>
       </ul>
@@ -217,7 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>Unidad 2. Técnicas de recolección y manipulación de datos textuales</strong></span></a>
+ <span class="menu-text"><strong>Clase 2. Expresiones regulares</strong></span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -225,7 +186,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clase3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Clase 3 - Introducción a fuentes de datos textuales, APIs y CURL</span></a>
+  <a href="./clase2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">C2. Presentación</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase2_1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">C2. Taller Práctico</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase2_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">C2: Actividad entregable</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./hoja_regex.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">C2. Hoja de ruta de Expresiones Regulares en R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Clase 3. Técnicas de recolección y manipulación de datos textuales</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase3_1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">C3. Antes de la clase</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">C3. Presentación</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase3_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">C3. Actividad entregable</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Bibliografía</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bibliografia.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bibliografía</span></a>
   </div>
 </li>
       </ul>
@@ -241,28 +259,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#objetivo-de-la-clase" id="toc-objetivo-de-la-clase" class="nav-link active" data-scroll-target="#objetivo-de-la-clase"><strong>Objetivo de la clase</strong></a></li>
-  <li><a href="#antes-de-la-clase" id="toc-antes-de-la-clase" class="nav-link" data-scroll-target="#antes-de-la-clase"><strong>Antes de la clase</strong></a>
-  <ul class="collapse">
-  <li><a href="#instalá-r-y-r-studio" id="toc-instalá-r-y-r-studio" class="nav-link" data-scroll-target="#instalá-r-y-r-studio"><strong>1. Instalá R y R Studio</strong></a></li>
-  <li><a href="#paquetes" id="toc-paquetes" class="nav-link" data-scroll-target="#paquetes"><strong>2. Paquetes</strong></a></li>
-  </ul></li>
   <li><a href="#presentación" id="toc-presentación" class="nav-link" data-scroll-target="#presentación"><strong>Presentación</strong></a></li>
-  <li><a href="#taller" id="toc-taller" class="nav-link" data-scroll-target="#taller"><strong>Taller</strong></a>
-  <ul class="collapse">
-  <li><a href="#los-paquetes" id="toc-los-paquetes" class="nav-link" data-scroll-target="#los-paquetes">Los paquetes</a></li>
-  <li><a href="#cargamos-el-libro" id="toc-cargamos-el-libro" class="nav-link" data-scroll-target="#cargamos-el-libro">Cargamos el libro</a></li>
-  <li><a href="#frecuencia-de-palabras-más-utilizadas" id="toc-frecuencia-de-palabras-más-utilizadas" class="nav-link" data-scroll-target="#frecuencia-de-palabras-más-utilizadas">Frecuencia de palabras más utilizadas</a></li>
-  <li><a href="#graficamos" id="toc-graficamos" class="nav-link" data-scroll-target="#graficamos">Graficamos</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./clase1.html"><strong>Unidad 1. La minería de texto (text-mining) y la investigación social</strong></a></li><li class="breadcrumb-item"><a href="./clase1.html"><span class="chapter-title">Clase 1 Introducción al <em>Text Mining</em></span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./clase1_1.html"><strong>Clase 1. Introducción a la Minería de Texto</strong></a></li><li class="breadcrumb-item"><a href="./clase1.html"><span class="chapter-title">C1. Presentación</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Clase 1 Introducción al <em>Text Mining</em></span></h1>
+<h1 class="title"><span class="chapter-title">C1. Presentación</span></h1>
 </div>
 
 
@@ -281,237 +287,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="objetivo-de-la-clase" class="level2">
 <h2 class="anchored" data-anchor-id="objetivo-de-la-clase"><strong>Objetivo de la clase</strong></h2>
-<p>En esta clase realizaremos la presentación de la materia. Se buscará introducir el concepto de minería de texto y la diferencia entre datos estructurados y no estructurados. Además, realizaremos ejercicios prácticos a través de R y R Studio</p>
-</section>
-<section id="antes-de-la-clase" class="level2">
-<h2 class="anchored" data-anchor-id="antes-de-la-clase"><strong>Antes de la clase</strong></h2>
-<section id="instalá-r-y-r-studio" class="level3">
-<h3 class="anchored" data-anchor-id="instalá-r-y-r-studio"><strong>1. Instalá R y R Studio</strong></h3>
-<p>Descargá e instalá las últimas versiones de R y RStudio</p>
-<ul>
-<li><p>R 4.2.3 o superior: <a href="https://cran.r-project.org/">https://cran.r-project.org</a></p></li>
-<li><p>RStudio 2024.04.0 or superior: <a href="https://posit.co/download/rstudio-desktop" class="uri">https://posit.co/download/rstudio-desktop</a></p></li>
-</ul>
-</section>
-<section id="paquetes" class="level3">
-<h3 class="anchored" data-anchor-id="paquetes"><strong>2. Paquetes</strong></h3>
-<p>Instalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>paquetes_lista <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidyverse"</span>, <span class="st">"janitor"</span>, <span class="st">"esquisse"</span>, <span class="st">"tm"</span>,<span class="st">"wordcloud"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(paquetes_lista)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
+<p>En esta clase realizaremos la presentación de la materia. Se buscará introducir el concepto de minería de texto y la diferencia entre datos estructurados y no estructurados.</p>
 </section>
 <section id="presentación" class="level2">
 <h2 class="anchored" data-anchor-id="presentación"><strong>Presentación</strong></h2>
 <iframe src="presentaciones/clase_1/intro_tm.html" width="100%" height="600px">
 </iframe>
-</section>
-<section id="taller" class="level2">
-<h2 class="anchored" data-anchor-id="taller"><strong>Taller</strong></h2>
-<p>Para la actividad de hoy vamos a trabajar con el libro de <strong>Harry Potter 3 - El prisionero de Azkaban de J.K Rowling</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="www/patronum.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="593"></p>
-</figure>
-</div>
-<section id="los-paquetes" class="level3">
-<h3 class="anchored" data-anchor-id="los-paquetes">Los paquetes</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(esquisse)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="sobre-los-paquetes" class="level4">
-<h4 class="anchored" data-anchor-id="sobre-los-paquetes"><strong>Sobre los paquetes</strong></h4>
-<p><code>Tidyverse</code> es un&nbsp;conjunto de paquetes de R. Se utiliza para analizar datos y está compuesto por paquetes que comparten una filosofía de diseño, gramática y estructura. Más información <a href="https://www.tidyverse.org/">acá</a></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="www/tidyverse.jpg" class="img-fluid figure-img"></p>
-<figcaption>Fuente: https://x.com/RosanaFerrero/status/1521396654829617153/photo/1</figcaption>
-</figure>
-</div>
-<p><code>esquisse</code> es un paquete que permite generar graficos con <code>ggplot</code> a partir de una manera interactiva utilizando drag and drop. Más información <a href="https://dreamrs.github.io/esquisse/">acá</a></p>
-<p><code>janitor</code> contiene funciones para limpiar y examinar datos. Más información <a href="https://www.rdocumentation.org/packages/janitor/versions/2.2.1">acá</a></p>
-</section>
-</section>
-<section id="cargamos-el-libro" class="level3">
-<h3 class="anchored" data-anchor-id="cargamos-el-libro">Cargamos el libro</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargamos los datos</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>hp3 <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="st">"data/hp3.txt"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Lo convertimos en un solo vector</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>libro <span class="ot">&lt;-</span> <span class="fu">paste</span>(hp3, <span class="at">collapse =</span> <span class="st">" "</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Vemos los primeros caracteres</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">substr</span>(libro, <span class="dv">1</span>, <span class="dv">500</span>))  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "J.K. Rowling Harry Potter y el prisionero de Azkaban   Por la cicatriz que lleva en la frente, sabemos que Harry Potter no es un niño como los demás, sino el héroe que venció a lord Voldemort, el mago más temible y maligno de todos los tiempos y culpable de la muerte de los padres de Harry. Desde entonces, Harry no tiene más remedio que vivir con sus pesados tíos y su insoportable primo Dudley, todos ellos muggles, o sea, personas no magas, que desprecian a su sobrino debido a sus poderes. Igual"</code></pre>
-</div>
-</div>
-<section id="cuantos-caracteres-tiene-el-libro" class="level4">
-<h4 class="anchored" data-anchor-id="cuantos-caracteres-tiene-el-libro">¿Cuantos caracteres tiene el libro?</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ¿Cuantos caracteres tiene el libro? </span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(libro)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 644726</code></pre>
-</div>
-</div>
-</section>
-<section id="cuantas-oraciones-tiene-el-libro" class="level4">
-<h4 class="anchored" data-anchor-id="cuantas-oraciones-tiene-el-libro">¿Cuantas oraciones tiene el libro?</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>oraciones <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">str_split</span>(libro, <span class="st">"(?&lt;=[.!?])</span><span class="sc">\\</span><span class="st">s+"</span>))</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(oraciones)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10603</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="frecuencia-de-palabras-más-utilizadas" class="level3">
-<h3 class="anchored" data-anchor-id="frecuencia-de-palabras-más-utilizadas">Frecuencia de palabras más utilizadas</h3>
-<section id="limpiamos-el-texto" class="level4">
-<h4 class="anchored" data-anchor-id="limpiamos-el-texto">Limpiamos el texto</h4>
-<p><code>gsub()</code> es una función en <strong>R</strong> que se usa para <strong>buscar y reemplazar texto</strong> dentro de cadenas de caracteres.</p>
-<p>La sintaxis es:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gsub</span>(<span class="st">"patrón_a_buscar"</span>, <span class="st">"nuevo_texto"</span>, texto)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>A través de esta función vamos a limpiar el texto del libro para mejorar el conteo de las palabrbas</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertimos a minusculas</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>libro_limpio <span class="ot">&lt;-</span> <span class="fu">tolower</span>(libro)  </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminamos las puntuaciones</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>libro_limpio <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>, libro_limpio)  </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminamos los números</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>libro_limpio <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"[[:digit:]]"</span>, <span class="st">""</span>, libro_limpio) </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminamos espacios múltiples</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>libro_limpio <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>, <span class="st">" "</span>, libro_limpio) </span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>libro_limpio <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"[^</span><span class="sc">\x20</span><span class="st">-</span><span class="sc">\x7E</span><span class="st">]"</span>, <span class="st">""</span>, libro_limpio)  <span class="co"># Elimina caracteres no imprimibles</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="dividimos-las-palabras" class="level4">
-<h4 class="anchored" data-anchor-id="dividimos-las-palabras">Dividimos las palabras</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Divido las palabras:</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>palabras <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">strsplit</span>(libro_limpio, <span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="eliminamos-las-stopwords" class="level4">
-<h4 class="anchored" data-anchor-id="eliminamos-las-stopwords">Eliminamos las stopwords</h4>
-<p>Las stopwords (o palabras vacías) son palabras muy comunes en un idioma que suelen tener poco valor en análisis de texto porque no aportan significado relevante. Ejemplos en español incluyen:</p>
-<p>🔹 Preposiciones: “de”, “a”, “con”, “por”, “para” 🔹 Artículos: “el”, “la”, “los”, “las” 🔹 Conjunciones: “y”, “o”, “pero”, “aunque” 🔹 Pronombres: “yo”, “tú”, “él”, “ella”, “nosotros” 🔹 Verbos auxiliares: “ser”, “estar”, “haber”</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>stopwords_es <span class="ot">&lt;-</span> <span class="fu">stopwords</span>(<span class="st">"es"</span>) </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Vector sin los stopwords</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>palabras_filtradas <span class="ot">&lt;-</span> palabras[<span class="sc">!</span>palabras <span class="sc">%in%</span> stopwords_es] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="contamos" class="level4">
-<h4 class="anchored" data-anchor-id="contamos">Contamos</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>frecuencia <span class="ot">&lt;-</span> <span class="fu">table</span>(palabras_filtradas)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordenamos por la frecuencia</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>frecuencia <span class="ot">&lt;-</span> <span class="fu">sort</span>(frecuencia, <span class="at">decreasing =</span> <span class="cn">TRUE</span>) </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 20 palabras</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(frecuencia, <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>palabras_filtradas
-    harry      dijo       ron  hermione      haba        si     lupin        ms 
-     1935      1020       769       656       649       404       401       400 
-       qu     black         l     hacia    hagrid     snape  profesor   pregunt 
-      397       307       264       260       253       245       242       223 
-      voz         s profesora    malfoy 
-      222       206       203       185 </code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="graficamos" class="level3">
-<h3 class="anchored" data-anchor-id="graficamos">Graficamos</h3>
-<ol type="1">
-<li>Convertimos nuestras frecuencias en una tabla</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_frec <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(frecuencia)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df_frec) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Palabra"</span>, <span class="st">"Frecuencia"</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_frec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Palabra Frecuencia
-1    harry       1935
-2     dijo       1020
-3      ron        769
-4 hermione        656
-5     haba        649
-6       si        404</code></pre>
-</div>
-</div>
-<p>Me quedo con las 20 palabras más mencionadas y grafico utilizando <code>esquisser</code></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_grafico <span class="ot">&lt;-</span> df_frec <span class="sc">|&gt;</span> </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">esquisser</span>(df_grafico)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Lo diseñamos a gusto y luego guardamos el código</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grafico final</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_grafico) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Palabra, <span class="at">y =</span> Frecuencia) <span class="sc">+</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#440154"</span>) <span class="sc">+</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Palabras"</span>,</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Cantidad"</span>,</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Palabras mas mencionadas en Harry Potter 3"</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  ggthemes<span class="sc">::</span><span class="fu">theme_fivethirtyeight</span>() <span class="sc">+</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.justification =</span> <span class="st">"top"</span>,</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>L,</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">face =</span> <span class="st">"bold"</span>,</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="fl">0.5</span>)</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="clase1_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="nube-de-palabras" class="level4">
-<h4 class="anchored" data-anchor-id="nube-de-palabras">Nube de palabras</h4>
-<p>También podemos realizar una nube de palabras:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(<span class="fu">names</span>(frecuencia), frecuencia, <span class="at">max.words =</span> <span class="dv">100</span>, <span class="at">colors =</span> <span class="fu">brewer.pal</span>(<span class="dv">8</span>, <span class="st">"Dark2"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="clase1_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
 
 
-</section>
-</section>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>J. K. Rowling . (1999). Harry Potter y el prisionero de Azkaban. Reino Unido: Bloomsbury.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->
@@ -937,13 +720,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Sobre este libro">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Sobre este libro</span></span>
+      <a href="./clase1_1.html" class="pagination-link" aria-label="C1. Antes de la clase">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">C1. Antes de la clase</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./clase2.html" class="pagination-link" aria-label="Clase 2 - Expresiones regulares">
-        <span class="nav-page-text"><span class="chapter-title">Clase 2 - Expresiones regulares</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./clase1_2.html" class="pagination-link" aria-label="C1. Taller práctico">
+        <span class="nav-page-text"><span class="chapter-title">C1. Taller práctico</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

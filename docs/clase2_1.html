@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>C2. Presentación – Taller de investigación IV - Minería de texto</title>
+<title>C2. Taller Práctico – Taller de investigación IV - Minería de texto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./clase2_1.html" rel="next">
-<link href="./clase1_2.html" rel="prev">
+<link href="./clase2_2.html" rel="next">
+<link href="./clase2.html" rel="prev">
 <link href="./https://abs.twimg.com/emoji/v2/72x72/1f4d6.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -82,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./clase2.html"><strong>Clase 2. Expresiones regulares</strong></a></li><li class="breadcrumb-item"><a href="./clase2.html"><span class="chapter-title">C2. Presentación</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./clase2.html"><strong>Clase 2. Expresiones regulares</strong></a></li><li class="breadcrumb-item"><a href="./clase2_1.html"><span class="chapter-title">C2. Taller Práctico</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -186,12 +220,12 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clase2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">C2. Presentación</span></a>
+  <a href="./clase2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">C2. Presentación</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clase2_1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">C2. Taller Práctico</span></a>
+  <a href="./clase2_1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">C2. Taller Práctico</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -253,15 +287,23 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#ejercicio-1-filtrar-normativas-sobre-locaciones-de-obras-y-servicios-loys" id="toc-ejercicio-1-filtrar-normativas-sobre-locaciones-de-obras-y-servicios-loys" class="nav-link active" data-scroll-target="#ejercicio-1-filtrar-normativas-sobre-locaciones-de-obras-y-servicios-loys">Ejercicio 1: Filtrar normativas sobre Locaciones de Obras y Servicios (LOYS)</a></li>
+  <li><a href="#ejercicio-2-filtrar-designaciones-y-renuncias" id="toc-ejercicio-2-filtrar-designaciones-y-renuncias" class="nav-link" data-scroll-target="#ejercicio-2-filtrar-designaciones-y-renuncias">Ejercicio 2: Filtrar designaciones y renuncias</a></li>
+  <li><a href="#ejercicio-3-pensando-en-el-trabajo-final" id="toc-ejercicio-3-pensando-en-el-trabajo-final" class="nav-link" data-scroll-target="#ejercicio-3-pensando-en-el-trabajo-final">Ejercicio 3: Pensando en el trabajo final</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./clase2.html"><strong>Clase 2. Expresiones regulares</strong></a></li><li class="breadcrumb-item"><a href="./clase2.html"><span class="chapter-title">C2. Presentación</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./clase2.html"><strong>Clase 2. Expresiones regulares</strong></a></li><li class="breadcrumb-item"><a href="./clase2_1.html"><span class="chapter-title">C2. Taller Práctico</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">C2. Presentación</span></h1>
+<h1 class="title"><span class="chapter-title">C2. Taller Práctico</span></h1>
 </div>
 
 
@@ -278,11 +320,268 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>En esta clase aprenderemos a utilizar expresiones regulares para la extracción y manipulación de texto libre</p>
-<iframe src="presentaciones/clase_2/regex.html" width="100%" height="600px">
-</iframe>
+<p>El <strong>Servicio de Información Normativa</strong> es un conjunto de datos publicado por el Gobierno de la Ciudad Autónoma de Buenos Aires. Este dataset recopila las normativas sancionadas en el ámbito de la ciudad, publicadas tanto en el Boletín Municipal como en el Boletín Oficial desde el 6 de agosto de 1996.</p>
+<p><a href="https://data.buenosaires.gob.ar/dataset/servicio-informacion-normativa?utm_source=chatgpt.com">data.buenosaires.gob.ar</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Adjuntando el paquete: 'janitor'
+
+The following objects are masked from 'package:stats':
+
+    chisq.test, fisher.test</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_normativa <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-legal-y-tecnica/servicio-informacion-normativa/normativa.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 748671 Columns: 11
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (8): norma_tipo, norma_numero, norma_organismo_emisor, norma_fecha_sanci...
+dbl (3): norma_id, norma_anio_sancion, norma_anio_publicacion
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>Antes de empezar a trabajar con expresiones regulares vamos a analizar un poco la base</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df_normativa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 748,671
+Columns: 11
+$ norma_id                &lt;dbl&gt; 101940, 101941, 101942, 101943, 101944, 101945…
+$ norma_tipo              &lt;chr&gt; "DISPOSICION", "DISPOSICION", "RESOLUCION", "D…
+$ norma_numero            &lt;chr&gt; "93", "4", "2398", "879", "893", "962", "1226"…
+$ norma_anio_sancion      &lt;dbl&gt; 2005, 2005, 2005, 2007, 2007, 2007, 2007, 2007…
+$ norma_anio_publicacion  &lt;dbl&gt; NA, NA, NA, 2007, 2007, 2007, 2007, 2007, 2007…
+$ norma_organismo_emisor  &lt;chr&gt; "GOBIERNO DE LA CIUDAD AUTONOMA DE BUENOS AIRE…
+$ norma_fecha_sancion     &lt;chr&gt; "01/01/2005", "01/01/2005", "01/01/2005", "20/…
+$ norma_fecha_publicacion &lt;chr&gt; NA, NA, NA, "28/06/2007", "28/06/2007", "28/06…
+$ norma_alcance           &lt;chr&gt; "PARTICULAR", "PARTICULAR", "PARTICULAR", "PAR…
+$ norma_gestion           &lt;chr&gt; "Aníbal Ibarra", "Aníbal Ibarra", "Aníbal Ibar…
+$ norma_sintesis          &lt;chr&gt; "APLICA UNA MULTA AL CEAMSE, EN LOS TÉRMINOS D…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_normativa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    norma_id       norma_tipo        norma_numero       norma_anio_sancion
+ Min.   :     1   Length:748671      Length:748671      Min.   :1858      
+ 1st Qu.:190912   Class :character   Class :character   1st Qu.:2011      
+ Median :380912   Mode  :character   Mode  :character   Median :2017      
+ Mean   :380335                                         Mean   :2015      
+ 3rd Qu.:570305                                         3rd Qu.:2021      
+ Max.   :757614                                         Max.   :2027      
+                                                        NA's   :412       
+ norma_anio_publicacion norma_organismo_emisor norma_fecha_sancion
+ Min.   :1882           Length:748671          Length:748671      
+ 1st Qu.:2012           Class :character       Class :character   
+ Median :2017           Mode  :character       Mode  :character   
+ Mean   :2016                                                     
+ 3rd Qu.:2021                                                     
+ Max.   :2202                                                     
+ NA's   :8834                                                     
+ norma_fecha_publicacion norma_alcance      norma_gestion     
+ Length:748671           Length:748671      Length:748671     
+ Class :character        Class :character   Class :character  
+ Mode  :character        Mode  :character   Mode  :character  
+                                                              
+                                                              
+                                                              
+                                                              
+ norma_sintesis    
+ Length:748671     
+ Class :character  
+ Mode  :character  
+                   
+                   
+                   
+                   </code></pre>
+</div>
+</div>
+<p>¿Qué tipos de normativa existen?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_normativa <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(norma_tipo, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">view</span>()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>df_normativa <span class="sc">|&gt;</span> </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(norma_anio_sancion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 148 × 2
+   norma_anio_sancion     n
+                &lt;dbl&gt; &lt;int&gt;
+ 1               1858     1
+ 2               1867     1
+ 3               1869     1
+ 4               1870     1
+ 5               1872     1
+ 6               1876     1
+ 7               1880     1
+ 8               1881     1
+ 9               1882     1
+10               1883     1
+# ℹ 138 more rows</code></pre>
+</div>
+</div>
+<section id="ejercicio-1-filtrar-normativas-sobre-locaciones-de-obras-y-servicios-loys" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-1-filtrar-normativas-sobre-locaciones-de-obras-y-servicios-loys">Ejercicio 1: Filtrar normativas sobre Locaciones de Obras y Servicios (LOYS)</h3>
+<p>El objetivo es Filtrar todas las normativas referidas a contrataciones de locaciones de obras y servicios (LOYS).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>patron_loys <span class="ot">&lt;-</span> <span class="fu">regex</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">bloys</span><span class="sc">\\</span><span class="st">b|locaci.n ?de obras y servicios"</span>, T)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>patron_baja_contrato <span class="ot">&lt;-</span> <span class="fu">regex</span>(<span class="st">"deja sin efecto|</span><span class="sc">\\</span><span class="st">bbaja"</span>,T)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>aumento <span class="ot">&lt;-</span> <span class="fu">regex</span>(<span class="st">"(aumenta|eleva|sube).{0,20} monto"</span>,T)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Me quedo con todas normativas vinculadas a loys</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>loys <span class="ot">&lt;-</span> df_normativa  <span class="sc">|&gt;</span> </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(norma_sintesis, patron_loys))</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>loys <span class="sc">|&gt;</span> </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(norma_anio_sancion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 14 × 2
+   norma_anio_sancion     n
+                &lt;dbl&gt; &lt;int&gt;
+ 1               2006     1
+ 2               2011     4
+ 3               2012     3
+ 4               2013     6
+ 5               2014     6
+ 6               2015     6
+ 7               2016     6
+ 8               2018     8
+ 9               2019     8
+10               2020    11
+11               2021     9
+12               2022     8
+13               2023    18
+14               2024    11</code></pre>
+</div>
+</div>
+<section id="clasificar-las-normativas-loys" class="level4">
+<h4 class="anchored" data-anchor-id="clasificar-las-normativas-loys">1.1 Clasificar las normativas LOYS</h4>
+<p>Ahora vamos a caracterizar las normativas LOYS según su tipo:</p>
+<ul>
+<li><p>Alta: Contrataciones nuevas</p></li>
+<li><p>Baja: Rescisión de contrato</p></li>
+<li><p>Adenda: Aumento del monto del contrato</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>loys <span class="ot">&lt;-</span> df_normativa  <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(norma_sintesis, patron_loys)) <span class="sc">|&gt;</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tipo_normativa_loys =</span> <span class="fu">case_when</span>(<span class="fu">str_detect</span>(norma_sintesis, patron_baja_contrato) <span class="sc">~</span> <span class="st">"Baja"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="fu">str_detect</span>(norma_sintesis, aumento) <span class="sc">~</span><span class="st">"Adenda"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                                                   T <span class="sc">~</span> <span class="st">"Alta"</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                                         ))</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Grafico</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>loys <span class="sc">|&gt;</span> </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(tipo_normativa_loys, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(tipo_normativa_loys, n), <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribución de tipos de normativas en LOYS"</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tipo de normativa"</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Cantidad"</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="clase2_1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="ejercicio-2-filtrar-designaciones-y-renuncias" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-2-filtrar-designaciones-y-renuncias">Ejercicio 2: Filtrar designaciones y renuncias</h3>
+<section id="objetivo" class="level4">
+<h4 class="anchored" data-anchor-id="objetivo">Objetivo</h4>
+<p>Filtrar todas las normativas que mencionen <strong>designaciones</strong> y <strong>renuncias</strong> de personal.</p>
+</section>
+<section id="paso-1-filtrar-la-base-de-datos-por-designaciones-y-renuncia" class="level4">
+<h4 class="anchored" data-anchor-id="paso-1-filtrar-la-base-de-datos-por-designaciones-y-renuncia"><strong>Paso 1: Filtrar la base de datos por designaciones y renuncia</strong></h4>
+<p>Completar los patrones regex</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>patron_renuncia <span class="ot">&lt;-</span> <span class="fu">regex</span>(<span class="st">""</span>, T)  <span class="co"># 📝 Completar </span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>patron_designacion <span class="ot">&lt;-</span> <span class="fu">regex</span>(<span class="st">""</span> , T)  <span class="co"># 📝 Completar </span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>df_renuncias_y_designaciones <span class="ot">&lt;-</span> df_normativa <span class="sc">|&gt;</span> </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filtro</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(norma_sintesis, patron_renuncia) <span class="sc">|</span> <span class="fu">str_detect</span>(norma_sintesis, patron_renuncia))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There were 2 warnings in `filter()`.
+The first warning was:
+ℹ In argument: `|...`.
+Caused by warning in `stri_detect_regex()`:
+! empty search patterns are not supported
+ℹ Run `dplyr::last_dplyr_warnings()` to see the 1 remaining warning.</code></pre>
+</div>
+</div>
+</section>
+<section id="paso-2-clasificar-en-renuncias-o-designaciones" class="level4">
+<h4 class="anchored" data-anchor-id="paso-2-clasificar-en-renuncias-o-designaciones"><strong>Paso 2: Clasificar en renuncias o designaciones</strong></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># 📝 Completar </span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a> <span class="co"># PISTA: Podes usar case_when() o ifelse()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="paso-3-extraer-el-cargo" class="level4">
+<h4 class="anchored" data-anchor-id="paso-3-extraer-el-cargo"><strong>Paso 3: Extraer el cargo</strong></h4>
+<p>Usamos <code>str_extract()</code> para identificar el cargo mencionado en la normativa.</p>
+<p>Ejemplo: se podrían extraer las gerencias, subgerencias y secretarías</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 📝 Completar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="paso-4-analizar-los-resultados" class="level4">
+<h4 class="anchored" data-anchor-id="paso-4-analizar-los-resultados"><strong>Paso 4: Analizar los resultados</strong></h4>
+<p>¿Hay algún dato interesante? ¿Hubo diferencia por año?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 📝 Completar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="ejercicio-3-pensando-en-el-trabajo-final" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-3-pensando-en-el-trabajo-final">Ejercicio 3: Pensando en el trabajo final</h3>
+<p>📌 Buscar un tema de interés y un dataset relevante para plantear la investigación final.</p>
+<ul>
+<li><p>Elegir un tema te interese analizar en donde tengas que aplicar tecnicas cuantitativas a corpus de textos.</p></li>
+<li><p>Buscar un dataset o corpus relacionado con ese tema. Puede ser una página web, una API o incluso un video de youtube!</p></li>
+</ul>
+<p>Algunos repositorios:</p>
+<ul>
+<li><a href="https://data.buenosaires.gob.ar/">Datos Abiertos de Buenos Aires</a></li>
+</ul>
+<!-- -->
+<ul>
+<li><a href="https://datos.gob.ar/">Datos Abiertos de Argentina</a></li>
+</ul>
+<!-- -->
+<ul>
+<li><p><a href="https://www.kaggle.com/" class="uri">https://www.kaggle.com/</a></p></li>
+<li><p><a href="https://github.com/cienciadedatos/datos-de-miercoles" class="uri">https://github.com/cienciadedatos/datos-de-miercoles</a></p></li>
+<li><p><a href="https://huggingface.co/collections/somosnlp/corpus-instructions-in-spanish-and-related-languages-6697e4ce5ef2828a1ff26d5d">Corpus de NLP en español</a></p></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -707,13 +1006,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./clase1_2.html" class="pagination-link" aria-label="C1. Taller práctico">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">C1. Taller práctico</span></span>
+      <a href="./clase2.html" class="pagination-link" aria-label="C2. Presentación">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">C2. Presentación</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./clase2_1.html" class="pagination-link" aria-label="C2. Taller Práctico">
-        <span class="nav-page-text"><span class="chapter-title">C2. Taller Práctico</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./clase2_2.html" class="pagination-link" aria-label="C2: Actividad entregable">
+        <span class="nav-page-text"><span class="chapter-title">C2: Actividad entregable</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

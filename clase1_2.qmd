@@ -1,0 +1,179 @@
+# C1. Taller práctico
+
+Para la actividad de hoy vamos a trabajar con el libro de **Harry Potter 3 - El prisionero de Azkaban de J.K Rowling**[^clase1-1]
+
+[^clase1-1]: J. K. Rowling . (1999). Harry Potter y el prisionero de Azkaban. Reino Unido: Bloomsbury.
+
+![](www/patronum.png){fig-align="center" width="593"}
+
+### Los paquetes
+
+```{r warning=FALSE, message=FALSE}
+
+
+library(tidyverse)
+library(esquisse)
+library(janitor)
+library(tm)
+library(wordcloud)
+```
+
+#### **Sobre los paquetes**
+
+`Tidyverse` es un conjunto de paquetes de R. Se utiliza para analizar datos y está compuesto por paquetes que comparten una filosofía de diseño, gramática y estructura. Más información [acá](https://www.tidyverse.org/)
+
+![Fuente: https://x.com/RosanaFerrero/status/1521396654829617153/photo/1](www/tidyverse.jpg){fig-align="center"}
+
+`esquisse` es un paquete que permite generar graficos con `ggplot` a partir de una manera interactiva utilizando drag and drop. Más información [acá](https://dreamrs.github.io/esquisse/)
+
+`janitor` contiene funciones para limpiar y examinar datos. Más información [acá](https://www.rdocumentation.org/packages/janitor/versions/2.2.1)
+
+### Cargamos el libro
+
+```{r warning=FALSE, message=FALSE}
+# Cargamos los datos
+hp3 <- readLines("data/hp3.txt")
+
+# Lo convertimos en un solo vector
+libro <- paste(hp3, collapse = " ")
+
+# Vemos los primeros caracteres
+print(substr(libro, 1, 500))  
+
+
+
+
+```
+
+#### ¿Cuantos caracteres tiene el libro?
+
+```{r}
+
+# ¿Cuantos caracteres tiene el libro? 
+nchar(libro)
+```
+
+#### ¿Cuantas oraciones tiene el libro?
+
+```{r}
+oraciones <- unlist(str_split(libro, "(?<=[.!?])\\s+"))
+length(oraciones)
+```
+
+### Frecuencia de palabras más utilizadas
+
+#### Limpiamos el texto
+
+`gsub()` es una función en **R** que se usa para **buscar y reemplazar texto** dentro de cadenas de caracteres.
+
+La sintaxis es:
+
+``` r
+gsub("patrón_a_buscar", "nuevo_texto", texto)
+```
+
+A través de esta función vamos a limpiar el texto del libro para mejorar el conteo de las palabrbas
+
+```{r}
+# Convertimos a minusculas
+libro_limpio <- tolower(libro)  
+# Eliminamos las puntuaciones
+libro_limpio <- gsub("[[:punct:]]", "", libro_limpio)  
+# Eliminamos los números
+libro_limpio <- gsub("[[:digit:]]", "", libro_limpio) 
+# Eliminamos espacios múltiples
+libro_limpio <- gsub("\\s+", " ", libro_limpio) 
+libro_limpio <- gsub("[^\x20-\x7E]", "", libro_limpio)  # Elimina caracteres no imprimibles
+
+```
+
+#### Dividimos las palabras
+
+```{r}
+# Divido las palabras:
+
+palabras <- unlist(strsplit(libro_limpio, "\\s+")) 
+
+```
+
+#### Eliminamos las stopwords
+
+Las stopwords (o palabras vacías) son palabras muy comunes en un idioma que suelen tener poco valor en análisis de texto porque no aportan significado relevante. Ejemplos en español incluyen:
+
+🔹 Preposiciones: "de", "a", "con", "por", "para" 🔹 Artículos: "el", "la", "los", "las" 🔹 Conjunciones: "y", "o", "pero", "aunque" 🔹 Pronombres: "yo", "tú", "él", "ella", "nosotros" 🔹 Verbos auxiliares: "ser", "estar", "haber"
+
+```{r}
+stopwords_es <- stopwords("es") 
+
+# Vector sin los stopwords
+palabras_filtradas <- palabras[!palabras %in% stopwords_es] 
+```
+
+#### Contamos
+
+```{r}
+frecuencia <- table(palabras_filtradas)
+# Ordenamos por la frecuencia
+frecuencia <- sort(frecuencia, decreasing = TRUE) 
+
+# Top 20 palabras
+head(frecuencia, 20)
+```
+
+### Graficamos
+
+1)  Convertimos nuestras frecuencias en una tabla
+
+```{r}
+df_frec <- as.data.frame(frecuencia)
+colnames(df_frec) <- c("Palabra", "Frecuencia")
+
+
+head(df_frec)
+```
+
+Me quedo con las 20 palabras más mencionadas y grafico utilizando `esquisser`
+
+```{r}
+
+df_grafico <- df_frec |> 
+  head(20)
+
+
+```
+
+``` r
+esquisser(df_grafico)
+```
+
+Lo diseñamos a gusto y luego guardamos el código
+
+```{r}
+
+# Grafico final
+
+ggplot(df_grafico) +
+  aes(x = Palabra, y = Frecuencia) +
+  geom_col(fill = "#440154") +
+  labs(
+    x = "Palabras",
+    y = "Cantidad",
+    title = "Palabras mas mencionadas en Harry Potter 3"
+  ) +
+  ggthemes::theme_fivethirtyeight() +
+  theme(
+    legend.justification = "top",
+    plot.title = element_text(size = 14L,
+    face = "bold",
+    hjust = 0.5)
+  )
+```
+
+#### Nube de palabras
+
+También podemos realizar una nube de palabras:
+
+```{r}
+
+wordcloud(names(frecuencia), frecuencia, max.words = 100, colors = brewer.pal(8, "Dark2"))
+```

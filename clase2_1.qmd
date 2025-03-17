@@ -1,0 +1,161 @@
+---
+title: "C2. Taller Práctico"
+---
+
+El **Servicio de Información Normativa** es un conjunto de datos publicado por el Gobierno de la Ciudad Autónoma de Buenos Aires. Este dataset recopila las normativas sancionadas en el ámbito de la ciudad, publicadas tanto en el Boletín Municipal como en el Boletín Oficial desde el 6 de agosto de 1996.
+
+[data.buenosaires.gob.ar](https://data.buenosaires.gob.ar/dataset/servicio-informacion-normativa?utm_source=chatgpt.com)
+
+```{r}
+
+library(tidyverse)
+library(janitor)
+
+df_normativa <- read_csv("https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-legal-y-tecnica/servicio-informacion-normativa/normativa.csv") |> 
+  clean_names()
+
+
+
+```
+
+Antes de empezar a trabajar con expresiones regulares vamos a analizar un poco la base
+
+```{r}
+glimpse(df_normativa)
+summary(df_normativa)
+```
+
+¿Qué tipos de normativa existen?
+
+```{r}
+
+df_normativa |> 
+  count(norma_tipo, sort = TRUE) |> 
+  view()
+
+df_normativa |> 
+  count(norma_anio_sancion)
+```
+
+### Ejercicio 1: Filtrar normativas sobre Locaciones de Obras y Servicios (LOYS)
+
+El objetivo es Filtrar todas las normativas referidas a contrataciones de locaciones de obras y servicios (LOYS).
+
+```{r}
+
+patron_loys <- regex("\\bloys\\b|locaci.n ?de obras y servicios", T)
+patron_baja_contrato <- regex("deja sin efecto|\\bbaja",T)
+aumento <- regex("(aumenta|eleva|sube).{0,20} monto",T)
+
+# Me quedo con todas normativas vinculadas a loys
+loys <- df_normativa  |> 
+  filter(str_detect(norma_sintesis, patron_loys))
+
+loys |> 
+  count(norma_anio_sancion)
+```
+
+#### 1.1 Clasificar las normativas LOYS
+
+Ahora vamos a caracterizar las normativas LOYS según su tipo:
+
+-   Alta: Contrataciones nuevas
+
+-   Baja: Rescisión de contrato
+
+-   Adenda: Aumento del monto del contrato
+
+```{r}
+loys <- df_normativa  |> 
+  filter(str_detect(norma_sintesis, patron_loys)) |> 
+  mutate(tipo_normativa_loys = case_when(str_detect(norma_sintesis, patron_baja_contrato) ~ "Baja",
+                                         str_detect(norma_sintesis, aumento) ~"Adenda",
+                                                   T ~ "Alta"
+                                         ))
+
+# Grafico
+loys |> 
+  count(tipo_normativa_loys, sort = TRUE) |> 
+  ggplot(aes(x = reorder(tipo_normativa_loys, n), y = n)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  labs(
+    title = "Distribución de tipos de normativas en LOYS",
+    x = "Tipo de normativa",
+    y = "Cantidad"
+  ) +
+  theme_minimal()
+```
+
+### Ejercicio 2: Filtrar designaciones y renuncias
+
+#### Objetivo
+
+Filtrar todas las normativas que mencionen **designaciones** y **renuncias** de personal.
+
+#### **Paso 1: Filtrar la base de datos por designaciones y renuncia**
+
+Completar los patrones regex
+
+```{r}
+
+patron_renuncia <- regex("", T)  # 📝 Completar 
+patron_designacion <- regex("" , T)  # 📝 Completar 
+
+df_renuncias_y_designaciones <- df_normativa |> 
+  # Filtro
+  filter(str_detect(norma_sintesis, patron_renuncia) | str_detect(norma_sintesis, patron_renuncia))
+
+```
+
+#### **Paso 2: Clasificar en renuncias o designaciones**
+
+```{r}
+ # 📝 Completar 
+ # PISTA: Podes usar case_when() o ifelse()
+
+```
+
+#### **Paso 3: Extraer el cargo**
+
+Usamos `str_extract()` para identificar el cargo mencionado en la normativa.
+
+Ejemplo: se podrían extraer las gerencias, subgerencias y secretarías
+
+```{r}
+# 📝 Completar
+
+
+```
+
+#### **Paso 4: Analizar los resultados**
+
+¿Hay algún dato interesante? ¿Hubo diferencia por año?
+
+```{r}
+# 📝 Completar
+```
+
+### Ejercicio 3: Pensando en el trabajo final
+
+📌 Buscar un tema de interés y un dataset relevante para plantear la investigación final.
+
+-   Elegir un tema te interese analizar en donde tengas que aplicar tecnicas cuantitativas a corpus de textos.
+
+-   Buscar un dataset o corpus relacionado con ese tema. Puede ser una página web, una API o incluso un video de youtube!
+
+Algunos repositorios:
+
+-   [Datos Abiertos de Buenos Aires](https://data.buenosaires.gob.ar/)
+
+<!-- -->
+
+-   [Datos Abiertos de Argentina](https://datos.gob.ar/)
+
+<!-- -->
+
+-   <https://www.kaggle.com/>
+
+-   <https://github.com/cienciadedatos/datos-de-miercoles>
+
+-   [Corpus de NLP en español](https://huggingface.co/collections/somosnlp/corpus-instructions-in-spanish-and-related-languages-6697e4ce5ef2828a1ff26d5d)

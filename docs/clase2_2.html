@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>C2. Presentación – Taller de investigación IV - Minería de texto</title>
+<title>C2: Actividad entregable – Taller de investigación IV - Minería de texto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./clase2_1.html" rel="next">
-<link href="./clase1_2.html" rel="prev">
+<link href="./hoja_regex.html" rel="next">
+<link href="./clase2_1.html" rel="prev">
 <link href="./https://abs.twimg.com/emoji/v2/72x72/1f4d6.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./clase2.html"><strong>Clase 2. Expresiones regulares</strong></a></li><li class="breadcrumb-item"><a href="./clase2.html"><span class="chapter-title">C2. Presentación</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./clase2.html"><strong>Clase 2. Expresiones regulares</strong></a></li><li class="breadcrumb-item"><a href="./clase2_2.html"><span class="chapter-title">C2: Actividad entregable</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -186,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clase2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">C2. Presentación</span></a>
+  <a href="./clase2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">C2. Presentación</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -196,7 +196,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clase2_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">C2: Actividad entregable</span></a>
+  <a href="./clase2_2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">C2: Actividad entregable</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -253,15 +253,22 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#ejercicio-pensando-en-el-trabajo-final" id="toc-ejercicio-pensando-en-el-trabajo-final" class="nav-link active" data-scroll-target="#ejercicio-pensando-en-el-trabajo-final">Ejercicio: Pensando en el trabajo final</a></li>
+  <li><a href="#formato-de-entrega" id="toc-formato-de-entrega" class="nav-link" data-scroll-target="#formato-de-entrega">Formato de entrega</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./clase2.html"><strong>Clase 2. Expresiones regulares</strong></a></li><li class="breadcrumb-item"><a href="./clase2.html"><span class="chapter-title">C2. Presentación</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./clase2.html"><strong>Clase 2. Expresiones regulares</strong></a></li><li class="breadcrumb-item"><a href="./clase2_2.html"><span class="chapter-title">C2: Actividad entregable</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">C2. Presentación</span></h1>
+<h1 class="title"><span class="chapter-title">C2: Actividad entregable</span></h1>
 </div>
 
 
@@ -278,11 +285,34 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>En esta clase aprenderemos a utilizar expresiones regulares para la extracción y manipulación de texto libre</p>
-<iframe src="presentaciones/clase_2/regex.html" width="100%" height="600px">
-</iframe>
+<section id="ejercicio-pensando-en-el-trabajo-final" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-pensando-en-el-trabajo-final">Ejercicio: Pensando en el trabajo final</h3>
+<p>📌 Buscar un tema de interés y un dataset relevante para plantear la investigación final.</p>
+<ul>
+<li><p>Es requisito que sea un tema donde tengas que aplicar minería de texto.</p></li>
+<li><p>Buscar un dataset o corpus relacionado con ese tema. Puede ser una página web, una API o incluso un video de youtube!</p></li>
+</ul>
+<p>Algunos repositorios:</p>
+<ul>
+<li><a href="https://data.buenosaires.gob.ar/">Datos Abiertos de Buenos Aires</a></li>
+</ul>
+<!-- -->
+<ul>
+<li><a href="https://datos.gob.ar/">Datos Abiertos de Argentina</a></li>
+</ul>
+<!-- -->
+<ul>
+<li><p><a href="https://www.kaggle.com/" class="uri">https://www.kaggle.com/</a></p></li>
+<li><p><a href="https://github.com/cienciadedatos/datos-de-miercoles" class="uri">https://github.com/cienciadedatos/datos-de-miercoles</a></p></li>
+<li><p><a href="https://huggingface.co/collections/somosnlp/corpus-instructions-in-spanish-and-related-languages-6697e4ce5ef2828a1ff26d5d">Corpus de NLP en español</a></p></li>
+</ul>
+</section>
+<section id="formato-de-entrega" class="level2">
+<h2 class="anchored" data-anchor-id="formato-de-entrega">Formato de entrega</h2>
+<p>Documento que explique brevemente la temática seleccionada junto a una descripción del dataset o corpus elegido.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -707,13 +737,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./clase1_2.html" class="pagination-link" aria-label="C1. Taller práctico">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">C1. Taller práctico</span></span>
+      <a href="./clase2_1.html" class="pagination-link" aria-label="C2. Taller Práctico">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">C2. Taller Práctico</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./clase2_1.html" class="pagination-link" aria-label="C2. Taller Práctico">
-        <span class="nav-page-text"><span class="chapter-title">C2. Taller Práctico</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./hoja_regex.html" class="pagination-link" aria-label="C2. Hoja de ruta de Expresiones Regulares en R">
+        <span class="nav-page-text"><span class="chapter-title">C2. Hoja de ruta de Expresiones Regulares en R</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

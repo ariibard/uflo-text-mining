@@ -21,18 +21,31 @@ book:
 
   
   chapters:
-    - index.qmd
-    - part: "**Unidad 1. La minería de texto (text-mining) y la investigación social**"
+    - text: "**Inicio**"
+      href: index.qmd
+    - part: "**Clase 1. Introducción a la Minería de Texto**"
       chapters:
-        - clase1.qmd
+        - clase1_1.qmd # Tiene los requisitos para la clase
+        - clase1.qmd # La ppt
+        - clase1_2.qmd # El taller practico
+        
+    - part: "**Clase 2. Expresiones regulares**"
+      chapters:
         - clase2.qmd
+        - clase2_1.qmd
+        - clase2_2.qmd
         - hoja_regex.qmd
-        - bibliografia.qmd
-    - part: "**Unidad 2. Técnicas de recolección y manipulación de datos textuales**"
-      chapters:
-        - clase3.qmd
 
-bibliography: references.bib
+    - part: "**Clase 3. Técnicas de recolección y manipulación de datos textuales**"
+      chapters:
+        - clase3_1.qmd
+        - clase3.qmd
+        - clase3_2.qmd
+        
+    - part: "**Bibliografía**"
+      chapters:
+        - bibliografia.qmd
+
 
 format:
   html:

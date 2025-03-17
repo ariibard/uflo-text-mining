@@ -1,0 +1,364 @@
+---
+format:
+  revealjs:
+    echo: true
+    theme: custom.scss
+    code-line-numbers: true
+embed-resources: true
+---
+
+# Fuentes de datos textuales
+
+## Objetivo de la clase
+
+::: incremental
+-   Aprender a consumir APIs utilizando CURL y R.
+-   Descargar y trabajar con subtítulos de YouTube.
+:::
+
+# APIs
+
+## ¿Qué es una API?
+
+> “interfaz de programación de aplicaciones”.
+
+Es como un contrato de servicio entre dos aplicaciones, mediante solicitudes y respuestas.
+
+⚠️ Siempre hay que revisar la documentación
+
+## ¿Cómo funciona?
+
+Su arquitectura funciona en términos de **cliente** y servidor.
+
+*La aplicación que envía la solicitud se llama cliente, y la que envía la respuesta se llama servidor.*
+
+## APIs ya integradas a R
+
+::::: columns
+::: {.column width="70%"}
+Existen APIS que ya estan integradas en R como `spotifyr`, `twitter`, `googledrive`, `ggmaps` (google maps).
+
+Para este ejemplo vamos a trabajar con la **API de spotify**
+:::
+
+::: {.column width="30%"}
+![](https://www.emubands.com/es/wp-content/uploads/sites/2/2018/02/Spotify_logo-1024x1024.png){width="374"}
+:::
+:::::
+
+## Librerías 📦
+
+```{r}
+#| code-line-numbers: "2"
+
+library(tidyverse) 
+library(spotifyr)  # Trabajar con la API de spotify
+library(rjson)     # Lectura de archivo json
+library(gt) # Para hacer tablas lindas
+```
+
+## Credenciales
+
+Las credenciales son claves de autenticación que permiten acceder a servicios a través de una API. Generalmente, constan de un `client ID` y un `client secret`. Estas credenciales son necesarias para verificar la identidad del usuario y garantizar un acceso seguro a los datos.
+
+Guardamos las credenciales en un **.json**
+
+``` r
+{
+  "SPOTIFY_CLIENT_ID" : "SPOTIFY_CLIENT_ID",
+  "SPOTIFY_CLIENT_SECRET" : "SPOTIFY_CLIENT_SECRET"
+}
+```
+
+## Credenciales
+
+Se realiza la lectura de las credenciales mediante la función fromJSON(). Luego, se setean como variables de entorno:
+
+```{r}
+credentials <- fromJSON(file = "credentials.json")
+
+Sys.setenv(SPOTIFY_CLIENT_ID = credentials$SPOTIFY_CLIENT_ID)
+Sys.setenv(SPOTIFY_CLIENT_SECRET = credentials$SPOTIFY_CLIENT_SECRET)
+access_token <- get_spotify_access_token()
+
+```
+
+## Autenticación
+
+Se utiliza la función get_spotify_access_token() del paquete {spotifyr} 📦 para autenticarse a la API:
+
+```{r}
+access_token <- get_spotify_access_token()
+```
+
+## ¿Funciona?
+
+Para verificar que la autenticación haya sido exitosa, se realiza una consulta de las canciones de shakira.
+
+Para ello vamos a necesitar el ID de la artista
+
+![](images/id_shakira.png)
+
+## Información de los albumes
+
+Usamos la función `get_artist_albums()` para traer información de sus discos
+
+```{r}
+
+id_shakira <- "0EmeFodog0BfCgMzAIvKQp"
+canciones_shakira <- get_artist_albums(id = id_shakira)
+
+```
+
+## Resultado <img src="https://media.giphy.com/media/ObNTw8Uzwy6KQ/giphy.gif" width="30px"/>
+
+🖇️[Más información sobre las funciones de spotifyr](https://github.com/charlie86/spotifyr)
+
+```{r}
+
+head(canciones_shakira) |> 
+  select(name, release_date,type) |> 
+  gt() 
+```
+
+# Volvemos en 10 minutos
+
+![](https://i.pinimg.com/originals/10/d2/05/10d205b912352788a8b7116a43c00230.gif){fig-align="center" style="border-radius: 100%;"}
+
+# CURL
+
+`CURL` es una herramienta para realizar peticiones HTTP. En R, se puede utilizar a través del paquete [`curl`](https://www.rdocumentation.org/packages/curl/versions/5.2.1)
+
+Sirve para obtener datos de APIs públicas y privadas
+
+## Star Wars
+
+::::: columns
+::: {.column width="40%"}
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/375px-Star_Wars_Logo.svg.png)
+:::
+
+::: {.column width="60%"}
+Existen varias APIs públicas. Vamos a trabajar con la de <https://www.swapi.tech/>
+
+El formato de consulta a una API es un link:
+
+> https://www.swapi.tech/api/people/1
+:::
+:::::
+
+## ¿Cómo y qué información trae la API?
+
+Lo primero que hay que hacer es buscar la [documentación](https://www.swapi.tech/documentation) de la API
+
+![](images/doc_star_wars.png)
+
+## Handle
+
+Un handle en curl es un objeto que almacena la configuración de una conexión HTTP.
+
+Básicamente, es una estructura que te permite personalizar y reutilizar una petición a una API o servidor web.
+
+```{r}
+#| code-line-numbers: "3"
+
+library(curl)
+
+h <- new_handle()
+handle_setheaders(h, "User-Agent" = "Mozilla/5.0")
+
+```
+
+## Handle
+
+`handle_setheaders()` es una función que se usa para **agregar o modificar los encabezados (headers)** en una solicitud HTTP.
+
+**`User-Agent" = "Mozilla/5.0"`** establece en el encabezado al agente como "Mozilla/5.0", lo que *hace que la solicitud parezca provenir de un **navegador web*** en lugar de un script automatizado.
+
+```{r}
+#| code-line-numbers: "2"
+
+h <- new_handle()
+handle_setheaders(h, "User-Agent" = "Mozilla/5.0")
+
+```
+
+## Personajes
+
+La función `curl_fetch_memory(url, handle = h)` en R se utiliza para realizar una solicitud HTTP a la URL especificada y almacenar la respuesta directamente en la memoria
+
+Ejemplo: **Luke** -\> ID = 1
+
+```{r}
+
+url <- "https://www.swapi.tech/api/people/1"
+response <- curl_fetch_memory(url, h)
+
+
+```
+
+## Personajes
+
+Transformamos el request a json para poder observarlo mejor
+
+```{r results='hide'}
+#| code-line-numbers: "1"
+json_text <- rawToChar(response$content)
+data <- fromJSON(json_text)
+
+# Observo resultados
+print(data$result$properties)
+```
+
+## Personajes
+
+Transformamos el request a json para poder observarlo mejor
+
+```{r results='hide'}
+#| code-line-numbers: "2"
+json_text <- rawToChar(response$content)
+data <- fromJSON(json_text)
+
+# Observo resultados
+print(data$result$properties)
+```
+
+## Personajes
+
+Transformamos el request a json para poder observarlo mejor
+
+```{r}
+#| code-line-numbers: "5"
+json_text <- rawToChar(response$content)
+data <- fromJSON(json_text)
+
+# Observo resultados
+print(data$result$properties)
+```
+
+## Convierto a un data frame
+
+```{r}
+
+personaje <- data$result$properties
+
+# Lo convierto a un dataframe:
+data.frame(
+  nombre = personaje$name,
+  altura = as.numeric(personaje$height),
+  peso = as.numeric(personaje$mass),
+  color_pelo = personaje$hair_color,
+  color_ojos = personaje$eye_color,
+  año_nacimiento = personaje$birth_year,
+  genero = personaje$gender,
+  planeta_origen = personaje$homeworld
+) |> 
+  gt()
+```
+
+## ¿Y si quiero la información de todos los personajes?
+
+```{r}
+url <- "https://www.swapi.tech/api/people"
+response <- curl_fetch_memory(url, h)
+json_text <- rawToChar(response$content)
+data <- fromJSON(json_text)
+
+data.frame(data$result)
+```
+
+## Armamos un bucle
+
+```{r}
+
+df_personajes <- data.frame()
+
+# Me quedo con un vector con los IDs de los personajes
+ids <- sapply(data$result, function(x) x$uid)
+
+
+for (i in ids) {
+ 
+  # Repetimos los pasos anteriores para consolidar la data 
+ url <- paste0("https://www.swapi.tech/api/people/",i)
+ response <- curl_fetch_memory(url, h)
+ json_text <- rawToChar(response$content)
+ data <- fromJSON(json_text)
+
+# Extraigo solo los resultados
+ personaje <- data$result$properties
+
+
+ df <- data.frame(
+  nombre = personaje$name,
+  altura = as.numeric(personaje$height),
+  peso = as.numeric(personaje$mass),
+  color_pelo = personaje$hair_color,
+  color_ojos = personaje$eye_color,
+  año_nacimiento = personaje$birth_year,
+  genero = personaje$gender,
+  planeta_origen = personaje$homeworld
+)
+ 
+ df_personajes <- df_personajes |> 
+   bind_rows(df)
+
+}
+```
+
+## Resultado <img src="https://media.giphy.com/media/ObNTw8Uzwy6KQ/giphy.gif" width="30px"/>
+
+```{r echo = FALSE}
+df_personajes |> 
+  gt()
+```
+
+# Volvemos en 10 minutos
+
+![](https://i.pinimg.com/originals/10/d2/05/10d205b912352788a8b7116a43c00230.gif){fig-align="center" style="border-radius: 100%;"}
+
+# Subtítulos
+
+![](https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png){fig-align="center" width="126"}
+
+# Librerías 📦
+
+``` r
+library(youtubecaption)
+library(reticulate)
+```
+
+## Descargamos
+
+Vamos a descargar los subtitulos de una [entrevista](https://www.youtube.com/watch?v=TfW5qAajtWw) a Ca7riel y Paco amoroso. Usamos `get_caption()` para descargar los subtituls en español de la entrevista
+
+``` r
+
+link <- "https://www.youtube.com/watch?v=TfW5qAajtWw"
+df_subtitulos<- get_caption(url = link, language = "es")
+
+```
+
+## Resultado <img src="https://media.giphy.com/media/ObNTw8Uzwy6KQ/giphy.gif" width="30px"/>
+
+```{r include=FALSE}
+df_subtitulos <- readRDS("subtitulos.rds")
+```
+
+```{r}
+df_subtitulos |> 
+  gt()
+
+```
+
+## ¿Y si quiero todo en una celda?
+
+```{r}
+df_subtitulos |> 
+  summarise(texto = paste(text, collapse = " ")) |> 
+  gt()
+```
+
+# Repaso
+
+En esta clase vimos - Cómo consumir APIs a través de librerías de R y CURL - Descargar subtitulos de youtube
