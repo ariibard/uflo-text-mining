@@ -36,7 +36,7 @@ book:
         - clases/clase2_TP.qmd
         - hoja_regex.qmd
 
-    - part: "**Clase 3. Técnicas de recolección y manipulación de datos textuales**"
+    - part: "**Clase 3. Fuentes de datos textuales: APIS, Subtítulos y PDFs**"
       chapters:
         - clases/clase3_A.qmd
         - clases/clase3_C.qmd
