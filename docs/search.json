@@ -809,5 +809,16 @@
       "**Clase 2. Expresiones regulares**",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>C2. Presentación</span>"
     ]
+  },
+  {
+    "objectID": "clases/clase1_C.html#referencias",
+    "href": "clases/clase1_C.html#referencias",
+    "title": "C1. Presentación",
+    "section": "Referencias",
+    "text": "Referencias\nEl material de esta clase está basado en:\nWeiss, S. M., Indurkhya, N., & Zhang, T. (2015). Fundamentals of Predictive Text Mining. Capítulo 1",
+    "crumbs": [
+      "**Clase 1. Introducción a la Minería de Texto**",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>C1. Presentación</span>"
+    ]
   }
 ]
