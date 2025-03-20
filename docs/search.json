@@ -551,7 +551,7 @@
     "href": "clases/clase1_T.html",
     "title": "C1. Taller práctico",
     "section": "",
-    "text": "Los paquetes\nPara la actividad de hoy vamos a trabajar con el libro de Harry Potter 3 - El prisionero de Azkaban de J.K Rowling1\nlibrary(tidyverse)\n#library(esquisse)\nlibrary(janitor)\nlibrary(tm)\nlibrary(wordcloud)",
+    "text": "Los paquetes\nlibrary(tidyverse)\nlibrary(janitor)\nlibrary(tm)\nlibrary(wordcloud)",
     "crumbs": [
       "**Clase 1. Introducción a la Minería de Texto**",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>C1. Taller práctico</span>"
