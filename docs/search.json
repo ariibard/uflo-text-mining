@@ -573,7 +573,7 @@
     "href": "clases/clase2_C.html",
     "title": "C2. Presentación",
     "section": "",
-    "text": "En esta clase aprenderemos a utilizar expresiones regulares para la extracción y manipulación de texto libre",
+    "text": "Objetivo de la clase\nEn esta clase aprenderemos a utilizar expresiones regulares para la extracción y manipulación de texto libre",
     "crumbs": [
       "**Clase 2. Expresiones regulares**",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>C2. Presentación</span>"
@@ -797,6 +797,17 @@
     "crumbs": [
       "**Clase 4. Webscrapping**",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>C4. Antes de la clase</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase2_C.html#presentación",
+    "href": "clases/clase2_C.html#presentación",
+    "title": "C2. Presentación",
+    "section": "Presentación",
+    "text": "Presentación",
+    "crumbs": [
+      "**Clase 2. Expresiones regulares**",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>C2. Presentación</span>"
     ]
   }
 ]

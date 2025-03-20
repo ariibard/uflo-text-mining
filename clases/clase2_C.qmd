@@ -4,9 +4,11 @@ warnings: false
 message: false
 ---
 
+## **Objetivo de la clase**
+
 En esta clase aprenderemos a utilizar expresiones regulares para la extracción y manipulación de texto libre
 
-
+## **Presentación**
 
 <iframe src="presentaciones/clase_2/regex.html" width="100%" height="600px">
 
