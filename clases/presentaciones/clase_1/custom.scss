@@ -1,123 +1,83 @@
 /*-- scss:defaults --*/
-
-$theme-light: #263e7e;
-$theme-yellow: #263e7e;
-$theme-red: #AD5769;
-$theme-grey:#fcfcfc;
-$theme-lightgrey: #90A1B8;
-$theme-vos: #7d2d83;
-
-$body-bg: $theme-light;
-$body-color: $theme-grey;
-$link-color:#85ddf7;
-
-
-$code-block-font-size: 1em;
-
+@import url(https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Montserrat&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Fira+Code&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans&display=swap);
+// fonts
+$font-family-sans-serif: "Montserrat", sans-serif !default;
+$font-family-monospace: "Fira Code", monospace !default;
+// colors
+$color_base: #009F8C !default;
+$color_accent: #B75C9D !default;
+$body_bg: #ffffff !default;
+$body-color: #272822 !default;
+$link-color: #B75C9D !default;
+// headings
+$presentation-heading-font: "Josefin Sans", sans-serif !default;
+$presentation-heading-color: #009F8C !default;
+$h1-font-size: 1.6em !default;
+$h2-font-size: 1.3em !default;
+$h3-font-size: 1.15em !default;
+$h4-font-size: 1.0em !default;
+// code blocks
+$code-block-border-color: #93a1a1 !default;
+$code-color: #009F8C;
 /*-- scss:rules --*/
 
+$right-arrow: "\2192"; // Unicode character for right arrow
 
-.rladies {
-  &.slide-background {
-    background: $theme-grey;
+.reveal p {
+  font-weight: 300;
+  margin-top: 1.25em;
+}
+
+// lists
+
+// Unordered lists
+
+.reveal ul {
+  font-weight: 300;
+  padding-left: 16px;
+
+  li::marker {
+    color: mix($color_base, white, 70%);
   }
-  
-  color: $theme-vos;
+}
 
-  h1 {
-    color: $theme-vos;
+.reveal ul ul {
+  list-style: none;
+
+  li:before {
+    content: $right-arrow;
+    color: mix($color_base, white, 60%);
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    margin-right: 0.5em;
   }
 }
 
-.reveal .rladies {
-  color:  $theme-vos;
-  
-}
-.rladies h1 {
-  color:  #7d2d83 !important; /* Violeta */
-  text-align: center;
-}
+// Ordered lists
 
-.rladies h2 {
-  color:  #7d2d83 !important; /* Violeta */
+.reveal ol {
+  font-weight: 300;
+  padding-left: 16px;
 
-}
-
-.red {
-  color: $theme-red;
-  font-weight: bold;
-}
-
-.reveal pre code {
-  max-height: 1000px;
-}
-
-.reveal div.sourceCode pre code {
-    background-color: $theme-yellow;
-}
-
-.reveal .title {
-  background-color: $body-color;
-  color: $theme-yellow;
-  
-  h1 {
-    color: #263e7e; // Estilo específico para los h1
+  li::marker {
+    color: $color_base;
   }
-  
-  h2 {
-    color: #263e7e; // Estilo específico para los h1
-  }
-  
-    h3 {
-    color: #263e7e; // Estilo específico para los h1
-    text-align: center;
-    font-size: 5rem;
-    margin-bottom: -10; 
-  }
-
 }
 
-.reveal .footer {
-  color: $theme-grey;
-}
+.reveal ol ul {
+  list-style: none;
 
-.textcenter {
-  text-align: center;
-}
-
-.flow {
-  background-image: url(imagenes/fondo_letras.jpg);
-  background-attachment: fixed;
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-	animation: animate 40s linear infinite;
-	font-weight: 900;
-}
-
-.hexs {
-  background-image: url(imagenes/hexs.png);
-  background-attachment: fixed;
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-	animation: animate 40s linear infinite;
-	font-weight: 900;
-}
-
-@keyframes animate {
-	0% {
-		background-position: left 0px top 5px;
-	}
-	40% {
-		background-position: left 800px top 10px;
-	}
-}
-
-
-
-
-.ladies {
-  &:is(.slide-background) {
-  background: $theme-vos;
+  li:before {
+    content: $right-arrow;
+    color: mix($color_base, white, 60%);
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    margin-right: 0.5em;
   }
 }
 
