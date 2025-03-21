@@ -727,7 +727,7 @@
     "href": "clases/clase1_A.html#paquetes",
     "title": "C1. Antes de la clase",
     "section": "2. Paquetes",
-    "text": "2. Paquetes\nInstalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:\n\npaquetes_lista &lt;- c(\n  \"tidyverse\", \"janitor\", \"esquisse\", \"tm\",\"wordcloud\"\n)\n\ninstall.packages(paquetes_lista)",
+    "text": "2. Paquetes\nInstalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:\n\npaquetes_lista &lt;- c(\n  \"tidyverse\", \"janitor\", \"esquisse\", \"tm\",\"wordcloud\", \"stopwords\", \"plotly\"\n)\n\ninstall.packages(paquetes_lista)",
     "crumbs": [
       "**Clase 1. Introducción a la Minería de Texto**",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>C1. Antes de la clase</span>"
