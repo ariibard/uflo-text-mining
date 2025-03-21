@@ -9,3 +9,9 @@ En esta clase realizaremos la presentación de la materia. Se buscará introduci
 <iframe src="presentaciones/clase_1/intro_tm.html" width="100%" height="600px">
 
 </iframe>
+
+## **Referencias**
+
+El material de esta clase está basado en:
+
+Weiss, S. M., Indurkhya, N., & Zhang, T. (2015). Fundamentals of Predictive Text Mining. Capítulo 1

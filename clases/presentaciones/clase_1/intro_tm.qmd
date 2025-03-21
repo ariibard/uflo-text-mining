@@ -1,43 +1,19 @@
 ---
-lightbox: true
-format: 
+format:
   revealjs:
-    theme: [default, custom.scss]
-    width: 1600
-    height: 900
-    # logo: imagenes/logo.png
-    # css: logo.css
-    fig.align: "left"
+    echo: true
+    theme: custom.scss
+    code-line-numbers: true
 embed-resources: true
 ---
 
-##  {.title}
+# Taller de Investigación: Minería de texto para la investigación social
 
-Taller de Investigación IV
-
-::: r-fit-text
-Text Mining
-
-Para las Cs. Sociales
-:::
-
-# Taller de Investigación IV
-
-::: incremental
--   📑 Introducirlos en el análisis de datos no estructurados
-
--   🕵️‍♀️ Metodología cualitativa + Análisis Estadístico
-
--   💻 Procesamiento de lenguaje Natural
-:::
-
-# Herramientas <img src="https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/Earth.gif?raw=true" width="40"/> {.title}
+# Herramientas <img src="https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/Earth.gif?raw=true" width="40"/>
 
 ![](imagenes/R_logo.png){fig-align="center" width="402"}
 
 ## ¿Por qué usamos R?
-
--   Es un lenguaje realizado por y para estadísticos. Manipulación de bases de datos, modelado de datos (regresiones lineales, logarítmicas, estadística bayesiana), machine-learning y visualizaciones
 
 ::: incremental
 -   **Es un software libre.** Es gratuito (no requiere licencias)
@@ -67,23 +43,38 @@ Para las Cs. Sociales
 ::: incremental
 Dos entregas obligatorias:
 
-1)  Presentación del proyecto de investigación (clase 8)
-2)  Informe final con resultados (clase 15)
+1)  Presentación del proyecto de investigación 
+2)  Informe final con resultados
 :::
 
-# ¿Dudas? / ¿consultas?
+# ¿Dudas? ¿Consultas?
 
-<img src="https://i.gifer.com/fy34.gif" width="529"/>
+![](https://i.gifer.com/fy34.gif){fig-align="center" width="529"}
 
-## 🕒 Recreo de 10 min 🕝 {.title}
-
-<img src="https://i.gifer.com/2zas.gif" width="529"/>
 
 # 💫 Text Mining 💫
 
-> **Es el proceso de analizar colecciones de materiales textuales con el fin de capturar conceptos y temas clave** y descubrir relaciones y tendencias ocultas 
+> Es el proceso de analizar colecciones de corpus textuales con el fin de capturar conceptos y temas clave, descubrir relaciones y tendencias ocultas 
 
-## *text mining* vs. *Data mining* {.title}
+# Text mining vs data mining
+
+# Números vs texto
+
+# ¿Cuál es el principal problema del **texto**?
+
+
+## ¿Estructura? A donde vamos no necesitamos estructura
+
+![](images/estructura.jpg){fig-align="center" width="342"}
+
+## 1° diferencia entre data y text mining: números vs texto
+
+::: incremental
+-   📊 Superficialmente, los datos son **números o texto**.\
+-   📄 El texto suele ser un conjunto **no estructurado** de documentos sin requisitos específicos para su composición.
+:::
+
+## 2° diferencia: estructura
 
 ::::: columns
 ::: {.column width="50%"}
@@ -99,14 +90,57 @@ Dos entregas obligatorias:
 :::
 :::::
 
-## ¿Qué haremos? {.title}
+## En la minería de datos (data mining)
 
-:::::: columns
-::: {.column width="50%"}
-![](imagenes/3_pasaje.png){fig-align="center"}
+::: incremental
+-   🔍 La mayoría de las aplicaciones de minería de datos **requieren información estructurada.**\
+
+-   ➡️ Los datos deben prepararse adecuadamente o diseñarse cuidadosamente para su extracción.
 :::
 
-:::: {.column width="50%"}
+# ¿Cuáles son los tipos de variables?
+
+## ¿Qué esperamos usualmente en los análisis cualitativos?
+
+::: incremental
+-   **Variables numéricas ordenados**: Permiten comparaciones ("mayor que" o "menor que"). Ejemplo: peso, ingresos.
+
+-   **Variables categóricos**: Códigos numéricos no ordenados con una definición establecida. Ejemplo: Sexo (0 = Femenino, 1 = Masculino).
+
+:::
+
+# Para la minería de datos los datos deben presentarse de forma muy organizada
+
+## Si los datos pueden describirse en formato tabular, entonces el problema está muy estructurado
+
+| Paciente | Presión arterial | Peso | Código enfermedad |
+|----------|------------------|------|-------------------|
+| 1        | 14/60            | 65   | 1                 |
+| 2        | 90/60            | 70   | 2                 |
+| 3        | 16/11            | 89   | 3                 |
+| 4        | 97/57            | 101  | 4                 |
+
+
+# ¿El texto es diferente a los números?
+
+## Del texto a la hoja de calculo
+
+![](images/textoaldato.png) \
+
+## Diferencias con los valores numéricos clásicos
+
+::: incremental
+-   El modelo tabular es limitado
+-   Todos los valores son positivos
+-   No existen los valores perdidos
+:::
+
+## ¿Qué haremos? {.title}
+
+
+![](imagenes/3_pasaje.png){fig-align="center"}
+
+## ¿Qué haremos?
 ::: incremental
 -   **Clasificación de documentos:** Asignación de categorías a textos.
 
@@ -116,8 +150,6 @@ Dos entregas obligatorias:
 
 -   **Extracción de información**: Identificación de entidades y relaciones.
 :::
-::::
-::::::
 
 ## Lo primero es
 
@@ -129,7 +161,7 @@ Dos entregas obligatorias:
 -   **Representación vectorial**: Bag of Words (BoW), TF-IDF, embeddings.
 :::
 
-## 🕒 Recreo de 10 min 🕝 {.title}
+## 🕒 Recreo de 10 min 🕝
 
 <img src="https://i.gifer.com/2zas.gif" width="529"/>
 
