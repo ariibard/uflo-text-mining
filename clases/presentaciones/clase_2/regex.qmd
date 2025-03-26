@@ -306,6 +306,8 @@ frases |>
 
 -   más [caracteres](https://cheatography.com/davechild/cheat-sheets/regular-expressions/) para armado de expresiones regulares
 
+- URL para probar expresiones regulares: https://regex101.com/
+
 # Recreo
 
 > Volvemos en 10 minutos para comenzar con el taller
