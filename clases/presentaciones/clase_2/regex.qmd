@@ -8,11 +8,14 @@ embed-resources: true
 
 # Expresiones regulares (`regex`)
 
+
 ## Qué es una expresión regular?
 
 ::: r-stack
 Son patrones utilizados para encontrar coincidencias dentro de 📑
 :::
+
+
 
 ## ¿Para qué se utilizan?
 
@@ -28,17 +31,41 @@ Son patrones utilizados para encontrar coincidencias dentro de 📑
 
 ## ¿Qué es una expresión regular?
 
+```r
+Ejemplo  <- "((?<=(\\bh?t[-/\\.\\\\ ]?a|\\bp[-/\\.\\\\ ]?a|presi.n|
+arterial|tensi.n|tens.|\\bb\\.?d|\\bb\\.?i)
+?[\\.:\\,=]? ?)((2[0-5][0-9]|1[0-9][0-9]|0[5-9][0-9]|
+[5-9][0-9])(( ?)[/\\-\\\\ ]
+( ?))(0[3-9][0-9]|1[0-3][0-9]|[3-9][0-9])))|((?<=\\D|\\b)
+((2[0-5][0-9]|1[0-9][0-9]|0[5-9][0-9]
+|[5-9][0-9])(( ?)[/\\-\\\\ ]( ?))(0[3-9][0-9]|1[0-2][0-9]|
+[3-9][0-9]))(?= ? ?(mm|b\\.?d\\.?\\b|b\\.?i\\.?\\b)))"
+
+```
+## Características
+
+::: incremental
+- Son trasversales a todos los lenguajes de programación 
+
+- Asustan y parecen inentendibles
+:::
+
+## regex en R
+
+Para que `r` entienda que es una expresión regular usamos la función `regex()`
+
 ```{r echo = TRUE}
-#| code-line-numbers: 5
+#| code-line-numbers: "5"
 library(stringr)
 library(tidyverse)
 #style_mono_quarto(path_scss = "custom.scss")
 texto <- "Hola mundo, hola universo"
-patron <- "mundo"
+patron <- regex("mundo",T)
 
 # Detecta si el patrón está presente en el texto
 str_detect(texto, patron)
 ```
+
 
 ## Librería a utilizar
 
