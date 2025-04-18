@@ -1,0 +1,363 @@
+---
+format:
+  revealjs:
+    echo: true
+    theme: custom.scss
+    code-line-numbers: true
+    chalkboard: true
+---
+
+# 🚀 Raspado web (web-scrapping)
+
+## 🔍 ¿Qué es?
+
+Es una técnica que permite extraer información de distintos sitios web.
+
+Un **scraper** es un programa que **simula el comportamiento de un usuario** navegando por una página web, pero en lugar de mostrar el contenido, **extrae los datos automáticamente**.
+
+⚠️ ¡Atención! Cuando involucra datos personales, plantea desafíos legales y éticos.
+
+## 🔐 Protección de datos personales
+
+-   🏛️ En Argentina, **la Ley 25.326 de Protección de Datos Personales** protege la información de los individuos.
+
+-   🌐 Incluso si los datos son "**públicos**" en redes sociales o sitios web, siguen estando sujetos a **normativas de privacidad.**
+
+## 🔐 Protección de datos personales
+
+-   🚫 El webscraping sin consentimiento puede constituir una violación de derechos.
+
+-   📋 **Toda base de datos con datos personales debe estar registrada** en la Agencia de Acceso a la Información Pública (AAIP).
+
+## ⚠️ Riesgos de la Extracción Masiva de Datos
+
+-   🎣 **Ciberataques dirigidos** (fraudes y phishing)
+
+-   🆔 **Usurpación de identidad**
+
+-   🕵️‍♂️ **Vigilancia y perfilado** (reconocimiento facial)
+
+-   💰 **Reventa de información** (comercialización de datos)
+
+-   🔓 **Pérdida de control de la privacidad**
+
+## 📜 Documentos sobre aspectos normativos y éticos del webscrapping
+
+-   Agencia de Acceso a la Información Pública (AAIP). (2023). *Declaración conjunta sobre webscraping y protección de la privacidad.* [Documento en línea](https://www.argentina.gob.ar/sites/default/files/declaracion_conjunta_aaip_datascraping.pdf).
+
+-   Corte Suprema de Justicia de la Nación. (2025). Nuevas tecnologías: Responsabilidad de los buscadores de internet. [Documento en línea](https://sj.csjn.gov.ar/homeSJ/notas/nota/189/documento)
+
+## 📜 Documentos sobre aspectos normativos y éticos del webscrapping
+
+-   Office of the Privacy Commissioner of Canada (OPC). (2024). *Joint statement on data scraping and the protection of privacy.* [Declaración en línea](https://www.priv.gc.ca/en/opc-news/speeches-and-statements/2024/js-dc_20241028/).
+
+-   Information Commissioner's Office (ICO). (2024). *ICO consultation series on generative AI and data protection.* [Consulta en línea](https://ico.org.uk/about-the-ico/ico-and-stakeholder-consultations/ico-consultation-series-on-generative-ai-and-data-protection/).
+
+# Aprender a scrapear
+
+## 🌐 ¿Qué es el HTML de una página web ?
+
+El HTML (HyperText Markup Language) es el lenguaje que estructura el contenido de las páginas web. Cuando entrás a un sitio, tu navegador descarga este código y lo muestra de forma visual.
+
+``` html
+<html>
+  <head>
+    <title>Ejemplo titulo</title>
+  </head>
+  <body>
+    <h1>Ejemplo H1s</h1>
+    <p class="destacado">blablablabla.</p>
+  </body>
+</html>
+```
+
+## ¿ Cómo scrapear?
+
+Hay dos formas de scrapear:
+
+1)  HTMLs `estaticos` que no necesitan interactividad
+2)  Necesidad de `interactividad` porque por ejemplo hay que apretar botones.
+
+## 🚀Pasos
+
+1.  **Solicita la página** 🌍 Descarga el código HTML desde la web
+
+2.  **Interpreta el código** 🔍 Encuentra los elementos relevantes (títulos, imágenes, precios, etc.).
+
+3.  **Extrae la información** 📊 Guarda los datos en una estructura como un **DataFrame de R**, un **CSV** o una **base de datos**.
+
+# **rvest**: Scraping Estático (HTML)
+
+La documentación del paquete se encuentrá [en este link](https://github.com/tidyverse/rvest)
+
+## `rvest`
+
+::: incremental
+-   📜 **Tipo de scraping:** Obtiene datos directamente del código HTML de una página web.
+
+-   ⚡ **Velocidad:** Rápido, porque solo descarga el HTML sin necesidad de renderizar JavaScript.
+
+-   ❌ **Limitaciones:** No puede interactuar con páginas que cargan contenido dinámico
+
+-   ✅ **Ideal para:** Sitios con HTML estático, como noticias, blogs o páginas gubernamentales.
+:::
+
+## Manos a la obra
+
+::::: columns
+::: {.column width="50%"}
+![](images/boletin_oficial.png)
+:::
+
+::: {.column width="50%"}
+Obtener un reporte con la legislación que sale a nivel nacional diariamente. Para ello, vamos a armar un [`scraper del BORA`](https://www.boletinoficial.gob.ar/seccion/primera)
+:::
+:::::
+
+## 1) Leemos el HTML
+
+🔹 1. `read_html()`– descarga el código HTML de una página web
+
+Ahora, pagina contiene el HTML de la web y podemos extraer información de ella.
+
+```{r}
+library(rvest) # para scrapear
+library(tidyverse) # para modelar
+library(gt) # para las tablitas
+
+url <- "https://www.boletinoficial.gob.ar/seccion/primera"
+pagina <- read_html(url)
+
+
+```
+
+## ¿Qué es lo que necesito descargar?
+
+Voy a observar la página y listar qué me gustaría consolidar en mi dataset
+
+:::::: columns
+::: {.column width="30%"}
+![](https://i.pinimg.com/originals/35/ec/d0/35ecd0734d233cb22f0307fdbe5ab0f4.gif)
+:::
+
+:::: {.column width="70%"}
+::: incremental
+1)  Fecha de hoy
+2)  La órbita del mismo (Ej. Ministerio de economía)
+3)  El número de normativa
+4)  El número de expediente
+5)  El enlace de la normativa
+:::
+::::
+::::::
+
+## Fecha de hoy
+
+La mejor forma de **conocer** que **item** del html necesito traerme para poder armar mi base de datos es seleccionando `inspeccionar` al hacer click derecho sobre lo que quiero extraer.
+
+## Inspeccionar elemento
+
+![](images/fecha_hoy.png)
+
+## Fecha de hoy
+
+Eso va a abrir una ventana con el contenido `html` de ese elemento. En este caso `h6.text-primary-alt.text-bold` es un comando CSS. Estos selectores son usados para aplicar estilos a elementos
+
+![](images/fecha_hoy_elementos.png)
+
+## html_nodes()
+
+Esta función encuentra elementos en la página web usando selectores CSS. Vamos a buscar todos los elementos con la clase *h6.text-primary-alt.text-bold*. `html_node()` solo selecciona el primer elemento
+
+❕ Vemos que la fecha se encuentra en el item \[2\]
+
+```{r}
+fechas_nodos <- pagina %>% html_nodes("h6.text-primary-alt.text-bold")
+fechas_nodos
+```
+
+## html_text()
+
+Extrae el texto de un nodo HTML y lo "limpia"
+
+¡Ya tenemos nuestro primer objeto escrapeado!
+
+```{r}
+fecha_texto <- fechas_nodos[2] %>% html_text(trim = TRUE)
+fecha_texto
+```
+
+## Ministerio
+
+![](images/ministerio_elemento.png)
+
+## Ministerio / Órbita
+
+Usamos `p.clase` cuando el elemento es una etiqueta 'p' (párrafo).
+
+```{r}
+
+orbitas <- pagina %>% html_nodes("p.item") %>% html_text()
+orbitas
+
+
+```
+
+## Normativas
+
+![](images/fecha_hoy_elementos.png){fig-align="center"}
+
+## Normativas
+
+Acá tenemos un problema que es que ambos items (normativa + descripción del número de expedientes) tienen el mismo formato
+
+```{r}
+
+normativas <- pagina %>% html_nodes("p.item-detalle small") %>% html_text(trim = TRUE)
+head(normativas)
+
+```
+
+## Normativas
+
+```{r}
+# Me quedo con los números impares que serían los números de normativa
+numeros_normativa <- normativas[seq(1, length(normativas), by = 2)]
+numeros_normativa
+# Los números pares serian los números de expediente
+nro_expediente <- normativas[seq(2, length(normativas), by = 2)]
+```
+
+## html_attr()
+
+Algunas veces, la información no está en el texto, sino en los atributos de la etiqueta HTML. En este caso necesitamos traernos los links
+
+```{r}
+enlaces <- pagina %>% html_nodes("a") %>% html_attr("href") 
+enlaces
+
+```
+
+## Links de normativa
+
+Hay más links que normativas. Por lo que necesitamos quedarnos **SOLO** con los que tienen la estructura de un link de normativa y eliminar los links de los anexos
+
+![](images/links.png)
+
+## Links de normativa
+
+Nos quedamos solo con los links de de detalle aviso y eliminamos los links a los anexos
+
+```{r}
+enlaces_normativa <- enlaces[grepl("/detalleAviso", enlaces) & !grepl("anexos=", enlaces)]
+enlaces_normativa
+```
+
+## Dataset final
+
+```{r}
+
+df_normativas <- data.frame(Normativa = numeros_normativa,nro_expediente, orbitas,enlaces_normativa, stringsAsFactors = FALSE) |> 
+  mutate(fecha_publicacion = fecha_texto) 
+
+df_normativas |> 
+  gt()
+```
+
+## ¿Ven algo raro en los links?
+
+```{r}
+df_normativas |> 
+  gt()
+```
+
+## Agregamos el path completo
+
+```{r}
+df_normativas <- df_normativas |> 
+  mutate(enlaces_normativa = paste0("https://www.boletinoficial.gob.ar", enlaces_normativa))
+
+df_normativas |> 
+  gt()
+```
+
+# ¿Y si quisieramos analizar el contenido de cada normativa?
+
+# ¿Qué deberíamos hacer?
+
+## Tratamos de traer el texto de una sola normativa
+
+Para ello nos quedamos con un solo link
+
+```{r}
+link_normativa_ejemplo <- df_normativas |> 
+  head(1) |> 
+  pull(enlaces_normativa)
+
+
+link_normativa_ejemplo
+```
+
+## 1° traemos el HTML
+
+Un éxito! Estaban OK los links que sustrajimos de la página web del BORA
+
+```{r}
+texto_normativa <- read_html(link_normativa_ejemplo)
+
+texto_normativa %>%
+  html_nodes("#cuerpoDetalleAviso") %>%  # Selecciona el div con ese ID
+  html_text(trim = TRUE) 
+```
+
+## 3° Aplicamos los mismos pasos dentro de un bucle
+
+``` r
+links_normativas <- df_normativas |> 
+  pull(enlaces_normativa)
+
+# Armo un dataset vacío
+base_texto_normativa <- data.frame()
+
+for (i in links_normativas) {
+  link <- i
+  
+  html_normativa <- read_html(link_normativa_ejemplo)
+  
+  texto_normativa <- html_normativa %>%
+  html_nodes("#cuerpoDetalleAviso") %>%  # Selecciona el div con ese ID
+  html_text(trim = TRUE) 
+  
+  df_temp <- data.frame(enlaces_normativa = link, texto_normativa, stringsAsFactors = FALSE) 
+  
+  base_texto_normativa <- base_texto_normativa |> 
+    bind_rows(df_temp)
+  
+}
+
+```
+
+```{r include = FALSE}
+base_texto_normativa <- readRDS("base_texto_normativa.rds")
+```
+
+## 4 ° unimos todo y guardamos
+
+```{r}
+df_normativas_final <- df_normativas |> 
+  left_join(base_texto_normativa) 
+
+# Guardamos
+saveRDS(df_normativas_final, "df_normativas_final.rds")
+
+# Observamos
+df_normativas_final |> 
+  head(1) 
+
+```
+
+# Recreo
+
+> Volvemos en 10 minutos para comenzar con el taller
+
+![](https://i.pinimg.com/originals/10/d2/05/10d205b912352788a8b7116a43c00230.gif){fig-align="center" style="border-radius: 100%;"}

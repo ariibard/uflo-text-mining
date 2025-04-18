@@ -1,0 +1,109 @@
+---
+format:
+  revealjs:
+    echo: true
+    theme: custom.scss
+    code-line-numbers: true
+embed-resources: true
+---
+
+# Preprocesamiento de Texto en R
+
+# Tokenización, lematización, limpieza y eliminación de ruido textual
+
+## Objetivos de la clase
+
+::: incremental
+-   Comprender el proceso de preprocesamiento de texto para análisis.
+-   Aplicar tokenización, limpieza, stopwords, lematización y stemming en R.
+-   Explorar un corpus real de debates presidenciales
+:::
+
+## ¿Por qué preprocesar?
+
+El texto, a diferencia de los datos estructurados, requiere pasos previos para convertirlo en representaciones analizables (vectores).
+
+## 📚 ¿Qué significa “representaciones analizables (vectores)”?
+
+Cuando hablamos de r**epresentaciones analizables** en el contexto del análisis de texto, nos referimos a transformar el texto en una forma que las computadoras puedan entender, comparar y procesar matemáticamente.
+
+Y eso, en general, significa convertir el texto en `vectores`.
+
+## 🧠 ¿Qué es un vector en este contexto?
+
+Un **vector** es simplemente una lista ordenada de números. En el caso del análisis de texto, un vector representa un documento como una secuencia de números que reflejan cosas como:
+
+## 🧠 ¿Qué es un vector en este contexto?
+
+::: incremental
+-   cuántas veces aparece cada palabra en ese texto (frecuencia),
+-   si una palabra aparece o no (presencia/ausencia),
+-   qué tan importante es esa palabra en comparación con todo el corpus.
+:::
+
+## Ejemplo
+
+Supongamos que queremos recolectar discursos que contengan estas palabras:
+
+`["salud", "educación", "derecho", "trabajo"]`
+
+. . .
+
+"El acceso a la salud es un derecho"
+
+## Ejemplo
+
+Supongamos que queremos recolectar discursos que contengan estas palabras:
+
+`["salud", "educación", "derecho", "trabajo"]`
+
+<p><em>"El acceso a la [salud]{style="background-color:#FFA500;"} es un [derecho]{style="background-color:#FFA500;"}"</em></p>
+
+## Ejemplo
+
+`["salud", "educación", "derecho", "trabajo"]`
+
+<p><em>"El acceso a la [salud]{style="background-color:#FFA500;"} es un [derecho]{style="background-color:#FFA500;"}"</em></p>
+
+El vector que representa el texto sería: `[1, 0, 1, 0]`
+
+. . .
+
+::: incremental
+-   Aparece “salud” → ✅
+-   No aparece “educación” → ❌
+-   Aparece “derecho” → ✅
+-   No aparece “trabajo” → ❌
+:::
+
+## 🔍 ¿Para qué sirve?
+
+Una vez que tenés un vector, podés:
+
+::: incremental
+-   calcular similitudes entre documentos (medidas de distancia),
+
+-   entrenar modelos de clasificación o predicción,
+
+-   visualizar tendencias (ej: con análisis de componentes principales),
+
+-   hacer clustering (agrupamientos),
+
+-   aplicar cualquier técnica de machine learning que necesita datos numéricos.
+:::
+
+# 🧩 ¿Y cómo llegamos a eso?
+
+con el **preprocesamiento de texto** que nos ayuda a convertir textos desordenados en vectores organizados listos para análisis.
+
+# 🧹 Limpieza
+
+## 🧹 Limpieza: ¿Qué es?
+
+Es el conjunto de acciones para eliminar elementos "ruidosos" del texto: puntuación, números, mayúsculas, caracteres especiales, URLs, espacios en blanco, etc. 
+
+Muchos de estos elementos no aportan información relevante para el análisis del contenido del texto. Por ejemplo, la coma o los signos de exclamación no suelen ser útiles para saber de qué trata un texto.
+
+## 🧹 Limpieza: ¿Por qué es útil?
+
+Reduce el "**ruido**" en el análisis, mejora los resultados y hace más eficiente el procesamiento posterior. Además, ayuda a normalizar el texto (por ejemplo, convertir todo a minúsculas evita que R distinga entre `Salud` y `salud` como si fueran cosas distintas).
