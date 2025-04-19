@@ -1,0 +1,9 @@
+---
+title: "C5. Taller práctico"
+---
+
+> 🔍 **Con el dataset o corpus de texto que vas a utilizar para tu trabajo final**, aplicá técnicas de preprocesamiento y vectorización para preparar el texto para su análisis.
+
+1.  **Aplicá los pasos de limpieza y preprocesamiento**
+2.  **Vectorizá el texto** generando una tabla de frecuencias por lemma o raiz.
+3.  **Visualizá los resultados**: Podés usar un gráfico de barras con las palabras más frecuentes o una nube de palabras que represente visualmente las palabras más importantes en tu corpus

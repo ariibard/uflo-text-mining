@@ -1,0 +1,15 @@
+---
+title: "C5. Antes de la clase"
+---
+
+## **1. Instalá los Paquetes**
+
+Instalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:
+
+``` r
+
+paquetes_lista <- c(
+  "tidytext", "stringr", "stringi", "SnowballC", "udpipe")
+
+install.packages(paquetes_lista)
+```

@@ -1,0 +1,9 @@
+---
+title: "C5. Presentación"
+---
+
+En esta clase aprenderás a implementar técnicas para eliminar ruido textual (caracteres especiales, puntuación, normalización de texto) y procesar textos en R mediante tokenización, eliminación de stopwords y lematización.
+
+<iframe src="presentaciones/clase_5/preprocesamiento.html" width="100%" height="600px">
+
+</iframe>

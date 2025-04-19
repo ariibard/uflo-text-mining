@@ -92,8 +92,8 @@
     "section": "",
     "text": "Text Mining\nWeiss, S. M., Indurkhya, N., & Zhang, T. (2015). Fundamentals of Predictive Text Mining. Capítulo 1 y 2",
     "crumbs": [
-      "Bibliografía",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Bibliografía</span>"
+      "**Referencias**",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Bibliografía</span>"
     ]
   },
   {
@@ -114,8 +114,8 @@
     "section": "Expresiones regulares",
     "text": "Expresiones regulares\nFriedl, J. E. F. (2006). Mastering regular expressions: Understand your data and be more productive (3.ª ed.). O’Reilly Media.",
     "crumbs": [
-      "Bibliografía",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Bibliografía</span>"
+      "**Referencias**",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Bibliografía</span>"
     ]
   },
   {
@@ -551,7 +551,7 @@
     "href": "clases/clase1_T.html",
     "title": "C1. Taller práctico",
     "section": "",
-    "text": "Los paquetes\nlibrary(tidyverse)\nlibrary(janitor)\nlibrary(tm)\nlibrary(wordcloud)",
+    "text": "Los paquetes\nPara la actividad de hoy vamos a trabajar con el libro de Harry Potter 3 - El prisionero de Azkaban de J.K Rowling1\nlibrary(tidyverse)\n#library(esquisse)\nlibrary(janitor)\nlibrary(tm)\nlibrary(wordcloud)",
     "crumbs": [
       "**Clase 1. Introducción a la Minería de Texto**",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>C1. Taller práctico</span>"
@@ -819,6 +819,83 @@
     "crumbs": [
       "**Clase 1. Introducción a la Minería de Texto**",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>C1. Presentación</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase5_C.html",
+    "href": "clases/clase5_C.html",
+    "title": "C5. Presentación",
+    "section": "",
+    "text": "En esta clase aprenderás a implementar técnicas para eliminar ruido textual (caracteres especiales, puntuación, normalización de texto) y procesar textos en R mediante tokenización, eliminación de stopwords y lematización.",
+    "crumbs": [
+      "<b>Clase 5. Preprocesamiento: tokenización, lematización, limpieza y eliminación de ruido textual</b>",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>C5. Presentación</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase5_A.html",
+    "href": "clases/clase5_A.html",
+    "title": "C5. Antes de la clase",
+    "section": "",
+    "text": "1. Instalá los Paquetes\nInstalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:",
+    "crumbs": [
+      "<b>Clase 5. Preprocesamiento: tokenización, lematización, limpieza y eliminación de ruido textual</b>",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>C5. Antes de la clase</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase5_A.html#instalá-los-paquetes",
+    "href": "clases/clase5_A.html#instalá-los-paquetes",
+    "title": "C5. Antes de la clase",
+    "section": "",
+    "text": "paquetes_lista &lt;- c(\n  \"tidytext\", \"stringr\", \"stringi\", \"SnowballC\", \"udpipe\")\n\ninstall.packages(paquetes_lista)",
+    "crumbs": [
+      "<b>Clase 5. Preprocesamiento: tokenización, lematización, limpieza y eliminación de ruido textual</b>",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>C5. Antes de la clase</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase5_TP.html",
+    "href": "clases/clase5_TP.html",
+    "title": "C5. Actividad entregable",
+    "section": "",
+    "text": "📄 Diseño del trabajo final",
+    "crumbs": [
+      "<b>Clase 5. Preprocesamiento: tokenización, lematización, limpieza y eliminación de ruido textual</b>",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>C5. Actividad entregable</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase5_TP.html#tarea-scrapear-una-página-web",
+    "href": "clases/clase5_TP.html#tarea-scrapear-una-página-web",
+    "title": "C4. Taller práctico",
+    "section": "",
+    "text": "Elegir una página web\ngenerar un dataset a través de scrapeo con {rvest}\n\n\nEntregable:\nArchivo .R o rmd con el procesamiento",
+    "crumbs": [
+      "<b>Clase 5. Preprocesamiento: tokenización, lematización, limpieza y eliminación de ruido textual</b>",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>C4. Taller práctico</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase5_T.html",
+    "href": "clases/clase5_T.html",
+    "title": "C5. Taller práctico",
+    "section": "",
+    "text": "🔍 Con el dataset o corpus de texto que vas a utilizar para tu trabajo final, aplicá una serie de técnicas de preprocesamiento y vectorización para preparar el texto para su análisis.\n\n\nAplicá los pasos de limpieza y preprocesamiento\nVectorizá el texto generando una tabla de frecuencias por palabra.\nVisualizá los resultados: Podés usar un gráfico de barras con las palabras más frecuentes o una nube de palabras que represente visualmente las palabras más importantes en tu corpus",
+    "crumbs": [
+      "<b>Clase 5. Preprocesamiento: tokenización, lematización, limpieza y eliminación de ruido textual</b>",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>C5. Taller práctico</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase5_TP.html#diseño-del-trabajo-final",
+    "href": "clases/clase5_TP.html#diseño-del-trabajo-final",
+    "title": "C5. Actividad entregable",
+    "section": "",
+    "text": "Esta actividad tiene como objetivo que puedas avanzar en la planificación y delimitación de tu trabajo final, organizando sus componentes principales.\n\n\nConsigna\nPresentá un documento breve que incluya los siguientes elementos:\n\nTítulo tentativo del trabajo final: Debería reflejar el tema, enfoque o población a estudiar.\nObjetivo general y objetivos específicos ¿Qué te proponés estudiar? ¿Qué aspectos o dimensiones vas a analizar en particular?\nPregunta de investigación: Enunciá claramente qué interrogante guía el trabajo. Podés agregar una o dos subpreguntas.\nHipótesis (si aplica): Planteá una o más suposiciones que orienten el análisis (pueden ser iniciales y exploratorias).\nMetodología a utilizar (versión preliminar): Indicá brevemente qué tipo de análisis pensás hacer (exploratorio, descriptivo, comparativo, etc.). ¿Qué técnicas de análisis de texto creés que vas a necesitar aplicar? (aunque aún no las hayas implementado)\nDescripción del corpus o conjunto de datos: Explicá qué tipo de textos o documentos vas a analizar ¿De dónde provienen? ¿Cómo los vas a obtener? ¿Qué variables contiene el corpus? ¿Qué tipo de información incluye? ¿Por qué es relevante y adecuado para responder tu pregunta de investigación?\nAntecedentes: ¿Existen investigaciones, artículos, papers que hayan trabajado sobre esta temática?\n\n\n\nModalidad de entrega\n\nFormato: PDF o Word (1 a 3 páginas aprox.)\nFecha límite: 8/05\nMedio de entrega: Aula virtual\nUtilizar normas APA",
+    "crumbs": [
+      "<b>Clase 5. Preprocesamiento: tokenización, lematización, limpieza y eliminación de ruido textual</b>",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>C5. Actividad entregable</span>"
     ]
   }
 ]

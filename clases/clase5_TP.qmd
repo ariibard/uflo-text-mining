@@ -1,0 +1,29 @@
+---
+title: "C5. Actividad entregable"
+---
+
+## 📄 Diseño del trabajo final
+
+> Esta actividad tiene como objetivo que puedas avanzar en la planificación y delimitación de tu trabajo final, organizando sus componentes principales.
+
+### Consigna
+
+Presentá un documento breve que incluya los siguientes elementos:
+
+-   **Título tentativo del trabajo final:** Debería reflejar el tema, enfoque o población a estudiar.
+-   **Objetivo general y objetivos específicos** ¿Qué te proponés estudiar? ¿Qué aspectos o dimensiones vas a analizar en particular?
+-   **Pregunta de investigación**: Enunciá claramente qué interrogante guía el trabajo. Podés agregar una o dos subpreguntas.
+-   **Hipótesis** (si aplica): Planteá una o más suposiciones que orienten el análisis (pueden ser iniciales y exploratorias).
+-   **Metodología a utilizar** (versión preliminar): Indicá brevemente qué tipo de análisis pensás hacer (exploratorio, descriptivo, comparativo, etc.). ¿Qué técnicas de análisis de texto creés que vas a necesitar aplicar? (aunque aún no las hayas implementado)
+-   **Descripción del corpus o conjunto de datos**: Explicá qué tipo de textos o documentos vas a analizar ¿De dónde provienen? ¿Cómo los vas a obtener? ¿Qué variables contiene el corpus? ¿Qué tipo de información incluye? ¿Por qué es relevante y adecuado para responder tu pregunta de investigación?
+-   **Antecedentes:** ¿Existen investigaciones, artículos, papers que hayan trabajado sobre esta temática?
+
+### Modalidad de entrega 
+
+-   Formato: PDF o Word (1 a 3 páginas aprox.)
+
+-   Fecha límite: 8/05
+
+-   Medio de entrega: Aula virtual
+
+-   Utilizar normas APA

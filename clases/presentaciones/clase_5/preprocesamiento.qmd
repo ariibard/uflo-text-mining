@@ -92,18 +92,308 @@ Una vez que tenés un vector, podés:
 -   aplicar cualquier técnica de machine learning que necesita datos numéricos.
 :::
 
-# 🧩 ¿Y cómo llegamos a eso?
+# ¿Y cómo llegamos a eso?
 
 con el **preprocesamiento de texto** que nos ayuda a convertir textos desordenados en vectores organizados listos para análisis.
+
+# Tokenización
+
+## 🧩  ¿Qué es la tokenización?
+
+> ✂️ **Tokenizar** un texto significa dividirlo en unidades más pequeñas llamadas **tokens**.
+
+En general, los tokens son **palabras**, pero también pueden ser **frases, oraciones o caracteres**.
+
+## 🧩 ¿Para qué sirve?
+
+::: incremental
+-   Convierte texto en bruto en una estructura manejable.\
+-   Permite contar palabras, detectar temas y patrones.\
+-   Es clave para transformar texto en **vectores analizables**
+-   🧠 Sin tokenización, no se puede hacer minería de texto ni análisis estadístico del lenguaje.
+:::
+
+## 🧩  Ejemplo
+
+> *"El acceso a la salud es un derecho"*
+
+Tokenizado por palabras:
+
+::::: columns
+::: {.column width="50%"}
+- "el" 
+- **"acceso"**
+- "la"
+:::
+
+::: {.column width="50%"}
+- **"salud"**
+- "es"
+- "un"
+- **"derecho"**
+:::
+:::::
+
+## 🧩  ¿Cómo se aplica en R?
+
+`unnest_tokens()` → separa en palabras
+
+```{r}
+library(dplyr)
+library(tidytext)
+# Simulamos una tabla con texto
+textos <- tibble(id = 1, texto = "El acceso a la salud es un derecho")
+# Tokenización
+tokens <- textos %>%
+  unnest_tokens(output = palabra, input = texto)
+tokens
+```
+
+## 🧩  ¿Cómo se aplica en R?
+
+-   `get_stopwords(language = "es")` → trae una lista predefinida de palabras vacías en español
+
+-   `anti_join()` → se queda solo con las palabras que no están en la lista de stopwords
+
+## 🚫 Stopwords
+
+Las stopwords son palabras muy comunes en un idioma que, por su alta frecuencia y bajo contenido semántico, suelen eliminarse del análisis. Ejemplos: el, la, de, en, y, a, que. 
+
+[Eliminarlas permite que el análisis se enfoque en las palabras más informativas.]{style="background-color:#FFA500;"}
+
+## 🧩  ¿Cómo se aplica en R?
+
+```{r}
+stopwords_es <- get_stopwords(language = "es") 
+
+# Simulamos una tabla con texto
+textos <- tibble(id = 1, texto = "El acceso a la salud es un derecho")
+
+# Tokenización
+tokens <- textos %>%
+  unnest_tokens(output = palabra, input = texto)%>%
+  anti_join(stopwords_es, by = c("palabra" = "word"))
+
+tokens
+```
+
+## 🧩 Otras opciones
+
+``` r
+unnest_tokens(output, input, token = "words")      # palabras
+unnest_tokens(output, input, token = "sentences")  # oraciones
+unnest_tokens(output, input, token = "characters") # letras
+unnest_tokens(output, input, token = "ngrams", n = 2)  # bigramas
+```
 
 # 🧹 Limpieza
 
 ## 🧹 Limpieza: ¿Qué es?
 
-Es el conjunto de acciones para eliminar elementos "ruidosos" del texto: puntuación, números, mayúsculas, caracteres especiales, URLs, espacios en blanco, etc. 
+Es el conjunto de acciones para eliminar elementos "ruidosos" del texto: puntuación, números, mayúsculas, caracteres especiales, URLs, espacios en blanco, etc.
 
 Muchos de estos elementos no aportan información relevante para el análisis del contenido del texto. Por ejemplo, la coma o los signos de exclamación no suelen ser útiles para saber de qué trata un texto.
 
 ## 🧹 Limpieza: ¿Por qué es útil?
 
 Reduce el "**ruido**" en el análisis, mejora los resultados y hace más eficiente el procesamiento posterior. Además, ayuda a normalizar el texto (por ejemplo, convertir todo a minúsculas evita que R distinga entre `Salud` y `salud` como si fueran cosas distintas).
+
+## 🧹 ¿Cómo limpiar texto en R?
+
+Vamos a utilizar la librería `{stringr}` que tiene funciones para manipulación de texto *(muchas las vimos en la clase n° 2)*
+
+```{r}
+library(stringr)
+library(stringi)
+```
+
+## 🧹 ¿Cómo limpiar texto en R?
+
+```{r}
+texto_sucio <- "🗣️ ¡Hola! Este es un ejemplo de texto con RUIDO: números (12345), símbolos $$$, @correos.com, http://link.com, #hashtags, signos!!! ¿¡y tildes? ÁÉÍÓÚ..."
+
+df <- tibble(texto = texto_sucio)
+```
+
+## 🧹 Minúsculas y mayúsculas
+
+```{r}
+df <- df %>%
+  mutate(texto = str_to_lower(texto))
+
+print(df$texto)
+
+df <- df %>%
+  mutate(texto = str_to_upper(texto))
+
+print(df$texto)
+```
+
+## 🧹 Eliminamos URLs
+
+-   `str_remove_all()` elimina todo lo que coincide con determinado patrón
+
+La clave: `expresiones regulares`
+
+```{r}
+df_limpio <- df %>%
+  # Convertimos todo a minúsculas
+  mutate(texto = str_to_lower(texto)) %>%  
+  # Eliminamos URLs
+  mutate(texto = str_remove_all(texto, "http[s]?://\\S+"))
+
+print(df_limpio$texto)
+```
+
+## 🧹 Eliminamos menciones
+
+```{r}
+df_limpio <- df_limpio %>%
+  # Menciones
+  mutate(texto = str_remove_all(texto, "@\\w+")) |> 
+  # Hashtags
+  mutate(texto = str_remove_all(texto, "#\\w+")) 
+
+print(df_limpio$texto)
+```
+
+## 🧹 Signos de puntuación
+
+```{r}
+df_limpio <- df_limpio %>%
+  # Signos de puntuación
+  mutate(texto = str_remove_all(texto, "[[:punct:]]"))
+  
+print(df_limpio$texto)
+```
+
+## 🧹 Números
+
+```{r}
+df_limpio <- df_limpio %>%
+  # Signos de puntuación
+  mutate(texto = str_remove_all(texto, "[[:digit:]]"))
+  
+print(df_limpio$texto)
+```
+
+## 🧹 Espacios en blanco
+
+1)  La función `str_squish()` elimina espacios consecutivos
+2)  Reemplaza todos los espacios consecutivos (como varios espacios, tabs o saltos de línea) por un solo espacio " " pero
+
+```{r}
+df_limpio <- df_limpio %>%
+  # Espacios
+  mutate(texto = str_squish(texto)) |> 
+  # Otra opcion con expresiones regulares:
+  mutate(texto = str_replace_all(texto, "\\s+", " "))
+
+print(df_limpio$texto)
+```
+
+## 🧹 Espacios en blanco
+
+1)  La función `str_trim()` elimina espacios al principio y al final del texto
+2)  Otras opciones son: `stri_trim_both()`, `stri_trim_left()`, `stri_trim_right()` eliminan espacios al inicio y/o final del texto.
+
+```{r}
+df_limpio <- df_limpio %>%           
+  mutate(texto = str_trim(texto))
+
+print(df_limpio$texto)
+```
+
+## 🧹 Tildes
+
+1)  La función `str_trim()` elimina espacios al principio y al final del texto
+
+```{r}
+df_limpio <- df_limpio %>%                                 
+  mutate(texto = stri_trans_general(texto, "Latin-ASCII"))
+
+print(df_limpio$texto)
+```
+
+## 🧹 Eliminar emojis
+
+```{r}
+df_limpio <- df_limpio %>% 
+  mutate(texto = stri_replace_all_regex(texto, "\\p{So}", ""))
+
+print(df_limpio$texto)
+```
+
+## 🧹 Eliminar simbolos
+
+```{r}
+
+df_limpio <-  df_limpio %>% 
+  mutate(texto = stri_replace_all_regex(texto,"\\p{Sc}", ""))
+
+print(df_limpio$texto)
+```
+
+
+# 🌱 Stemming
+
+## 🌱 ¿Qué es Stemming?
+
+Es un proceso que reduce una palabra a su raíz gramatical. Por ejemplo, caminando, camina, caminamos se reducen a camin. Permite grupar diferentes formas de una misma palabra bajo una forma base común, sin importar la conjugación o el género
+
+## 🌱 ¿Cómo se usa en R?
+
+`wordStem()` del paquete `{SnowballC}` aplica un algoritmo para reducir palabras a su raíz gramatical, ignorando conjugaciones, plurales, géneros, etc.
+
+```{r}
+library(SnowballC)
+
+textos <- tibble(id = 1, texto = "Caminando caminamos caminé camina")
+
+tokens <- textos %>%
+  unnest_tokens(output = palabra, input = texto)
+
+```
+
+## 🌱 ¿Cómo se usa en R?
+
+```{r}
+tokens
+```
+## 🌱 ¿Cómo se usa en R?
+
+```{r}
+tokens_raiz <- tokens %>%
+  mutate(raiz = wordStem(palabra, language = "spanish"))
+
+tokens_raiz
+```
+
+# 🧠 Lematización
+
+Es un proceso similar al stemming, pero más "inteligente": en lugar de cortar la palabra, busca devolver su forma canónica o de diccionario (lema). Ejemplo: corriendo → correr. 
+
+Para mantener el sentido lingüístico correcto. A diferencia del stemming, no se pierde la forma reconocible de la palabra.
+
+## 🧠  ¿Cómo se usa en R? 
+
+```{r}
+
+library(udpipe)
+ejemplo <- c("somos", "soy", "seremos")
+prueba <- udpipe(ejemplo, "spanish")
+
+prueba[, c("token", "lemma", "upos")]
+```
+
+## ❗Limitaciones de algunos paquetes
+
+- Muchos paquetes en R, como `udpipe`, están entrenados principalmente para el **inglés**.
+- Por eso, si le das verbos o palabras en español, puede que **no los reconozca** o no devuelva su lema correctamente.
+- No da error, pero **devuelve la palabra tal cual**.
+
+# Recreo
+
+> Volvemos en 10 minutos para comenzar con el taller
+
+![](https://i.pinimg.com/originals/10/d2/05/10d205b912352788a8b7116a43c00230.gif){fig-align="center" style="border-radius: 100%;"}
