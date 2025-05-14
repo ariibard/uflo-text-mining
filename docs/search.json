@@ -53,5 +53,93 @@
       "<b>Clase 6. POS Tagging, WSD y NER</b>",
       "<span class='chapter-number'>21</span>  <span class='chapter-title'>C6. Presentación</span>"
     ]
+  },
+  {
+    "objectID": "clases/clase5_C.html",
+    "href": "clases/clase5_C.html",
+    "title": "C5. Presentación",
+    "section": "",
+    "text": "En esta clase aprenderás a implementar técnicas para eliminar ruido textual (caracteres especiales, puntuación, normalización de texto) y procesar textos en R mediante tokenización, eliminación de stopwords y lematización.",
+    "crumbs": [
+      "<b>Clase 5. Preprocesamiento: tokenización, lematización, limpieza y eliminación de ruido textual</b>",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>C5. Presentación</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase4_C.html",
+    "href": "clases/clase4_C.html",
+    "title": "C4. Presentación",
+    "section": "",
+    "text": "En esta clase aprenderás a realizar web scrapping con R",
+    "crumbs": [
+      "**Clase 4. Webscrapping**",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>C4. Presentación</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase3_C.html",
+    "href": "clases/clase3_C.html",
+    "title": "C3. Presentación",
+    "section": "",
+    "text": "En esta clase aprenderás a consumir APIs utilizando CURL y R. Y, a descargar y trabajar con subtítulos de YouTube.",
+    "crumbs": [
+      "**Clase 3. Fuentes de datos textuales: APIS, Subtítulos y PDFs**",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>C3. Presentación</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase2_C.html",
+    "href": "clases/clase2_C.html",
+    "title": "C2. Presentación",
+    "section": "",
+    "text": "Objetivo de la clase\nEn esta clase aprenderemos a utilizar expresiones regulares para la extracción y manipulación de texto libre",
+    "crumbs": [
+      "**Clase 2. Expresiones regulares**",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>C2. Presentación</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase2_C.html#presentación",
+    "href": "clases/clase2_C.html#presentación",
+    "title": "C2. Presentación",
+    "section": "Presentación",
+    "text": "Presentación",
+    "crumbs": [
+      "**Clase 2. Expresiones regulares**",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>C2. Presentación</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase1_C.html",
+    "href": "clases/clase1_C.html",
+    "title": "C1. Presentación",
+    "section": "",
+    "text": "Objetivo de la clase\nEn esta clase realizaremos la presentación de la materia. Se buscará introducir el concepto de minería de texto y la diferencia entre datos estructurados y no estructurados.",
+    "crumbs": [
+      "**Clase 1. Introducción a la Minería de Texto**",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>C1. Presentación</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase1_C.html#presentación",
+    "href": "clases/clase1_C.html#presentación",
+    "title": "C1. Presentación",
+    "section": "Presentación",
+    "text": "Presentación",
+    "crumbs": [
+      "**Clase 1. Introducción a la Minería de Texto**",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>C1. Presentación</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase1_C.html#referencias",
+    "href": "clases/clase1_C.html#referencias",
+    "title": "C1. Presentación",
+    "section": "Referencias",
+    "text": "Referencias\nEl material de esta clase está basado en:\nWeiss, S. M., Indurkhya, N., & Zhang, T. (2015). Fundamentals of Predictive Text Mining. Capítulo 1",
+    "crumbs": [
+      "**Clase 1. Introducción a la Minería de Texto**",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>C1. Presentación</span>"
+    ]
   }
 ]
