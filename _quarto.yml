@@ -55,6 +55,12 @@ book:
         - clases/clase5_T.qmd
         - clases/clase5_TP.qmd
         
+    - part: "<b>Clase 6. POS Tagging, WSD y NER</b>"
+      chapters: 
+        - clases/clase6_A.qmd
+        - clases/clase6_C.qmd
+        - clases/clase6_T.qmd
+        
     - part: "**Referencias**"
       chapters:
         - bibliografia.qmd

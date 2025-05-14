@@ -1,0 +1,23 @@
+---
+title: "C6. Antes de la clase"
+---
+
+## **1. Instalá los Paquetes**
+
+Instalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:
+
+``` r
+
+paquetes_lista <- c(
+  "spacyr", "udpipe")
+
+install.packages(paquetes_lista)
+
+# Instala spacyr
+library(spacyr)
+spacy_install()
+
+# Descarga el modelo
+
+spacy_download_langmodel("es_dep_news_trf")
+```

@@ -1,0 +1,28 @@
+---
+title: "C6. Taller Practico"
+---
+
+A partir del dataset que elijas (puede ser el corpus que estás usando para tu trabajo final), aplicá las siguientes técnicas vistas en clase:
+
+
+1.  **Cargá tu dataset en R** y realizá una exploración inicial de los textos.
+
+2.  **Aplicá POS Tagging**
+
+-   Usá `{udpipe}` para etiquetar gramaticalmente las palabras.
+
+-   Analizá qué categorías gramaticales predominan.
+
+3.  **Aplicá Named Entity Recognition (NER)**
+
+    -   Usá `{spacyr}` con un modelo en español.
+
+    -   Extraé entidades de tipo PERSON, ORG y LOC.
+
+    -   ¿Qué entidades aparecen con mayor frecuencia? ¿Qué revela esto del contenido del corpus?
+
+4.   **Explorá casos de Word Sense Disambiguation (WSD)**
+
+    -   Identificá al menos dos palabras polisémicas en tu corpus.
+
+    -   Mostrá en qué contextos aparecen y explicá cómo el contexto ayuda a desambiguarlas.

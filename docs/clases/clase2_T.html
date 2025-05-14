@@ -331,12 +331,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>Referencias</strong></span></a>
+ <span class="menu-text"><b>Clase 6. POS Tagging, WSD y NER</b></span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../clases/clase6_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">C6. Antes de la clase</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../clases/clase6_C.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">C6. Presentación</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../clases/clase6_T.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">C6. Taller Practico</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Referencias</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../bibliografia.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bibliografía</span></a>
@@ -417,6 +443,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'janitor' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'janitor'
 
@@ -424,14 +453,20 @@ The following objects are masked from 'package:stats':
 
     chisq.test, fisher.test</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_normativa <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-legal-y-tecnica/servicio-informacion-normativa/normativa.csv"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_normativa <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-legal-y-tecnica/servicio-informacion-normativa/normativa.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
+</div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 748671 Columns: 11
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr (8): norma_tipo, norma_numero, norma_organismo_emisor, norma_fecha_sanci...
-dbl (3): norma_id, norma_anio_sancion, norma_anio_publicacion
+chr (7): norma_tipo, norma_organismo_emisor, norma_fecha_sancion, norma_fech...
+dbl (4): norma_id, norma_numero, norma_anio_sancion, norma_anio_publicacion
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
@@ -439,32 +474,32 @@ dbl (3): norma_id, norma_anio_sancion, norma_anio_publicacion
 </div>
 <p>Antes de empezar a trabajar con expresiones regulares vamos a analizar un poco la base</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df_normativa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df_normativa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 748,671
 Columns: 11
-$ norma_id                &lt;dbl&gt; 101940, 101941, 101942, 101943, 101944, 101945…
-$ norma_tipo              &lt;chr&gt; "DISPOSICION", "DISPOSICION", "RESOLUCION", "D…
-$ norma_numero            &lt;chr&gt; "93", "4", "2398", "879", "893", "962", "1226"…
-$ norma_anio_sancion      &lt;dbl&gt; 2005, 2005, 2005, 2007, 2007, 2007, 2007, 2007…
-$ norma_anio_publicacion  &lt;dbl&gt; NA, NA, NA, 2007, 2007, 2007, 2007, 2007, 2007…
+$ norma_id                &lt;dbl&gt; 78404, 78405, 78406, 78407, 78408, 78409, 7841…
+$ norma_tipo              &lt;chr&gt; "DECRETO SINTETIZADO", "DECRETO SINTETIZADO", …
+$ norma_numero            &lt;dbl&gt; 1570, 1574, 1576, 1577, 1579, 1591, 1596, 1597…
+$ norma_anio_sancion      &lt;dbl&gt; 2005, 2005, 2005, 2005, 2005, 2005, 2005, 2005…
+$ norma_anio_publicacion  &lt;dbl&gt; 2005, 2005, 2005, 2005, 2005, 2005, 2005, 2005…
 $ norma_organismo_emisor  &lt;chr&gt; "GOBIERNO DE LA CIUDAD AUTONOMA DE BUENOS AIRE…
-$ norma_fecha_sancion     &lt;chr&gt; "01/01/2005", "01/01/2005", "01/01/2005", "20/…
-$ norma_fecha_publicacion &lt;chr&gt; NA, NA, NA, "28/06/2007", "28/06/2007", "28/06…
+$ norma_fecha_sancion     &lt;chr&gt; "14/10/2005", "14/10/2005", "14/10/2005", "14/…
+$ norma_fecha_publicacion &lt;chr&gt; "31/10/2005", "31/10/2005", "31/10/2005", "31/…
 $ norma_alcance           &lt;chr&gt; "PARTICULAR", "PARTICULAR", "PARTICULAR", "PAR…
 $ norma_gestion           &lt;chr&gt; "Aníbal Ibarra", "Aníbal Ibarra", "Aníbal Ibar…
-$ norma_sintesis          &lt;chr&gt; "APLICA UNA MULTA AL CEAMSE, EN LOS TÉRMINOS D…</code></pre>
+$ norma_sintesis          &lt;chr&gt; "SECRETARÍA JEFE DE GABINETE - DESIGNA A GENOV…</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_normativa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_normativa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    norma_id       norma_tipo        norma_numero       norma_anio_sancion
- Min.   :     1   Length:748671      Length:748671      Min.   :1858      
- 1st Qu.:190912   Class :character   Class :character   1st Qu.:2011      
- Median :380912   Mode  :character   Mode  :character   Median :2017      
- Mean   :380335                                         Mean   :2015      
- 3rd Qu.:570305                                         3rd Qu.:2021      
- Max.   :757614                                         Max.   :2027      
-                                                        NA's   :412       
+<pre><code>    norma_id       norma_tipo         norma_numero       norma_anio_sancion
+ Min.   :     1   Length:748671      Min.   :        0   Min.   :1858      
+ 1st Qu.:190912   Class :character   1st Qu.:      129   1st Qu.:2011      
+ Median :380912   Mode  :character   Median :      427   Median :2017      
+ Mean   :380335                      Mean   :   415450   Mean   :2015      
+ 3rd Qu.:570305                      3rd Qu.:     1511   3rd Qu.:2021      
+ Max.   :757614                      Max.   :141182503   Max.   :2027      
+                                     NA's   :2282        NA's   :412       
  norma_anio_publicacion norma_organismo_emisor norma_fecha_sancion
  Min.   :1882           Length:748671          Length:748671      
  1st Qu.:2012           Class :character       Class :character   
@@ -493,12 +528,12 @@ $ norma_sintesis          &lt;chr&gt; "APLICA UNA MULTA AL CEAMSE, EN LOS TÉRMI
 </div>
 <p>¿Qué tipos de normativa existen?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_normativa <span class="sc">|&gt;</span> </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(norma_tipo, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">view</span>()</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>df_normativa <span class="sc">|&gt;</span> </span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(norma_anio_sancion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_normativa <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(norma_tipo, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">view</span>()</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>df_normativa <span class="sc">|&gt;</span> </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(norma_anio_sancion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 148 × 2
    norma_anio_sancion     n
@@ -520,16 +555,16 @@ $ norma_sintesis          &lt;chr&gt; "APLICA UNA MULTA AL CEAMSE, EN LOS TÉRMI
 <h3 class="anchored" data-anchor-id="ejercicio-1-filtrar-normativas-sobre-locaciones-de-obras-y-servicios-loys">Ejercicio 1: Filtrar normativas sobre Locaciones de Obras y Servicios (LOYS)</h3>
 <p>El objetivo es Filtrar todas las normativas referidas a contrataciones de locaciones de obras y servicios (LOYS).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>patron_loys <span class="ot">&lt;-</span> <span class="fu">regex</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">bloys</span><span class="sc">\\</span><span class="st">b|locaci.n ?de obras y servicios"</span>, T)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>patron_baja_contrato <span class="ot">&lt;-</span> <span class="fu">regex</span>(<span class="st">"deja sin efecto|</span><span class="sc">\\</span><span class="st">bbaja"</span>,T)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>aumento <span class="ot">&lt;-</span> <span class="fu">regex</span>(<span class="st">"(aumenta|eleva|sube).{0,20} monto"</span>,T)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Me quedo con todas normativas vinculadas a loys</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>loys <span class="ot">&lt;-</span> df_normativa  <span class="sc">|&gt;</span> </span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(norma_sintesis, patron_loys))</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>loys <span class="sc">|&gt;</span> </span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(norma_anio_sancion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>patron_loys <span class="ot">&lt;-</span> <span class="fu">regex</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">bloys</span><span class="sc">\\</span><span class="st">b|locaci.n ?de obras y servicios"</span>, T)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>patron_baja_contrato <span class="ot">&lt;-</span> <span class="fu">regex</span>(<span class="st">"deja sin efecto|</span><span class="sc">\\</span><span class="st">bbaja"</span>,T)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>aumento <span class="ot">&lt;-</span> <span class="fu">regex</span>(<span class="st">"(aumenta|eleva|sube).{0,20} monto"</span>,T)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Me quedo con todas normativas vinculadas a loys</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>loys <span class="ot">&lt;-</span> df_normativa  <span class="sc">|&gt;</span> </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(norma_sintesis, patron_loys))</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>loys <span class="sc">|&gt;</span> </span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(norma_anio_sancion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 14 × 2
    norma_anio_sancion     n
@@ -559,25 +594,25 @@ $ norma_sintesis          &lt;chr&gt; "APLICA UNA MULTA AL CEAMSE, EN LOS TÉRMI
 <li><p>Adenda: Aumento del monto del contrato</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>loys <span class="ot">&lt;-</span> df_normativa  <span class="sc">|&gt;</span> </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(norma_sintesis, patron_loys)) <span class="sc">|&gt;</span> </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tipo_normativa_loys =</span> <span class="fu">case_when</span>(<span class="fu">str_detect</span>(norma_sintesis, patron_baja_contrato) <span class="sc">~</span> <span class="st">"Baja"</span>,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="fu">str_detect</span>(norma_sintesis, aumento) <span class="sc">~</span><span class="st">"Adenda"</span>,</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                                                   T <span class="sc">~</span> <span class="st">"Alta"</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                                         ))</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Grafico</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>loys <span class="sc">|&gt;</span> </span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(tipo_normativa_loys, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(tipo_normativa_loys, n), <span class="at">y =</span> n)) <span class="sc">+</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribución de tipos de normativas en LOYS"</span>,</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tipo de normativa"</span>,</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Cantidad"</span></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>loys <span class="ot">&lt;-</span> df_normativa  <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(norma_sintesis, patron_loys)) <span class="sc">|&gt;</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tipo_normativa_loys =</span> <span class="fu">case_when</span>(<span class="fu">str_detect</span>(norma_sintesis, patron_baja_contrato) <span class="sc">~</span> <span class="st">"Baja"</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="fu">str_detect</span>(norma_sintesis, aumento) <span class="sc">~</span><span class="st">"Adenda"</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                                                   T <span class="sc">~</span> <span class="st">"Alta"</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                                         ))</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Grafico</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>loys <span class="sc">|&gt;</span> </span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(tipo_normativa_loys, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(tipo_normativa_loys, n), <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribución de tipos de normativas en LOYS"</span>,</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tipo de normativa"</span>,</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Cantidad"</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -598,12 +633,12 @@ $ norma_sintesis          &lt;chr&gt; "APLICA UNA MULTA AL CEAMSE, EN LOS TÉRMI
 <h4 class="anchored" data-anchor-id="paso-1-filtrar-la-base-de-datos-por-designaciones-y-renuncia"><strong>Paso 1: Filtrar la base de datos por designaciones y renuncia</strong></h4>
 <p>Completar los patrones regex</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>patron_renuncia <span class="ot">&lt;-</span> <span class="fu">regex</span>(<span class="st">""</span>, T)  <span class="co"># 📝 Completar </span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>patron_designacion <span class="ot">&lt;-</span> <span class="fu">regex</span>(<span class="st">""</span> , T)  <span class="co"># 📝 Completar </span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>df_renuncias_y_designaciones <span class="ot">&lt;-</span> df_normativa <span class="sc">|&gt;</span> </span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filtro</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(norma_sintesis, patron_renuncia) <span class="sc">|</span> <span class="fu">str_detect</span>(norma_sintesis, patron_renuncia))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>patron_renuncia <span class="ot">&lt;-</span> <span class="fu">regex</span>(<span class="st">""</span>, T)  <span class="co"># 📝 Completar </span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>patron_designacion <span class="ot">&lt;-</span> <span class="fu">regex</span>(<span class="st">""</span> , T)  <span class="co"># 📝 Completar </span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>df_renuncias_y_designaciones <span class="ot">&lt;-</span> df_normativa <span class="sc">|&gt;</span> </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filtro</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(norma_sintesis, patron_renuncia) <span class="sc">|</span> <span class="fu">str_detect</span>(norma_sintesis, patron_renuncia))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: There were 2 warnings in `filter()`.
 The first warning was:
@@ -617,8 +652,8 @@ Caused by warning in `stri_detect_regex()`:
 <section id="paso-2-clasificar-en-renuncias-o-designaciones" class="level4">
 <h4 class="anchored" data-anchor-id="paso-2-clasificar-en-renuncias-o-designaciones"><strong>Paso 2: Clasificar en renuncias o designaciones</strong></h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># 📝 Completar </span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a> <span class="co"># PISTA: Podes usar case_when() o ifelse()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># 📝 Completar </span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a> <span class="co"># PISTA: Podes usar case_when() o ifelse()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="paso-3-extraer-el-cargo" class="level4">
@@ -626,14 +661,14 @@ Caused by warning in `stri_detect_regex()`:
 <p>Usamos <code>str_extract()</code> para identificar el cargo mencionado en la normativa.</p>
 <p>Ejemplo: se podrían extraer las gerencias, subgerencias y secretarías</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 📝 Completar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 📝 Completar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="paso-4-analizar-los-resultados" class="level4">
 <h4 class="anchored" data-anchor-id="paso-4-analizar-los-resultados"><strong>Paso 4: Analizar los resultados</strong></h4>
 <p>¿Hay algún dato interesante? ¿Hubo diferencia por año?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 📝 Completar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 📝 Completar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>

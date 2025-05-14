@@ -1,0 +1,214 @@
+---
+format:
+  revealjs:
+    echo: true
+    theme: custom.scss
+    code-line-numbers: true
+    
+embed-resources: true
+revealjs-plugins:
+  - codewindow
+---
+
+# POS Tagging, WSD y NER
+
+## Objetivos
+
+::: incremental
+-   Comprender y aplicar el etiquetado gramatical (POS Tagging) en español.
+
+-   Introducir la Desambiguación Semántica de Palabras (WSD).
+
+-   Identificar y extraer Entidades Nombradas (NER).
+:::
+
+## POS Tagging (Etiquetado de Partes del Discurso)
+
+Asigna etiquetas gramaticales (sustantivo , verbo , artículo , adjetivo , preposición , pronombre , adverbio , etc.) a cada palabra basándose tanto en su definición como en su contexto
+
+Fundamental para análisis sintáctico y semántico posterior.
+
+::: notes
+El etiquetado de categorías gramaticales es más complejo que simplemente tener una lista de palabras y sus categorías gramaticales, ya que algunas palabras pueden representar más de una categoría gramática en diferentes momentos y algunas categorías gramaticales son complejas.
+:::
+
+## Catergorías {.smaller}
+
+| Open class words | Closed class words | Other |
+|------------------------|------------------------|------------------------|
+| [ADJ](https://universaldependencies.org/u/pos/ADJ.html "u-pos ADJ") | [ADP](https://universaldependencies.org/u/pos/ADP.html "u-pos ADP") | [PUNCT](https://universaldependencies.org/u/pos/PUNCT.html "u-pos PUNCT") |
+| [ADV](https://universaldependencies.org/u/pos/ADV.html "u-pos ADV") | [AUX](https://universaldependencies.org/u/pos/AUX_.html "u-pos AUX") | [SYM](https://universaldependencies.org/u/pos/SYM.html "u-pos SYM") |
+| [INTJ](https://universaldependencies.org/u/pos/INTJ.html "u-pos INTJ") | [CCONJ](https://universaldependencies.org/u/pos/CCONJ.html "u-pos CCONJ") | [X](https://universaldependencies.org/u/pos/X.html "u-pos X") |
+| [NOUN](https://universaldependencies.org/u/pos/NOUN.html "u-pos NOUN") | [DET](https://universaldependencies.org/u/pos/DET.html "u-pos DET") |   |
+| [PROPN](https://universaldependencies.org/u/pos/PROPN.html "u-pos PROPN") | [NUM](https://universaldependencies.org/u/pos/NUM.html "u-pos NUM") |   |
+| [VERB](https://universaldependencies.org/u/pos/VERB.html "u-pos VERB") | [PART](https://universaldependencies.org/u/pos/PART.html "u-pos PART") |   |
+|   | [PRON](https://universaldependencies.org/u/pos/PRON.html "u-pos PRON") |   |
+|   | [SCONJ](https://universaldependencies.org/u/pos/SCONJ.html "u-pos SCONJ") |   |
+
+Más información en este [link](https://universaldependencies.org/u/pos/all.html)
+
+## ¿Cómo funciona?
+
+![](imagenes/1.pos_tagging.png)
+
+## ¿Para qué sirve?
+
+::: incremental
+-   Recuperación de información
+-   Extracción de información
+-   Sistemas de conversión de texto en voz
+-   Reconocimiento de entidades nombradas
+-   Desambiguación del sentido de las palabras
+:::
+
+## POS Tagging en R
+
+Vamos a aplicar el etiquetado de partes del discurso (POS Tagging) utilizando un corpus real en español.
+
+Trabajaremos con un [dataset](https://datos.gob.ar/dataset/jgm-comunidad-abierta) que posee las descripciones de  **proyectos de gobierno abierto** llevadas adelante por organismos estatales y sociedad civil.
+
+::: codewindow
+ejemplo.R
+
+```{r}
+library(readr)
+df <- read_csv("https://infra.datos.gob.ar/catalog/jgm/dataset/25/distribution/25.1/download/comunidad-abierta-iniciativas.csv", 
+    locale = locale(encoding = "ISO-8859-1"))
+```
+:::
+
+## Estructura del csv del debate {.smaller}
+
+```{r, echo = FALSE}
+reactable::reactable(head(df))
+```
+
+## POS Tagging en R
+
+::: codewindow
+```{r}
+library(udpipe)
+library(tidyverse)
+
+# "spanish-ancora", "spanish-gsd"
+modelo_es <- udpipe_download_model(language = "spanish")
+modelo <- udpipe_load_model(modelo_es$file_model)
+
+# Anotación
+anotado <- udpipe_annotate(modelo, x = df$descripcion)
+anotado_df <- as.data.frame(anotado)
+
+```
+:::
+
+## Resultado {.smaller}
+
+En `feats` se pueden ver rasgos morfosintácticos que acompañan al pos
+```{r echo = FALSE}
+
+# Visualización rápida
+reactable::reactable(anotado_df %>% select(token, upos, lemma, feats))
+```
+
+## Etiquetas generadas {.smaller}
+
+::: codewindow
+```{r}
+anotado_df %>%
+  drop_na(upos) |> 
+  count(upos, sort = TRUE) %>%
+  mutate(upos = reorder(upos, n)) %>%
+  ggplot(aes(x = upos, y = n)) +
+  geom_col(fill = "#6366F1") +
+  coord_flip() +
+  labs(
+    title = "Frecuencia de categorías gramaticales (POS)",
+    x = "Categoría gramatical (upos)",
+    y = "Frecuencia"
+  ) +
+  theme_minimal(base_size = 14)
+
+```
+:::
+
+## Word sense disambiguation (WSD) 
+
+La **desambiguación del sentido de las palabras** es la capacidad de identificar el significado de las palabras en contexto de forma computacional. En las personas, este proceso parece ser en gran medida inconsciente. En udpipe ya hay una forma básica de WSD basada en lematización y contexto
+
+## Word sense disambiguation (WSD) 
+
+::: codewindow
+```{r}
+observo <- anotado_df %>%
+  filter(lemma %in% c("abierto")) %>%
+  mutate(caracteres = nchar(sentence)) |> 
+  arrange(caracteres) |> 
+  distinct(upos,.keep_all =T) |> 
+  select(token, lemma, upos, sentence)
+reactable::reactable(observo)
+```
+:::
+
+## Named-Entity Recognition (NER)
+
+Es una herramienta del NLP que busca localizar y clasificar las entidades presentes dentro de un texto en un conjunto de categorías predefinidas.
+
+> Ayudan a entender el qué, quién y dónde de una serie de documentos.
+
+**Tres etiquetas básicas**: Personas, Organizaciones y Localizaciones
+
+## {spacyr} {.smaller}
+
+Uno de los frameworks más robustos para NLP es  [spacy](https://spacy.io/universe/project/spacyr), originalmente en Python, tiene su integración en R con `{spacyr}`. 
+
+**Modelos en español**: paquetes entrenados con corpus lingüísticos
+ 
+`es_core_news_sm` → liviano, rápido, buena cobertura general
+
+`es_dep_news_trf` → basado en Transformers, más preciso pero más pesado
+
+Los modelos se pueden observar en este [link](https://spacy.io/usage/models)
+
+## ¿Qué es un [embedding](https://gustavo-espindola.medium.com/qu%C3%A9-son-los-embeddings-y-c%C3%B3mo-se-utilizan-en-la-inteligencia-artificial-con-python-45b751ed86a5)? {.smaller}
+
+Es forma de representar palabras (o frases) como vectores numéricos en un espacio matemático. Los embeddings ubican las palabras en un espacio multidimensional donde la distancia y dirección entre las palabras tienen significado.
+
+Cada palabra es un vector (una lista de números), por ejemplo:
+`"perro" → [0.21, -1.34, 0.05, ...]`
+
+Los vectores son similares para las palabras que se utilizan en contextos similares. Esto significa que los vectores de embeddings pueden utilizarse para determinar la similitud semántica entre las palabras:
+`"perro" estará cerca de "gato" pero lejos de "astronauta"`
+
+
+## NER en R {.smaller}
+
+::: codewindow
+
+```r
+library(spacyr)
+
+# Descargar el modelo
+spacy_download_langmodel("es_dep_news_trf")
+
+# Iniciar spacy
+spacy_initialize(model = "es_dep_news_trf")
+
+ner <- spacy_extract_entity(df$descripcion)
+
+reactable::reactable(ner)
+```
+:::
+
+```{r echo = FALSE}
+ner <- readRDS("ner.rds") |> 
+  head()
+
+reactable::reactable(ner)
+```
+
+## Recursos
+
+-   [Estilometría y análisis de texto con R para filólogos](https://aic.uva.es/cuentapalabras/de-las-palabras-a-las-clases-de-palabras.html)
+-   [Word sense disambiguation](https://www.geeksforgeeks.org/word-sense-disambiguation-in-natural-language-processing/)
+- [¿Qué es un embedding?](https://gustavo-espindola.medium.com/qu%C3%A9-son-los-embeddings-y-c%C3%B3mo-se-utilizan-en-la-inteligencia-artificial-con-python-45b751ed86a5)
+- [Transformers para NLP](https://arxiv.org/abs/2311.17633)
