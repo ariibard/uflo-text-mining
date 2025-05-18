@@ -61,6 +61,11 @@ book:
         - clases/clase6_C.qmd
         - clases/clase6_T.qmd
         
+        
+    - part: "<b>Clase 7. Sentiment Analisis y Medidas de similitud y distancia</b>"
+      chapters: 
+        - clases/clase7_C.qmd
+        
     - part: "**Referencias**"
       chapters:
         - bibliografia.qmd

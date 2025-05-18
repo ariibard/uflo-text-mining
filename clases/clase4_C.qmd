@@ -4,6 +4,6 @@ title: "C4. Presentación"
 
 En esta clase aprenderás a realizar web scrapping con R
 
-<iframe src="presentaciones/clase_4/webscrapping.html" width="100%" height="600px">
+<iframe src="clases/presentaciones/clase_4/webscrapping.html" width="100%" height="600px">
 
 </iframe>

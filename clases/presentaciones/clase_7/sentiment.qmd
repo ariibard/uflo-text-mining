@@ -1,0 +1,64 @@
+---
+format:
+  revealjs:
+    echo: true
+    theme: custom.scss
+    code-line-numbers: true
+    
+embed-resources: true
+revealjs-plugins:
+  - codewindow
+---
+
+# Analisis de sentimiento y medidas de similitud
+
+
+## Analizar el contenido emocional {.smaller}
+Podemos utilizar las herramientas de minería de texto para analizar el contenido emocional del texto mediante programación
+
+En el análisis de sentimiento se suelen distinguir dos grandes enfoques:
+
+1. Enfoque léxico (basado en diccionarios)
+2. Enfoque basado en clasificación automática
+
+# Enfoque léxico {.smaller}
+
+Una forma de analizar el sentimiento de un texto es considerarlo como una combinación de sus palabras individuales y el contenido sentimental del texto completo como la suma del contenido sentimental de cada palabra. Se analiza el texto buscando qué palabras están en ese diccionario y se calcula un promedio de sentimiento
+
+✅ Ventajas: fácil de interpretar, rápido, transparente.
+
+❌ Desventajas: no capta contexto, ironía, negaciones o intensificadores (ej: "no está nada mal").
+
+
+## Enfoque Clasificación Automática {.smaller}
+
+Este segundo método usa técnicas de aprendizaje automático: se entrena un modelo con textos previamente clasificados por humanos (como "positivo", "negativo", "neutral") para que aprenda patrones de lenguaje que predicen el sentimiento, incluso cuando no aparecen palabras explícitamente “positivas” o “negativas”.
+
+✅ Ventajas: capta contexto, negaciones, matices.
+
+❌ Desventajas: requiere muchos datos, mayor complejidad técnica y computacional.
+
+
+# 1. LEXICONES 
+
+## Los sentimientos
+
+El paquete `tidytext` proporciona acceso a varios léxicos de sentimiento
+
+-   `AFINN`de [Finn Årup Nielsen](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010) ,
+
+-   `bing`de [Bing Liu y colaboradores](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html) , y
+
+-   `nrc`de [Saif Mohammad y Peter Turney](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm) .
+
+## Lexicones
+Estos tres léxicos se basan en unigramas, es decir, palabras individuales. Contienen muchas palabras en **inglés** y se les asigna una puntuación según su sentimiento positivo o negativo, y también, posiblemente, emociones como alegría, ira, tristeza, etc
+
+## ¿Qué pasa en español?
+La mayoría de los modelos y paquetes de análisis de sentimiento están entrenados en inglés.
+
+
+👉 Por eso, en esta clase:
+
+- Usamos un lexicón traducido (AFINN).
+- Usaremos uno desarrollado por Becerra,G. 

@@ -1,0 +1,9 @@
+---
+title: "C6. Presentación"
+---
+
+En esta clase exploramos **tres técnicas fundamentales del procesamiento del lenguaje natural (NLP)** aplicadas a textos en español, utilizando herramientas del ecosistema R: POS tagging, WDS y NER
+
+<iframe src="clases/presentaciones/clase_7/sentiment.html" width="100%" height="600px">
+
+</iframe>
