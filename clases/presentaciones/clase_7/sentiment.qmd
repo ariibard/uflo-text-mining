@@ -12,14 +12,14 @@ revealjs-plugins:
 
 # Analisis de sentimiento y medidas de similitud
 
-
 ## Analizar el contenido emocional {.smaller}
+
 Podemos utilizar las herramientas de minería de texto para analizar el contenido emocional del texto mediante programación
 
 En el análisis de sentimiento se suelen distinguir dos grandes enfoques:
 
-1. Enfoque léxico (basado en diccionarios)
-2. Enfoque basado en clasificación automática
+1.  Enfoque léxico (basado en diccionarios)
+2.  Enfoque basado en clasificación automática
 
 # Enfoque léxico {.smaller}
 
@@ -29,7 +29,6 @@ Una forma de analizar el sentimiento de un texto es considerarlo como una combin
 
 ❌ Desventajas: no capta contexto, ironía, negaciones o intensificadores (ej: "no está nada mal").
 
-
 ## Enfoque Clasificación Automática {.smaller}
 
 Este segundo método usa técnicas de aprendizaje automático: se entrena un modelo con textos previamente clasificados por humanos (como "positivo", "negativo", "neutral") para que aprenda patrones de lenguaje que predicen el sentimiento, incluso cuando no aparecen palabras explícitamente “positivas” o “negativas”.
@@ -38,8 +37,7 @@ Este segundo método usa técnicas de aprendizaje automático: se entrena un mod
 
 ❌ Desventajas: requiere muchos datos, mayor complejidad técnica y computacional.
 
-
-# 1. LEXICONES 
+# 1. LEXICONES
 
 ## Los sentimientos
 
@@ -52,13 +50,51 @@ El paquete `tidytext` proporciona acceso a varios léxicos de sentimiento
 -   `nrc`de [Saif Mohammad y Peter Turney](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm) .
 
 ## Lexicones
+
 Estos tres léxicos se basan en unigramas, es decir, palabras individuales. Contienen muchas palabras en **inglés** y se les asigna una puntuación según su sentimiento positivo o negativo, y también, posiblemente, emociones como alegría, ira, tristeza, etc
 
 ## ¿Qué pasa en español?
-La mayoría de los modelos y paquetes de análisis de sentimiento están entrenados en inglés.
 
+La mayoría de los modelos y paquetes de análisis de sentimiento están entrenados en inglés.
 
 👉 Por eso, en esta clase:
 
-- Usamos un lexicón traducido (AFINN).
-- Usaremos uno desarrollado por Becerra,G. 
+-   Usamos un lexicón traducido (AFINN).
+-   Usaremos uno desarrollado por Becerra,G.
+-   Uno desarrollado por la UBA (SACAR de SHINY)
+
+# Tango
+
+![](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDZjaGR5ZGQxcG00YTB1Z2hsanE5ajVzdmpxeDBkbzN3emlodm1rZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l2R0azdPUa6MDVbYA/giphy.gif){fig-align="center"}
+
+# ¿Qué emociones tienen las letras de tango?
+
+## ¿Qué emociones tienen las letras de tango?
+
+[Dataset](https://github.com/gefero/tango_scrap) de German Rosati obtenido a través de scrapeo web
+
+::: codewindow
+```{r}
+library(tidyverse)
+library(readr)
+library(janitor)
+url <- "https://raw.githubusercontent.com/gefero/tango_scrap/master/Data/Todo_Tango_letras_final.csv"
+tango <- read_csv(url) |> 
+  clean_names() |> 
+  # Elimino los que no tienen letra
+  drop_na(letra)
+```
+:::
+
+# ¿Cómo lo hacemos?
+
+![](imagenes/tidytext.jpg){fig-align="center" width="206"}
+
+## 1. Sentiment Lilia
+
+::: codewindow
+```{r}
+lexicones <- readr::read_csv('https://raw.githubusercontent.com/gastonbecerra/curso-intro-r/main/data/lexicones.csv')
+```
+
+:::
