@@ -90,11 +90,40 @@ tango <- read_csv(url) |>
 
 ![](imagenes/tidytext.jpg){fig-align="center" width="206"}
 
-## 1. Sentiment Lilia
+## 1. Traemos los lexicones
+
+Empezamos por el lexicón de Becerra, G. 
+
+Si observamos el mismo tiene un puntaje. Ese es el que usaremos para clasificar las letras de tango. 
 
 ::: codewindow
 ```{r}
 lexicones <- readr::read_csv('https://raw.githubusercontent.com/gastonbecerra/curso-intro-r/main/data/lexicones.csv')
+
+head(lexicones)
 ```
 
 :::
+
+## 2. Lematizamos nuestro corpus de texto
+
+Esto es para poder unirlo con los lexicones y su puntaje. Para ello vamos a utilizar la librería `{udpipe}`
+
+```{r}
+library(udpipe)
+#ud_model <- udpipe_download_model(language = "spanish")
+ud_model <- udpipe_load_model(ud_model$file_model)
+anotado <- udpipe_annotate(ud_model, x = tango$letra, doc_id = tango$link)
+anotado_df <- as_tibble(anotado)
+
+anotado_df %>%
+  select(doc_id, token, lemma)
+```
+
+```{r echo = FALSE}
+saveRDS(anotado_df %>%
+  select(doc_id, token, lemma), "lemas.rds")
+
+load("lemas.rds")
+```
+
