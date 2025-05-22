@@ -73,5 +73,38 @@
       "<b>Clase 5. Preprocesamiento: tokenización, lematización, limpieza y eliminación de ruido textual</b>",
       "<span class='chapter-number'>17</span>  <span class='chapter-title'>C5. Presentación</span>"
     ]
+  },
+  {
+    "objectID": "clases/clase4_C.html",
+    "href": "clases/clase4_C.html",
+    "title": "C4. Presentación",
+    "section": "",
+    "text": "En esta clase aprenderás a realizar web scrapping con R",
+    "crumbs": [
+      "**Clase 4. Webscrapping**",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>C4. Presentación</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase4_TP.html",
+    "href": "clases/clase4_TP.html",
+    "title": "C4. Taller práctico",
+    "section": "",
+    "text": "Tarea: Scrapear una página web",
+    "crumbs": [
+      "**Clase 4. Webscrapping**",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>C4. Taller práctico</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase4_TP.html#tarea-scrapear-una-página-web",
+    "href": "clases/clase4_TP.html#tarea-scrapear-una-página-web",
+    "title": "C4. Taller práctico",
+    "section": "",
+    "text": "Elegir una página web\ngenerar un dataset a través de scrapeo con {rvest}\n\n\nEntregable:\nArchivo .R o rmd con el procesamiento",
+    "crumbs": [
+      "**Clase 4. Webscrapping**",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>C4. Taller práctico</span>"
+    ]
   }
 ]
