@@ -10,7 +10,7 @@ revealjs-plugins:
   - codewindow
 ---
 
-# Analisis de sentimiento y medidas de similitud
+# Analisis de sentimiento y medidas de distancia
 
 ## Analizar el contenido emocional {.smaller}
 
@@ -59,9 +59,8 @@ La mayoría de los modelos y paquetes de análisis de sentimiento están entrena
 
 👉 Por eso, en esta clase:
 
--   Usamos un lexicón traducido (AFINN).
--   Usaremos uno desarrollado por Becerra,G.
--   Uno desarrollado por la UBA (SACAR de SHINY)
+-   Uno desarrollado por creado por Agustín Gravano del Laboratorio de Inteligencia Artificial Aplicada de la UBA
+-   [Usamos un lexicón traducido (AFINN) por Juan Bosco Mendoza Vega](https://github.com/jboscomendoza).
 
 # Tango
 
@@ -69,7 +68,9 @@ La mayoría de los modelos y paquetes de análisis de sentimiento están entrena
 
 # ¿Qué emociones tienen las letras de tango?
 
-## ¿Qué emociones tienen las letras de tango?
+## ¿Qué emociones tienen las letras de tango? {.smaller}
+
+**PASO 1** : Descargamos los datos
 
 [Dataset](https://github.com/gefero/tango_scrap) de German Rosati obtenido a través de scrapeo web
 
@@ -82,48 +83,311 @@ url <- "https://raw.githubusercontent.com/gefero/tango_scrap/master/Data/Todo_Ta
 tango <- read_csv(url) |> 
   clean_names() |> 
   # Elimino los que no tienen letra
-  drop_na(letra)
+  drop_na(letra) 
+
+reactable::reactable(head(tango))
 ```
 :::
+
+# ¿Cómo lo hacemos? {.smaller}
+
+::::: columns
+::: {.column width="50%"}
+Vamos a seleccionar letras de `Celedonio Flores`
+
+```{r}
+letras_flores <- tango |> 
+  filter(compositor == "celedonio flores") |> 
+  filter(ritmo == "tango")
+```
+:::
+
+::: {.column width="50%"}
+![](imagenes/celedenio.jpeg){fig-align="center" width="517"}
+:::
+:::::
 
 # ¿Cómo lo hacemos?
 
-![](imagenes/tidytext.jpg){fig-align="center" width="206"}
+![](imagenes/1.sentiment_tidytext.png)
 
-## 1. Traemos los lexicones
+## Paso 2: Traemos los lexicones {.smaller}
 
-Empezamos por el lexicón de Becerra, G. 
+Una vez que tenemos la **data**, nos traemos los `lexicones`
 
-Si observamos el mismo tiene un puntaje. Ese es el que usaremos para clasificar las letras de tango. 
+En este caso: Los valores van de 1 (negativo) a 3 (positivo).
+
+Si observamos el mismo tiene un puntaje. Ese es el que usaremos para clasificar las letras de tango.
+
+| Valor | Categoría de sentimiento |
+|-------|--------------------------|
+| 1     | Negativo                 |
+| 2     | Neutral                  |
+| 3     | Positivo                 |
+
+# Lexicones
+
+<!-- https://raw.githubusercontent.com/gastonbecerra/curso-intro-r/main/data/lexicones.csv -->
 
 ::: codewindow
 ```{r}
-lexicones <- readr::read_csv('https://raw.githubusercontent.com/gastonbecerra/curso-intro-r/main/data/lexicones.csv')
+lexicones <- readr::read_csv('sentiment_lexicon_liia.csv') 
 
-head(lexicones)
+reactable::reactable(head(lexicones))
 ```
-
 :::
 
-## 2. Lematizamos nuestro corpus de texto
+## Paso 3: Lematizamos nuestro corpus de texto {.smaller}
 
 Esto es para poder unirlo con los lexicones y su puntaje. Para ello vamos a utilizar la librería `{udpipe}`
 
+::: codewindow
 ```{r}
 library(udpipe)
-#ud_model <- udpipe_download_model(language = "spanish")
-ud_model <- udpipe_load_model(ud_model$file_model)
-anotado <- udpipe_annotate(ud_model, x = tango$letra, doc_id = tango$link)
+ud_model <- udpipe_load_model("spanish-gsd-ud-2.5-191206.udpipe") # udpipe_download_model(language = "spanish")
+#ud_model <- udpipe_load_model(ud_model$file_model)
+anotado <- udpipe_annotate(ud_model, x = letras_flores$letra, doc_id = letras_flores$link)
 anotado_df <- as_tibble(anotado)
 
-anotado_df %>%
-  select(doc_id, token, lemma)
+reactable::reactable(anotado_df %>%
+  select(doc_id, token, lemma) |> 
+    head())
 ```
+:::
+
+## Paso 4: Unimos con los lexicones {.smaller}
+
+Utilizamos `left_join` para unir palabras entre datasets
+
+::: codewindow
+```{r}
+df_sentimiento <- anotado_df |> 
+  select(doc_id, lemma) |> 
+  left_join(lexicones, by = c('lemma' = 'word')) 
+
+reactable::reactable(df_sentimiento |> 
+                       arrange(desc(mean_likeness))|> 
+    head())
+```
+:::
+
+## Paso 5: Calculamos el promedio por canción {.smaller}
+
+::: codewindow
+```{r}
+df_sentimiento <- df_sentimiento |> 
+  group_by(doc_id) |> 
+  summarise(valor=mean(mean_likeness, na.rm = TRUE), # valoración media
+    cruzadas_n=length(mean_likeness[!is.na(mean_likeness)]), # cantidad de palabras con valoracion
+    cruzadas_lemmas=paste(lemma[!is.na(mean_likeness)], collapse = " ")) |>  # palabras con valoracion)
+left_join(letras_flores, by = c("doc_id" = "link"))
+
+
+reactable::reactable(df_sentimiento |> 
+    head())
+```
+:::
+
+## Paso 6: Asignamos categorías para poder analizar y visualizar
+
+::: codewindow
+```{r}
+df_sentimiento <- df_sentimiento |> 
+  mutate(sentimiento_cat = cut(valor,
+                             breaks = c(1, 1.5, 2.5, 3),
+                             include.lowest = TRUE,
+                             labels = c("Negativo", "Neutral", "Positivo")))  %>%
+      mutate(colores = case_when(
+        sentimiento_cat == "Positivo" ~ "#38C477",
+            sentimiento_cat == "Neutro" ~ "#737272", 
+        sentimiento_cat == "Negativo" ~ "#F2543D"
+      )) |> 
+  arrange(desc(sentimiento_cat))
+   
+```
+:::
+
+## Paso 7: Visualizamos
+
+::: codewindow
+```{r}
+
+library(highcharter)
+plot <-hchart(df_sentimiento,
+       type = "bar",
+       hcaes(y = valor, x = titulo, group = sentimiento_cat)) %>%
+  hc_chart(inverted = TRUE) %>%
+  hc_yAxis(title = list(text = "Sentimiento promedio"), min = 1, max = 3) %>%
+  hc_exporting(enabled = TRUE) %>% 
+  hc_title(text = "Sentimiento promedio en letras de Celedonio Flores",
+           align = 'left',
+           style = list(fontSize = "18px")) %>% 
+  hc_subtitle(text = "Clasificación con lexicón UBA") %>% 
+  hc_colors(unique(df_sentimiento$colores)) %>%
+  hc_add_theme(hc_theme_flat())
+```
+:::
+
+## Paso 8: Visualizamos
 
 ```{r echo = FALSE}
-saveRDS(anotado_df %>%
-  select(doc_id, token, lemma), "lemas.rds")
-
-load("lemas.rds")
+plot
 ```
 
+## ¿Qué pasa si usamos otro lexicon? {.smaller}
+
+Originalmente desarrollado por Finn Årup Nielsen, AFINN es un lexicón de sentimientos que asigna a cada palabra un valor entero de sentimiento en una escala de -5 (muy negativo) a +5 (muy positivo).
+
+| Intervalo de puntaje | Categoría de sentimiento |
+|----------------------|--------------------------|
+| -5 a -2.5            | Negativo                 |
+| -2.5 a -0.5          | Algo negativo            |
+| -0.5 a 0.5           | Neutral                  |
+| 0.5 a 2.5            | Algo positivo            |
+| 2.5 a 5              | Positivo                 |
+
+::: codewindow
+```{r}
+lexicon_afinn <- readr::read_csv('https://raw.githubusercontent.com/jboscomendoza/lexicos-nrc-afinn/refs/heads/master/lexico_afinn.csv') 
+```
+:::
+
+## Procesamos
+
+::: codewindow
+```{r}
+df_sentimiento_2 <- anotado_df |> 
+  select(doc_id, lemma) |> 
+  left_join(lexicon_afinn, by = c('lemma' = 'palabra')) |> 
+  group_by(doc_id) |> 
+  summarise(valor=mean(puntuacion, na.rm = TRUE), # valoración media
+    cruzadas_n=length(puntuacion[!is.na(puntuacion)]), # cantidad de palabras con valoracion
+    cruzadas_lemmas=paste(lemma[!is.na(puntuacion)], collapse = " ")) |>  # palabras con valoracion)
+left_join(letras_flores, by = c("doc_id" = "link"))  |> 
+  mutate( sentimiento_cat = cut(valor,
+                          breaks = c(-5, -2.5, -0.5, 0.5, 2.5, 5),
+                          include.lowest = TRUE,
+                          labels = c("Negativo", 
+                                     "Algo negativo", 
+                                     "Neutral", 
+                                     "Algo positivo", 
+                                     "Positivo")))  %>%
+      mutate(colores = case_when(
+        sentimiento_cat == "Positivo" ~ "#38C477",
+        sentimiento_cat == "Algo positivo" ~ "#87EBA8",
+        sentimiento_cat == "Neutral" ~ "#737272", 
+        sentimiento_cat == "Algo negativo" ~ "#F28268", 
+        sentimiento_cat == "Negativo" ~ "#F2543D"
+      ))
+```
+:::
+
+## Graficamos {.smaller}
+
+::: codewindow
+```{r}
+hchart(df_sentimiento_2,
+       type = "bar",
+       hcaes(y = valor, x = titulo, group = sentimiento_cat)) %>%
+  hc_chart(inverted = TRUE) %>%
+  hc_yAxis(title = list(text = "Sentimiento promedio"), min = -5, max = 5) %>%
+  hc_exporting(enabled = TRUE) %>% 
+  hc_title(text = "Sentimiento promedio en letras de Celedonio Flores",
+           align = 'left',
+           style = list(fontSize = "18px")) %>% 
+  hc_subtitle(text = "Clasificación con lexicón AFINN") %>% 
+  hc_colors(unique(df_sentimiento_2$colores)) %>%
+  hc_add_theme(hc_theme_flat())
+
+```
+:::
+
+# Recreo
+
+> Volvemos en 10 minutos para comenzar con el taller
+
+![](https://i.pinimg.com/originals/10/d2/05/10d205b912352788a8b7116a43c00230.gif){fig-align="center" style="border-radius: 100%;"}
+
+# Medidas de similitud y distancia {.smaller}
+
+## ¿Cuales podemos usar? [`stringdist`](https://www.rdocumentation.org/packages/stringdist/versions/0.9.15/topics/stringdist)
+
+El paquete `stringdist` ofrece una serie de **métricas** de distancia entre cadenas de texto. Estas permiten cuantificar c*uán diferentes son dos secuencias de caracteres*, ya sea para comparar palabras, nombres, textos o realizar tareas como deduplicación, corrección ortográfica o búsquedas aproximadas.
+
+## Métodos {.smaller}
+
+| Método | Tipo | Rango | + similar si | Qué compara |
+|--------------|--------------|--------------|--------------|-----------------|
+| `"jaccard"` | Distancia | 0 a 1 | Valor **más bajo** | Conj. de caracteres/palabras |
+| `"cosine"` | Distancia | 0 a 1 | Valor **más bajo** | N de caracteres o tokens |
+| `"lv"` (Levenshtein) | Distancia | 0 a n (n = largo texto) | Valor **más bajo** | Ediciones mínimas |
+| `"dl"` (Damerau-Levenshtein) | Distancia | 0 a n | Valor **más bajo** | Como `"lv"` + transposiciones |
+| `"jw"` (Jaro-Winkler) | Distancia | 0 a 1 | Valor **más bajo** | Caracteres coincidentes |
+| `"soundex"` | Similitud | Códigos de sonido | 0 (igual) 1 (distinto) | Sonido parecido (ej. “barrio” y “vario”) |
+
+Más información sobre cada medida [acá](https://www.rdocumentation.org/packages/stringdist/versions/0.9.15/topics/stringdist-metrics)
+
+## Ejemplo de uso
+
+Elegimos dos letras del autor para comparar:
+
+::: codewindow
+```{r}
+#install.packages("stringdist")
+library(stringdist)
+
+
+texto1 <- letras_flores$letra[1]
+texto2 <- letras_flores$letra[2]
+
+# Comparación básica con varias métricas
+stringdist(texto1, texto2, method = "jaccard")
+stringdist(texto1, texto2, method = "lv")         # Levenshtein
+stringdist(texto1, texto2, method = "jw")         # Jaro-Winkler
+stringdist(texto1, texto2, method = "cosine")     # Coseno
+```
+:::
+
+## Podriamos comparar las canciones del autor
+
+::: codewindow
+```{r}
+library(stringdist)
+library(pheatmap)
+
+letras_flores <- letras_flores |> 
+  sample_n(size = 20)
+
+# Creamos la matriz de distancias
+mat_dist <- stringdistmatrix(letras_flores$letra, method = "jw")
+mat_dist <- as.matrix(mat_dist)
+
+# Asignamos nombres de fila y columna
+rownames(mat_dist) <- letras_flores$titulo
+colnames(mat_dist) <- letras_flores$titulo
+
+
+```
+:::
+
+## Visualizamos
+
+::: codewindow
+```{r}
+# Graficamos
+pheatmap(mat_dist,
+         cluster_rows = TRUE,
+         cluster_cols = TRUE,
+         main = "Distancia Jaro-Winkler entre letras de tango")
+```
+:::
+
+# ¿Qué otros análisis podríamos hacer?
+
+## Referencias {.smaller}
+
+-   Silge, J., & Robinson, D. (2017). *Text Mining with R: A Tidy Approach*. O’Reilly Media. Recuperado de <https://www.tidytextmining.com/sentiment>
+
+-   Becerra, G. (2024). *Procesamiento del lenguaje natural y análisis de sentimiento*. En *Curso introductorio a R*. Recuperado de <https://bookdown.org/gaston_becerra/curso-intro-r/>
+
+-   Bosco Mendoza, J. (2020). *Análisis de sentimientos con léxico AFINN*. Recuperado de <https://rpubs.com/jboscomendoza/analisis_sentimientos_lexico_afinn>

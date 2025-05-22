@@ -1,5 +1,36 @@
 [
   {
+    "objectID": "clases/clase7_C.html",
+    "href": "clases/clase7_C.html",
+    "title": "C7. Presentación",
+    "section": "",
+    "text": "En esta clase exploramos tres técnicas fundamentales del procesamiento del lenguaje natural (NLP) aplicadas a textos en español, utilizando herramientas del ecosistema R: POS tagging, WDS y NER",
+    "crumbs": [
+      "<b>Clase 7. Sentiment Analisis y Medidas de similitud y distancia</b>",
+      "<span class='chapter-number'>24</span>  <span class='chapter-title'>C7. Presentación</span>"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Taller de investigación IV - Minería de texto",
+    "section": "",
+    "text": "¡Bienvenidxs al curso de Minería de Texto aplicado a las Ciencias Sociales!\nEste curso tiene como objetivo introducirte en el análisis de datos no estructurados en formato textual. A lo largo de las semanas, aprenderás a aplicar herramientas de Text Mining, combinando metodologías cualitativas y análisis estadístico para procesar grandes volúmenes de texto.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>**Inicio**</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#información-general",
+    "href": "index.html#información-general",
+    "title": "Taller de investigación IV - Minería de texto",
+    "section": "Información General",
+    "text": "Información General\nCurso: Taller de Investigación IV - UFLO\nInicio: 20/03/2025\nFinaliza: 3/06/2025\nDía y hora: Jueves, 19:00 hs (On-line)\nPlataforma: Campus UFLO",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>**Inicio**</span>"
+    ]
+  },
+  {
     "objectID": "clases/clase6_A.html",
     "href": "clases/clase6_A.html",
     "title": "C6. Antes de la clase",
@@ -22,36 +53,14 @@
     ]
   },
   {
-    "objectID": "bibliografia.html",
-    "href": "bibliografia.html",
-    "title": "Bibliografía",
+    "objectID": "clases/clase7_T.html",
+    "href": "clases/clase7_T.html",
+    "title": "C7. Taller Practico",
     "section": "",
-    "text": "Text Mining\nWeiss, S. M., Indurkhya, N., & Zhang, T. (2015). Fundamentals of Predictive Text Mining. Capítulo 1 y 2",
+    "text": "Utilizando el dataset tango\n\nArmar un sentiment analisis comparando autores y años\nCompará las letras entre dos o más autores utilizando diferentes medidas de distancia\nAnaliza los resultados",
     "crumbs": [
-      "**Referencias**",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>Bibliografía</span>"
-    ]
-  },
-  {
-    "objectID": "bibliografia.html#expresiones-regulares",
-    "href": "bibliografia.html#expresiones-regulares",
-    "title": "Bibliografía",
-    "section": "Expresiones regulares",
-    "text": "Expresiones regulares\nFriedl, J. E. F. (2006). Mastering regular expressions: Understand your data and be more productive (3.ª ed.). O’Reilly Media.",
-    "crumbs": [
-      "**Referencias**",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>Bibliografía</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase6_C.html",
-    "href": "clases/clase6_C.html",
-    "title": "C6. Presentación",
-    "section": "",
-    "text": "En esta clase exploramos tres técnicas fundamentales del procesamiento del lenguaje natural (NLP) aplicadas a textos en español, utilizando herramientas del ecosistema R: POS tagging, WDS y NER",
-    "crumbs": [
-      "<b>Clase 6. POS Tagging, WSD y NER</b>",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>C6. Presentación</span>"
+      "<b>Clase 7. Sentiment Analisis y Medidas de similitud y distancia</b>",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>C7. Taller Practico</span>"
     ]
   },
   {
@@ -63,83 +72,6 @@
     "crumbs": [
       "<b>Clase 5. Preprocesamiento: tokenización, lematización, limpieza y eliminación de ruido textual</b>",
       "<span class='chapter-number'>17</span>  <span class='chapter-title'>C5. Presentación</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase4_C.html",
-    "href": "clases/clase4_C.html",
-    "title": "C4. Presentación",
-    "section": "",
-    "text": "En esta clase aprenderás a realizar web scrapping con R",
-    "crumbs": [
-      "**Clase 4. Webscrapping**",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>C4. Presentación</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase3_C.html",
-    "href": "clases/clase3_C.html",
-    "title": "C3. Presentación",
-    "section": "",
-    "text": "En esta clase aprenderás a consumir APIs utilizando CURL y R. Y, a descargar y trabajar con subtítulos de YouTube.",
-    "crumbs": [
-      "**Clase 3. Fuentes de datos textuales: APIS, Subtítulos y PDFs**",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>C3. Presentación</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase2_C.html",
-    "href": "clases/clase2_C.html",
-    "title": "C2. Presentación",
-    "section": "",
-    "text": "Objetivo de la clase\nEn esta clase aprenderemos a utilizar expresiones regulares para la extracción y manipulación de texto libre",
-    "crumbs": [
-      "**Clase 2. Expresiones regulares**",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>C2. Presentación</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase2_C.html#presentación",
-    "href": "clases/clase2_C.html#presentación",
-    "title": "C2. Presentación",
-    "section": "Presentación",
-    "text": "Presentación",
-    "crumbs": [
-      "**Clase 2. Expresiones regulares**",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>C2. Presentación</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase1_C.html",
-    "href": "clases/clase1_C.html",
-    "title": "C1. Presentación",
-    "section": "",
-    "text": "Objetivo de la clase\nEn esta clase realizaremos la presentación de la materia. Se buscará introducir el concepto de minería de texto y la diferencia entre datos estructurados y no estructurados.",
-    "crumbs": [
-      "**Clase 1. Introducción a la Minería de Texto**",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>C1. Presentación</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase1_C.html#presentación",
-    "href": "clases/clase1_C.html#presentación",
-    "title": "C1. Presentación",
-    "section": "Presentación",
-    "text": "Presentación",
-    "crumbs": [
-      "**Clase 1. Introducción a la Minería de Texto**",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>C1. Presentación</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase1_C.html#referencias",
-    "href": "clases/clase1_C.html#referencias",
-    "title": "C1. Presentación",
-    "section": "Referencias",
-    "text": "Referencias\nEl material de esta clase está basado en:\nWeiss, S. M., Indurkhya, N., & Zhang, T. (2015). Fundamentals of Predictive Text Mining. Capítulo 1",
-    "crumbs": [
-      "**Clase 1. Introducción a la Minería de Texto**",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>C1. Presentación</span>"
     ]
   }
 ]

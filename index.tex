@@ -583,11 +583,6 @@ También podemos realizar una nube de palabras:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-Warning in wordcloud(names(frecuencia), frecuencia, max.words = 100, colors =
-brewer.pal(8, : harry could not be fit on page. It will not be plotted.
-\end{verbatim}
-
 \pandocbounded{\includegraphics[keepaspectratio]{clases/clase1_T_files/figure-pdf/unnamed-chunk-12-1.pdf}}
 
 \part{\textbf{Clase 2. Expresiones regulares}}
@@ -1553,7 +1548,7 @@ en la consola de RStudio:
 \begin{Highlighting}[]
 
 \NormalTok{paquetes\_lista }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
-  \StringTok{"spacyr"}\NormalTok{, }\StringTok{"udpipe"}\NormalTok{, }\StringTok{"stringi"}\NormalTok{, }\StringTok{"SnowballC"}\NormalTok{, }\StringTok{"udpipe"}\NormalTok{)}
+  \StringTok{"spacyr"}\NormalTok{, }\StringTok{"udpipe"}\NormalTok{)}
 
 \FunctionTok{install.packages}\NormalTok{(paquetes\_lista)}
 
@@ -1618,6 +1613,40 @@ para tu trabajo final), aplicá las siguientes técnicas vistas en clase:
 
 -   Mostrá en qué contextos aparecen y explicá cómo el contexto ayuda a desambiguarlas.
 \end{verbatim}
+
+\part{Clase 7. Sentiment Analisis y Medidas de similitud y distancia}
+
+\chapter{C6. Antes de la clase}\label{c6.-antes-de-la-clase-1}
+
+\section{\texorpdfstring{\textbf{1. Instalá los
+Paquetes}}{1. Instalá los Paquetes}}\label{instaluxe1-los-paquetes-3}
+
+Instalá los siguientes paquetes copiando y pegando el siguiente código
+en la consola de RStudio:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{paquetes\_lista }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+  \StringTok{"spacyr"}\NormalTok{, }\StringTok{"udpipe"}\NormalTok{)}
+
+\FunctionTok{install.packages}\NormalTok{(paquetes\_lista)}
+
+\CommentTok{\# Instala spacyr}
+\FunctionTok{library}\NormalTok{(spacyr)}
+\FunctionTok{spacy\_install}\NormalTok{()}
+
+\CommentTok{\# Descarga el modelo}
+
+\FunctionTok{spacy\_download\_langmodel}\NormalTok{(}\StringTok{"es\_dep\_news\_trf"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{C6. Presentación}\label{c6.-presentaciuxf3n-1}
+
+En esta clase exploramos \textbf{tres técnicas fundamentales del
+procesamiento del lenguaje natural (NLP)} aplicadas a textos en español,
+utilizando herramientas del ecosistema R: POS tagging, WDS y NER
 
 \part{\textbf{Referencias}}
 

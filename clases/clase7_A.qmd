@@ -1,0 +1,17 @@
+---
+title: "C7. Antes de la clase"
+---
+
+## **1. Instalá los Paquetes**
+
+Instalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:
+
+``` r
+
+paquetes_lista <- c(
+  "tidytext", "janitor","highcharter", "stringdist","pheatmap")
+
+install.packages(paquetes_lista)
+```
+
+2.  Descarga el siguiente [CSV](https://drive.google.com/file/d/1wIUQbm1EscRhhjHfTIDCQi_h63nSzY3g/view?usp=drive_link)

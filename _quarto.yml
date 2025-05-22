@@ -14,7 +14,6 @@ book:
   search: true
   repo-url: https://github.com/ariibard/uflo-text-mining
   #repo-actions: [edit]
-  downloads: [pdf, epub]
   sharing: [twitter, facebook]
   
 
@@ -64,7 +63,9 @@ book:
         
     - part: "<b>Clase 7. Sentiment Analisis y Medidas de similitud y distancia</b>"
       chapters: 
+        - clases/clase7_A.qmd
         - clases/clase7_C.qmd
+        - clases/clase7_T.qmd
         
     - part: "**Referencias**"
       chapters:

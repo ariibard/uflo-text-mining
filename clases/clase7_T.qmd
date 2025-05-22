@@ -1,0 +1,11 @@
+---
+title: "C7. Taller Practico"
+---
+
+Utilizando el dataset `tango`
+
+1) Armar un sentiment analisis comparando autores y años
+
+2) Compará las letras entre dos o más autores utilizando diferentes medidas de distancia 
+
+3) Analiza los resultados
