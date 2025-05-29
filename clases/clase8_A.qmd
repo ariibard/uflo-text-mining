@@ -1,5 +1,5 @@
 ---
-title: "C7. Antes de la clase"
+title: "C8. Antes de la clase"
 ---
 
 ## **1. Instalá los Paquetes**
