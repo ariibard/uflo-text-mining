@@ -106,5 +106,38 @@
       "**Clase 4. Webscrapping**",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>C4. Taller práctico</span>"
     ]
+  },
+  {
+    "objectID": "clases/clase8_A.html",
+    "href": "clases/clase8_A.html",
+    "title": "C7. Antes de la clase",
+    "section": "",
+    "text": "1. Instalá los Paquetes\nInstalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:",
+    "crumbs": [
+      "<b>Clase 8. Representación vectorial de textos </b>",
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>C7. Antes de la clase</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase8_A.html#instalá-los-paquetes",
+    "href": "clases/clase8_A.html#instalá-los-paquetes",
+    "title": "C7. Antes de la clase",
+    "section": "",
+    "text": "paquetes_lista &lt;- c(\n  \"forcats\", \"text2vec\", \"umap\", \"plotly\")\n\ninstall.packages(paquetes_lista)",
+    "crumbs": [
+      "<b>Clase 8. Representación vectorial de textos </b>",
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>C7. Antes de la clase</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase8_C.html",
+    "href": "clases/clase8_C.html",
+    "title": "C7. Presentación",
+    "section": "",
+    "text": "En esta clase exploramos tres técnicas fundamentales del procesamiento del lenguaje natural (NLP) aplicadas a textos en español, utilizando herramientas del ecosistema R: POS tagging, WDS y NER",
+    "crumbs": [
+      "<b>Clase 8. Representación vectorial de textos </b>",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>C7. Presentación</span>"
+    ]
   }
 ]

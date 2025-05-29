@@ -1,0 +1,7 @@
+---
+title: "C8. Presentación"
+---
+
+<iframe src="presentaciones/clase_8/vectorial.html" width="100%" height="600px">
+
+</iframe>

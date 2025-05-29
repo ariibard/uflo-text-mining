@@ -1,0 +1,388 @@
+---
+format:
+  revealjs:
+    echo: true
+    theme: custom.scss
+    code-line-numbers: true
+    
+embed-resources: true
+revealjs-plugins:
+  - codewindow
+---
+
+# Representación vectorial de textos
+
+## Diferentes métodos {.smaller}
+
+Existen distintos enfoques para vectorizar textos, desde los más simples hasta los más sofisticados:
+
+| Método | ¿Cómo funciona? | Pros | Contras |
+|---------------|-----------------------|---------------|-------------------|
+| **Bag of Words** | Cuenta frecuencia de palabras | Simple, rápido | Ignora el orden y el contexto |
+| **TF-IDF** | Pondera palabras por frecuencia y relevancia | Mejora BoW, reduce ruido | Aún ignora el significado |
+| **Embeddings** | Mapeo semántico en espacios densos | Captura relaciones de significado | Requiere más recursos y entrenamiento |
+
+::: notes
+Existen distintos enfoques, que fueron evolucionando a medida que se fue profundizando el análisis computacional del lenguaje. En esta tabla comparativa vemos tres de los métodos más conocidos y utilizados:
+
+Empezamos por Bag of Words, que es el más simple: lo que hace es contar cuántas veces aparece cada palabra en un texto. Es fácil de implementar y bastante rápido, pero tiene una gran limitación: pierde el orden de las palabras y no capta ningún significado.
+
+Luego tenemos TF-IDF, que es una mejora sobre Bag of Words. En lugar de simplemente contar, pondera las palabras: le da más peso a las que aparecen mucho en un documento, pero no tanto en el resto del corpus. Esto ayuda a reducir el ruido y destacar las palabras más representativas. Aun así, sigue siendo una representación basada solo en frecuencia.
+
+Finalmente, tenemos los embeddings, como Word2Vec o GloVe. Estos modelos aprenden a representar las palabras en un espacio semántico continuo. Es decir, palabras que aparecen en contextos similares van a tener vectores parecidos. Por ejemplo, "doctor" y "enfermera" van a estar más cerca entre sí que "doctor" y "bicicleta".
+
+Esta aproximación permite capturar relaciones mucho más ricas, pero también requiere más recursos computacionales y entrenamiento.
+:::
+
+# Frecuencia Inversa de un documento (IDF)
+
+::: notes
+Una pregunta central en la minería de texto y el procesamiento del lenguaje natural es cómo cuantificar de qué trata un documento. ¿Podemos hacer esto observando las palabras que componen el documento? Una medida de cuán importante puede ser una palabra es su frecuencia de término (tf), con qué frecuencia aparece una palabra en un documento, como examinamos en el Capítulo 1. Sin embargo, hay palabras en un documento que aparecen muchas veces pero pueden no ser importantes; en inglés, estas son probablemente palabras como "the", "is", "of", etc. Podríamos adoptar el enfoque de agregar palabras como estas a una lista de palabras vacías y eliminarlas antes del análisis, pero es posible que algunas de estas palabras puedan ser más importantes en algunos documentos que otras. Una lista de palabras vacías no es un enfoque muy sofisticado para ajustar la frecuencia de términos para palabras de uso común.
+
+Otro enfoque consiste en observar la frecuencia inversa del documento (IDF) de un término, lo que disminuye la ponderación de las palabras de uso común y aumenta la de las palabras con menor uso en una colección de documentos. Esto puede combinarse con la frecuencia del término para calcular la tf-IDF de un término (la multiplicación de ambas cantidades), la frecuencia de un término ajustada según su uso poco frecuente.
+:::
+
+# TF-IDF
+
+> La estadística tf-idf tiene como objetivo medir la importancia de una palabra para un documento de una colección (o corpus) de documentos, por ejemplo, para una novela de una colección de novelas o para un sitio web de una colección de sitios web.
+
+$$
+[\text{idf}(término) = \ln \left( \frac{n_{\text{documentos}}}{n_{\text{documentos que contienen el término}}} \right)]
+$$
+
+
+## ¿Cuáles son las palabras más usadas? {.smaller}
+
+Vamos a analizar las letras de los 10 compositores de tango con más canciones
+
+::: codewindow
+```{r}
+library(tidyverse)
+library(readr)
+library(janitor)
+library(tidytext)
+
+url <- "https://raw.githubusercontent.com/gefero/tango_scrap/master/Data/Todo_Tango_letras_final.csv"
+
+autores <- read_csv(url) |> 
+  clean_names() |> 
+  drop_na(letra) |> 
+  group_by(compositor) |> 
+  mutate(total_canciones = n()) |> 
+  ungroup() |> 
+  group_by(compositor) |> 
+  summarise(letra_completa = paste0(letra, collapse = " , "),
+            total_canciones = first(total_canciones)) |> 
+  arrange(desc(total_canciones)) |> 
+  slice_max(n = 10, order_by = total_canciones)
+
+```
+:::
+
+## ¿Cuáles son las palabras más usadas?
+::: codewindow
+```{r}
+reactable::reactable(head(autores))
+```
+:::
+
+## Tokenizamos
+
+::: codewindow
+```{r}
+
+canciones_palabras <- autores %>%
+  unnest_tokens(word, letra_completa) %>%
+  count(compositor, word, sort = TRUE)
+
+reactable::reactable(head(canciones_palabras))
+```
+:::
+
+## ¿Qué porcentaje representa cada palabra?
+
+::: codewindow
+```{r}
+palabras_totales <- canciones_palabras %>% 
+  group_by(compositor) %>% 
+  summarize(total = sum(n))
+
+canciones_palabras <- left_join(canciones_palabras, palabras_totales)
+
+reactable::reactable(head(canciones_palabras))
+```
+:::
+
+## Observamos la distribución
+
+::: codewindow
+```{r}
+canciones_palabras <- canciones_palabras |> 
+  mutate(freq = n/total)
+
+ggplot(canciones_palabras) +
+  aes(x = n, fill = compositor) +
+  geom_histogram(show.legend = FALSE) +
+  scale_fill_hue(direction = 1)  +
+  facet_wrap(vars(compositor))
+
+```
+:::
+
+## Frecuencias entre compositores {.smaller}
+
+::: codewindow
+```{r}
+freq_by_rank <- canciones_palabras %>% 
+  group_by(compositor) %>% 
+  mutate(rank = row_number(), 
+         term_frequency = n/total) %>%
+  ungroup()
+
+freq_by_rank %>% 
+  ggplot(aes(rank, term_frequency, color = compositor)) + 
+  geom_line(linewidth = 1.1, alpha = 0.8, show.legend = FALSE) + 
+  scale_x_log10() +
+  scale_y_log10()
+```
+
+:::
+
+## Ley de Zipf
+
+la ley de Zipf establece que cuando las palabras de un texto lo suficientemente extenso se alinean en orden de frecuencia decreciente, exhiben un patrón especial.
+
+En concreto, la segunda palabra más frecuente aparece aproximadamente la mitad de veces que la número uno. La tercera palabra más frecuente aparece aproximadamente un tercio más que la primera, la cuarta una cuarta parte y así sucesivamente
+
+::: notes
+
+La Ley de Zipf nos dice algo muy interesante sobre cómo usamos las palabras.
+Si tomamos un texto cualquiera y contamos cuántas veces aparece cada palabra, vamos a ver que muy pocas palabras aparecen muchas veces, y la mayoría aparecen muy poco.
+
+Por ejemplo, en español las palabras como “de”, “el”, “la”, “y”, “en” aparecen cientos o miles de veces. En cambio, palabras como “guitarra” o “esperanza” aparecen solo una o dos veces.
+
+Lo sorprendente es que esta distribución no es aleatoria, sino que sigue un patrón predecible.
+Si graficamos la frecuencia de cada palabra en función de su posición en el ranking, vamos a ver que forma una curva que disminuye rápidamente al principio y luego se aplana.
+Y si lo graficamos en escala log-log... ¡nos da una línea recta! Eso es típico de la Ley de Zipf.
+:::
+
+## TF-IDF {.smaller}
+La idea de tf-idf es encontrar las palabras importantes para el contenido de cada documento, disminuyendo la ponderación de las palabras de uso común y aumentando la de las palabras poco utilizadas en una colección o corpus de documentos
+
+::: codewindow
+```{r}
+autor_tf_idf <- canciones_palabras %>%
+  bind_tf_idf(word, compositor, n)
+
+reactable::reactable(head(autor_tf_idf))
+```
+
+:::
+
+::: notes
+Observe que idf y, por lo tanto, tf-idf son cero para estas palabras extremadamente comunes. Todas estas palabras aparecen en las letras de los autores, por lo que el término idf (que será el logaritmo natural de 1) es cero. La frecuencia inversa de documentos (y, por lo tanto, tf-idf) es muy baja (próxima a cero) para las palabras que aparecen en muchos documentos de una colección; así es como este enfoque reduce la ponderación de las palabras comunes
+:::
+
+## Términos con TD-IDF alto {.smaller}
+
+::: codewindow
+```r
+library(forcats)
+
+autor_tf_idf %>%
+  group_by(compositor) %>%
+  slice_max(tf_idf, n = 5) %>%
+  ungroup() %>%
+  ggplot(aes(tf_idf, fct_reorder(word, tf_idf), fill = compositor)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~compositor, ncol = 3, scales = "free") +
+  labs(x = "tf-idf", y = NULL)
+
+```
+:::
+
+## Términos con TD-IDF alto {.smaller}
+
+::: codewindow
+```{r echo = FALSE}
+library(forcats)
+
+autor_tf_idf %>%
+  group_by(compositor) %>%
+  slice_max(tf_idf, n = 5) %>%
+  ungroup() %>%
+  ggplot(aes(tf_idf, fct_reorder(word, tf_idf), fill = compositor)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~compositor, ncol = 3, scales = "free") +
+  labs(x = "tf-idf", y = NULL)
+  
+```
+
+:::
+
+
+# Embeddings: Word2vec. Similitudes semanticas
+
+::: notes
+Un embedding es una representación numérica densa y de baja dimensión de una palabra (o cualquier otro objeto, como frases, documentos, usuarios, etc.) que captura sus propiedades y relaciones.
+
+Imaginá que tenés una palabra como "amor". Si queremos trabajar con ella en un modelo computacional, necesitamos transformarla en un conjunto de números.
+Eso es un embedding: un vector (por ejemplo, de 50 o 100 números) que resume el contexto y significado de esa palabra según cómo se usa en un corpus.
+
+A diferencia de TF-IDF o Bag of Words (que solo cuentan frecuencia), los embeddings aprenden cómo se relacionan las palabras entre sí.
+
+Si "pena" y "dolor" aparecen en contextos parecidos, sus vectores estarán cerca entre sí.
+Si "tango" y "café" aparecen en escenas distintas, sus vectores estarán lejos.
+
+Un embedding es una manera de convertir una palabra en un vector de números que no solo representa la palabra, sino también lo que significa, según su contexto.
+Es como si estuviéramos proyectando las palabras en un mapa semántico: las palabras parecidas entre sí terminan más cerca.
+
+
+ ¿Cómo se obtienen?
+Se entrenan modelos (como Word2Vec o GloVe) que leen millones de contextos y aprenden los vectores automáticamente.
+
+El modelo aprende a ubicar cada palabra en el espacio de manera que las relaciones de significado estén preservadas.
+
+
+Word2Vec es un modelo de aprendizaje automático que transforma palabras en vectores numéricos (embeddings), de forma que capturan su significado semántico.
+
+ Fue creado por un equipo de Google en 2013, y es una de las herramientas más importantes para representar texto en procesamiento de lenguaje natural (NLP).
+ 
+ Word2Vec lee un corpus (una colección de textos) y aprende que:
+
+Palabras que aparecen en contextos similares (por ejemplo, pena, dolor, tristeza) deberían tener vectores parecidos.
+
+Palabras que aparecen en contextos distintos (amor vs puñal) deberían tener vectores alejados.
+
+Así, crea un espacio vectorial semántico donde la cercanía entre vectores = similitud de significado.
+
+Word2Vec es un modelo que "lee" textos y aprende cómo usamos las palabras.
+
+Luego, transforma cada palabra en un vector de números, de forma que las palabras parecidas en contexto estén cerca.
+:::
+
+## ¿Cómo lo aplicamos en R?
+Armamos una lista de vectores:
+
+::: codewindow
+```{r}
+library(text2vec)
+
+tokens <- word_tokenizer(tolower(autores$letra_completa))
+
+```
+:::
+
+## Vectorizador y matriz de co-ocurrencias {.smaller}
+
+Convertimos la lista en un objeto iterable.
+
+`create_vocabulary()` cuenta cuántas veces aparece cada palabra.
+
+`prune_vocabulary()` filtra el vocabulario y se queda solo con palabras que aparecen al menos 5 veces.
+
+`vocab_vectorizer()` convierte el vocabulario en una función que transforma texto en vectores.
+
+::: codewindow
+```{r}
+it <- itoken(tokens, progressbar = FALSE)
+
+vocab <- create_vocabulary(it) %>%
+  prune_vocabulary(term_count_min = 5)
+
+vectorizer <- vocab_vectorizer(vocab)
+
+```
+:::
+
+## Entrenar el modelo GloVe
+
+`create_tcm()` genera la Term Co-occurrence Matrix (TCM):
+fit_transform() entrena el modelo sobre la matriz tcm.
+
+::: codewindow
+```{r}
+tcm <- create_tcm(it, vectorizer, skip_grams_window = 5)
+
+glove <- GlobalVectors$new(rank = 50, x_max = 10)
+word_vectors <- glove$fit_transform(tcm, n_iter = 20)
+```
+:::
+
+## Similitudes semanticas 
+
+::: codewindow
+```{r}
+similarity <- sim2(word_vectors, method = "cosine")
+similarity["amor", ] |> sort(decreasing = TRUE) |> head(10)
+```
+:::
+
+## Similitudes
+
+::: codewindow
+```{r}
+library(plotly)
+library(umap)
+
+skip_embedding <- as.matrix(word_vectors)
+skip_embedding <- na.omit(skip_embedding)
+vizualization <- umap(skip_embedding, n_neighbors = 15, n_threads = 2)
+
+df <- data.frame(
+  word = rownames(skip_embedding),
+  x = vizualization$layout[, 1],
+  y = vizualization$layout[, 2],
+  stringsAsFactors = FALSE
+)
+
+
+```
+:::
+
+## Graficamos
+
+::: codewindow
+```{r}
+plot_ly(df, x = ~x, y = ~y, type = "scatter", mode = 'text', text = ~word) %>%
+  layout(title = "Visualización de embeddings semánticos")
+
+```
+:::
+
+## Mostramos solo de algunas tematicas
+
+::: codewindow
+```{r}
+temas <- c("amor", "pena", "dolor", "llanto", "barrio", "noche", "soledad")
+vecinos <- sim2(word_vectors, y = word_vectors[temas, ], method = "cosine") |>
+  rowMeans() |>
+  sort(decreasing = TRUE) |>
+  head(200)
+
+seleccionadas <- names(vecinos)
+word_vectors_tema <- word_vectors[seleccionadas, ]
+
+skip_embedding <- as.matrix(word_vectors_tema)
+skip_embedding <- na.omit(skip_embedding)
+vizualization <- umap(skip_embedding, n_neighbors = 15, n_threads = 2)
+
+df <- data.frame(
+  word = rownames(skip_embedding),
+  x = vizualization$layout[, 1],
+  y = vizualization$layout[, 2],
+  stringsAsFactors = FALSE
+)
+```
+:::
+
+## Graficamos
+
+::: codewindow
+```{r}
+plot_ly(df, x = ~x, y = ~y, type = "scatter", mode = 'text', text = ~word) %>%
+  layout(title = "Visualización de embeddings semánticos")
+```
+
+:::
+

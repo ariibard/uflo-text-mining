@@ -1,0 +1,15 @@
+---
+title: "C7. Antes de la clase"
+---
+
+## **1. Instalá los Paquetes**
+
+Instalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:
+
+``` r
+
+paquetes_lista <- c(
+  "forcats", "text2vec", "umap", "plotly")
+
+install.packages(paquetes_lista)
+```

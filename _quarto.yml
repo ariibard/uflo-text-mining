@@ -67,6 +67,12 @@ book:
         - clases/clase7_C.qmd
         - clases/clase7_T.qmd
         
+    - part: "<b>Clase 8. Representación vectorial de textos </b>"
+      chapters: 
+        - clases/clase8_A.qmd
+        - clases/clase8_C.qmd
+
+        
     - part: "**Referencias**"
       chapters:
         - bibliografia.qmd
