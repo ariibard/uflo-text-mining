@@ -1,0 +1,394 @@
+---
+format:
+  revealjs:
+    echo: true
+    theme: custom.scss
+    code-line-numbers: true
+    
+embed-resources: true
+revealjs-plugins:
+  - codewindow
+---
+
+# Modelado de tópicos
+
+::: notes
+En la minería de texto, solemos tener colecciones de documentos, como entradas de blog o artículos de noticias, que queremos dividir en grupos naturales para poder comprenderlos por separado. El modelado de temas es un método de clasificación no supervisada de dichos documentos, similar a la agrupación de datos numéricos, que encuentra grupos naturales de elementos incluso cuando no estamos seguros de lo que buscamos.
+:::
+
+## ¿Qué es?
+
+![](imagenes/1.png)
+
+::: notes
+El Topic Modelling o Modelado de Tópicos es un tipo de modelado estadístico utilizado para revelar la estructura semántica subyacente en grandes colecciones de documentos. Consiste en agrupar automáticamente palabras que tienden a aparecer con frecuencia en varios documentos, con el fin de identificar grupos de palabras que representen temas distintos (University of Pensilvannia, s/f). Su objetivo principal es extraer temas latentes que representan conceptos o áreas de interés dentro del conjunto de datos, proporcionando una comprensión más profunda del contenido textual.
+
+Una de las bases fundamentales para el modelado de tópicos es el Modelo de Espacio Vectorial (VSM, Vector Space Model), que ha influido en diversas técnicas avanzadas de recuperación de información y modelado semántico. Es un modelo algebraico, basado en la matriz término-documento, que sirvió como punto de partida para extraer información semántica mediante la frecuencia de términos, aunque sin considerar el orden en que aparecen las palabras.
+
+El VSM ha evolucionado en aplicaciones de aprendizaje automático, motores de búsqueda, procesamiento del lenguaje natural y traducción automática, donde medir la similitud y el contexto entre palabras, frases y documentos es esencial.
+
+Al modelar las colecciones de documentos, no todas las palabras tienen la misma relevancia; por ello, a cada término se le asigna un peso según su frecuencia dentro del documento. Esta ponderación optimiza el análisis temático al distinguir términos significativos de aquellos menos relevantes. Por ejemplo, al identificar la temática de un texto, es útil ponderar más alto los sustantivos y verbos que las preposiciones, ya que los primeros aportan más información contextual sobre el tema.
+:::
+
+## Tipos de modelados de tópicos
+
+![](imagenes/2.png)
+
+## Latent Dirichlet Allocation (LDA)
+
+![](imagenes/3.png)
+
+::: notes
+La asignación de Dirichlet latente (LDA) es un método particularmente popular para ajustar un modelo de temas. Trata cada documento como una mezcla de temas, y cada tema como una mezcla de palabras. Esto permite que los documentos se superpongan en cuanto a contenido, en lugar de estar separados en grupos discretos, de forma similar al uso típico del lenguaje natural.
+
+Lo interesante de esta manera de operativizar los temas, es que cada tópico puede ser entendido como un campo semántico, un conjunto de palabras que suelen correlacionar en distintos documentos. Luego, en el momento del análisis de estos resultados, buscaremos inferir un tema a partir de las palabras que más contribuyen a cada tópico.
+:::
+
+## ¿Cómo lo usamos en R? `{topicmodels}`
+
+![](imagenes/4.png)
+
+::: notes
+Diagrama de flujo de un análisis de texto que incorpora modelado de temas. El paquete topicmodels toma una Matriz Documento-Término como entrada y genera un modelo que puede ser ordenado por tidytext, de modo que pueda manipularse y visualizarse con dplyr y ggplot2.
+:::
+
+## LDA
+
+Se rige por dos principios
+
+-   Cada documento es una mezcla de temas
+-   Cada tema es una mezcla de palabras
+
+::: notes
+Cada documento es una mezcla de temas. Imaginamos que cada documento puede contener palabras de varios temas en proporciones específicas. Por ejemplo, en un modelo de dos temas, podríamos decir: «El Documento 1 contiene un 90 % del tema A y un 10 % del tema B, mientras que el Documento 2 contiene un 30 % del tema A y un 70 % del tema B».
+
+Cada tema es una mezcla de palabras. Por ejemplo, podríamos imaginar un modelo de noticias estadounidenses con dos temas, uno para "política" y otro para "entretenimiento". Las palabras más comunes en el tema de política podrían ser "presidente", "Congreso" y "gobierno", mientras que en el de entretenimiento podrían estar compuestas por palabras como "cine", "televisión" y "actor". Es importante destacar que las palabras pueden compartirse entre temas; una palabra como "presupuesto" podría aparecer en ambos por igual.
+
+LDA es un método matemático que permite estimar ambos simultáneamente: encontrar la combinación de palabras asociada a cada tema y determinar la combinación de temas que describe cada documento. Existen varias implementaciones de este algoritmo, y exploraremos una de ellas en profundidad.
+:::
+
+# Cuentos {.smaller}
+
+Vamos a utilizar un corpus con cuentos de 57 autores en español creado por [Karen Palacios](https://docs.google.com/presentation/d/1ROmh6rz_8Oblh-yGTz8aypbHnaxXx2R5usZnBOdz3lk/edit?slide=id.p#slide=id.p)
+
+::: codewindow
+```{r}
+library(tidyverse)
+library(janitor)
+cuentos <- read.csv("https://raw.githubusercontent.com/karen-pal/borges/refs/heads/master/datasets/full_corpus.csv") |> 
+  clean_names() |> 
+  rename(id = x)
+```
+:::
+
+## Observamos {.smaller}
+
+::: codewindow
+``` r
+library(highcharter)
+
+cuentos |> 
+  count(author, sort= T)|> 
+  arrange(n) |>  # Para que coord_flip de ggplot se vea igual en highcharter
+  hchart(
+    type = "bar",  # bar = horizontal; column = vertical
+    hcaes(x = author, y = n)
+  ) |>
+  hc_chart(backgroundColor = "transparent") |>
+  hc_colors("#112446") |>
+  hc_xAxis(title = list(text = "")) |>
+  hc_yAxis(title = list(text = "Cantidad")) |>
+  hc_add_theme(hc_theme_flat())  # Similar a theme_minimal
+```
+:::
+
+## Observamos {.smaller}
+
+::: codewindow
+```{r echo = FALSE}
+library(highcharter)
+
+cuentos |> 
+  count(author, sort= T)|>  # Para que coord_flip de ggplot se vea igual en highcharter
+  hchart(
+    type = "bar",  # bar = horizontal; column = vertical
+    hcaes(x = author, y = n)
+  ) |>
+  hc_chart(backgroundColor = "transparent") |>
+  hc_colors("#112446") |>
+  hc_xAxis(title = list(text = "")) |>
+  hc_yAxis(title = list(text = "Cantidad")) |>
+  hc_add_theme(hc_theme_flat())  # Similar a theme_minimal
+```
+:::
+
+## Recortamos
+
+Nos vamos a quedar solo con los cuentos de Borges
+
+::: codewindow
+```{r}
+
+borges <- cuentos |> 
+  filter(str_detect(author, regex("borges", T)))
+```
+:::
+
+## Preprocesamiento {.smaller}
+
+::: codewindow
+``` r
+
+library(udpipe)
+modelo_sp <- udpipe::udpipe_download_model('spanish')
+modelo_sp$file_model
+modelo_sp <- udpipe_load_model(file = modelo_sp$file_model)
+
+cuentos_anotados <- udpipe_annotate(
+  object = modelo_sp,
+  x = borges$text,
+  doc_id = borges$id,
+  trace = 20
+  ) %>% as.data.frame(.)  
+
+```
+:::
+
+```{r include = FALSE}
+
+#saveRDS(cuentos_anotados, "cuentos_anotados.rds")
+cuentos_anotados <- readRDS("cuentos_anotados.rds")
+```
+
+## Preprocesamiento
+
+Convertimos a matriz
+
+::: codewindow
+```{r}
+library(tidytext)
+cuentos_anotados_limpios <- cuentos_anotados  %>% 
+  filter(upos=="ADJ"| upos=="VERB"| upos=="NOUN") %>% 
+  select( doc_id, lemma ) %>%
+  filter(!lemma %in% stopwords::stopwords(language = "es"))%>%
+  count(doc_id, lemma, sort = TRUE) %>% # Armamos una freq por cada documento
+  cast_dtm(doc_id, lemma, n) # Convertimos a vector
+
+```
+:::
+
+## Topic Models en R
+
+Podemos utilizar la LDA() función del paquete topicmodels, configurando k = 5, para crear un modelo LDA de dos temas.
+
+::: codewindow
+```{r}
+library(topicmodels)
+
+cuentos_lda <- LDA(cuentos_anotados_limpios, k = 5, control = list(seed = 1234))
+cuentos_lda
+```
+:::
+
+## Beta y Gamma
+
+-   beta: probabilidad topico x palabra;
+-   gamma: probabilidad topico x documento;
+
+::: codewindow
+```{r}
+cuentos_lda_beta <- tidy(cuentos_lda, matrix = "beta")
+cuentos_lda_gamma <- tidy(cuentos_lda, matrix = "gamma")
+```
+:::
+
+::: notes
+Observe que esto ha convertido el modelo a un formato de un tema por término por fila. Para cada combinación, el modelo calcula la probabilidad de que ese término se genere a partir de ese tema
+:::
+
+## Beta {.smaller}
+
+Podemos usar dplyr `slice_max()` para encontrar los 10 términos más comunes en cada tema
+
+::: codewindow
+```{r}
+cuentos_lda_beta %>% # principales términos en cada tópico
+  group_by(topic) %>%
+  top_n(15) %>%
+  ungroup() %>%
+  arrange(topic, -beta) %>% # vamos a mostrarlo como grafico
+  ggplot(aes(x=reorder(term, (beta)),y=beta)) + 
+    geom_col() +
+    facet_wrap(~topic, scales = "free_y") +
+  coord_flip() +
+  theme_minimal()
+```
+:::
+
+::: notes
+Como alternativa, podríamos considerar los términos que tenían la *mayor diferencia* enββentre el tema 1 y el tema 2. Esto se puede estimar basándose en la relación logarítmica de los dos:registro2(β2β1)registro2⁡(β2β1)(una relación logarítmica es útil porque hace que la diferencia sea simétrica:β2β2ser el doble de grande conduce a una relación logarítmica de 1, mientras queβ1β1ser el doble de grande da como resultado -1). Para restringirlo a un conjunto de palabras especialmente relevantes, podemos filtrar por palabras relativamente comunes, como aquellas que tienen unββmayor de 1/1000 en al menos un tema.
+:::
+
+## Eliminar palabras comunes
+
+::: notes
+🎯 ¿Cuál es el objetivo?
+Identificar, para cada tópico, las palabras más características, es decir, aquellas que tienen una alta probabilidad 
+𝛽
+β en ese tópico en particular, comparadas con los otros.
+
+🧠 ¿Qué estamos haciendo técnicamente?
+Expandimos la matriz 
+𝛽
+β
+La cuentos_lda_beta nos da las probabilidades de cada palabra en cada tópico. Al pivotearla a formato "ancho", obtenemos una fila por palabra con una columna para cada tópico.
+
+Detectamos el tópico dominante para cada palabra
+Usamos max.col() para encontrar, para cada término, el tópico en el que su 
+𝛽
+β es mayor. Esto lo guardamos como topico_max.
+
+Pivotamos de vuelta a formato largo
+Así podemos trabajar fácilmente con ggplot, filtrando solo las combinaciones (término, tópico) donde ese tópico es el dominante para esa palabra.
+
+Filtramos los términos más representativos por tópico
+De todos los términos que aparecen en un tópico, nos quedamos con los 10 de mayor 
+𝛽
+β, lo que representa las palabras más importantes para ese tópico.
+
+🧪 ¿Por qué no usar solo el top_n por tópico?
+Porque muchas veces los tópicos comparten palabras comunes ("dijo", "persona", "vida", etc.) y terminás viendo las mismas en todos. Este enfoque asegura que mostramos lo más distintivo de cada tópico, no solo lo más frecuente.
+:::
+
+::: codewindow
+```{r}
+library(tidyr)
+
+beta_wide <- cuentos_lda_beta |> 
+  mutate(topic = paste0("topic", topic)) |> 
+  pivot_wider(names_from = topic, values_from = beta)
+
+# Filtrar términos con beta > 0.001 en al menos un tema
+beta_wide_filtrado <- beta_wide |> 
+  filter(if_any(starts_with("topic"), ~ .x > 0.001))
+
+cols_topics <- beta_wide_filtrado |> 
+  select(starts_with("topic")) |> 
+  colnames()
+
+# Luego, hacer el mutate con max.col correctamente
+beta_topico_max <- beta_wide_filtrado |> 
+  mutate(topico_max = cols_topics[max.col(across(all_of(cols_topics)), ties.method = "first")])
+```
+:::
+
+## Filtramos {.smaller}
+
+::: codewindow
+```{r}
+
+beta_larga <- beta_topico_max |> 
+  pivot_longer(cols = all_of(cols_topics), names_to = "topic", values_to = "beta")
+
+beta_filtrada <- beta_larga |> 
+  filter(topic == topico_max) |> 
+  group_by(topic) |> 
+  slice_max(order_by = beta, n = 20, with_ties = FALSE) |> 
+  ungroup()
+
+ggplot(beta_filtrada, aes(x = reorder(term, beta), y = beta, fill = topic)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ topic, scales = "free_y") +
+  coord_flip() +
+  theme_minimal()
+```
+:::
+
+## Nombres de los tópicos
+
+::: codewindow
+```{r}
+topicos_nombres <- rbind( 
+  c(topico_max = "topic1" , nombre = "Acciones"),
+  c(topico_max = "topic2" , nombre = "Tiempo y espacio"),
+  c(topico_max = "topic3" , nombre = "Existencia"),
+  c(topico_max = "topic4" , nombre = "Conocimiento"),
+  c(topico_max = "topic5" , nombre = "Reflexiones")
+) %>% as_tibble()
+
+# Agregar nombres al gráfico
+beta_filtrada <- beta_filtrada |> 
+  left_join(topicos_nombres, by = "topico_max")|> 
+  group_by(topic) |> 
+  slice_max(order_by = beta, n = 20, with_ties = FALSE) |> 
+  ungroup()
+
+```
+:::
+
+## Observamos {.smaller}
+
+::: codewindow
+```{r}
+ggplot(beta_filtrada, aes(x = reorder(term, beta), y = beta, fill = nombre)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ nombre, scales = "free_y") +
+  coord_flip() +
+  theme_minimal()
+
+```
+:::
+
+
+## ¿Qué topico tiene cada cuento?
+
+::: codewindow
+```{r}
+
+topicos_nombres <- tibble(
+  topic = 1:5,
+  nombre = c("Acciones", "Tiempo y espacio", "Existencia", "Conocimiento", "Reflexiones")
+)
+
+gamma_dominante <- cuentos_lda_gamma |>
+  group_by(document) |>
+  slice_max(gamma, n = 1)|> 
+  left_join(topicos_nombres, by = "topic")
+
+```
+:::
+
+## Cantidad de cuentos por tópico {.smaller}
+
+::: codewindow
+```{r}
+gamma_dominante |> 
+  count(nombre) |> 
+  ggplot(aes(x = reorder(nombre, n), y = n)) +
+  geom_col(fill = "#112446") +
+  coord_flip() +
+  theme_minimal() +
+  labs(x = "", y = "Cantidad de documentos", title = "Distribución de cuentos por tópico dominante")
+```
+:::
+
+## Unimos todo
+
+::: codewindow
+```{r}
+cuentos_clasificados <- gamma_dominante |> 
+  select(document, topic_final = topic, nombre_topico = nombre, probabilidad = gamma) |> 
+  mutate(document = as.numeric(document)) |> 
+  left_join(borges |> select(id, author, text), by = c("document" = "id"))
+
+head(cuentos_clasificados)
+```
+:::
+
+## Recursos
+
+-   Blei, David. 2012. “Probabilistic topic models.” Communications of the ACM 55 (4): 77. https://doi.org/10.1145/2133806.2133826.
+
+-   [https://www.tidytextmining.com/topicmodeling](https://www.tidytextmining.com/topicmodeling)
+
+- [https://bookdown.org/gaston_becerra/curso-intro-r](https://bookdown.org/gaston_becerra/curso-intro-r)

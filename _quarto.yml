@@ -71,7 +71,9 @@ book:
       chapters: 
         - clases/clase8_A.qmd
         - clases/clase8_C.qmd
-
+    - part: "<b>Clase 8. Modelado de tópicos </b>"
+      chapters: 
+        - clases/clase9_C.qmd
         
     - part: "**Referencias**"
       chapters:
