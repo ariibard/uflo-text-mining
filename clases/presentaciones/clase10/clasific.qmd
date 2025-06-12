@@ -1,0 +1,432 @@
+---
+format:
+  revealjs:
+    echo: true
+    theme: custom.scss
+    code-line-numbers: true
+embed-resources: true
+revealjs-plugins:
+  - codewindow
+---
+
+# Clasificación supervisada de textos
+
+::: callout-note
+**Objetivo:** Introducir modelos supervisados aplicados a texto, implementar Naive Bayes en R y evaluar su desempeño con métricas clásicas de clasificación.
+:::
+
+## ¿Qué es la clasificación supervisada de textos?
+
+La clasificación supervisada es una tarea de aprendizaje automático donde el objetivo es **predecir una categoría** (etiqueta) para un nuevo texto, a partir de ejemplos previamente etiquetados.
+
+::: notes
+Ejemplos comunes:
+
+-   Clasificar correos como spam o no spam
+-   Clasificar reseñas como positivas o negativas
+-   Clasificar noticias por sección (deportes, política, economía)
+:::
+
+## Näive Bayes {.smaller}
+
+::: notes
+La idea de Naïve Bayes es sencilla, pero efectiva. Usamos las probabilidades condicionales de las palabras en un texto para determinar a qué categoría pertenece, estas calculadas con el teorema de Bayes.
+
+Por ejemplo, si deseamos clasificar reseñas de un servicio en dos categorías, “positiva” y “negativa”, tenemos que determinar qué palabras es más probable encontrar en cada una de ellas. Podemos imaginar que es más probable que una reseña pertenezca a la categoría “positiva” si contiene palabras como “bueno” o “excelente”, y menos probable si contiene palabras como “malo” o “deficiente.
+
+Entonces podemos decir: ¿cuál es la probabilidad de que una reseña pertenezca a la categoría “positiva”, dado que contiene la palabra “bueno”? De manera sencilla: p(positiva\|bueno)
+
+Este algoritmo es llamado “ingenuo” porque calcula las probabilidades condicionales de cada palabra por separado, como si fueran independientes una de otra. En lugar de calcular la probabilidad condicional de que una reseña pertenezca a la categoría “positiva”, dado que contiene la palabra “bueno”, y dado que contiene la palabra “servicio”, y dado que contiene la palabra “familia”, y así sucesivamente para todas las palabras de la reseña; lo que hacemos es calcular la probabilidad condicional de cada palabra, asumiendo de manera “ingenua” que en esta probabilidad no importa cuales palabras le acompañan.
+
+Una vez que tenemos las probabilidades condicionales de cada palabra en una reseña, calculamos la probabilidad conjunta de todas ellas, mediante un producto , para determinar la probabilidad de que pertenezca a la categoría “positiva”. Luego hacemos lo mismo para cada reseña que tengamos hasta clasificarlas todas.
+:::
+
+Representación de texto
+
+Antes de aplicar un modelo, debemos convertir el texto a una representación numérica:
+
+-   **Bolsa de palabras (Bag of Words)**
+-   **TF-IDF (Term Frequency - Inverse Document Frequency)**
+
+En este ejemplo vamos a usar TF-IDF con ayuda del paquete `textrecipes`.
+
+## Dataset
+
+Usaremos un dataset simulado con textos cortos y etiquetas de sentimiento (`pos` o `neg`).
+
+```{r}
+library(tidytext)
+library(tidyverse)
+library(tidymodels)
+library(textrecipes)
+library(discrim)
+library(naivebayes)
+set.seed(123)
+
+datos <- read_csv("comentarios_clasificados.csv") |> 
+  mutate(clase = as.factor(clase))
+
+```
+
+## Dataset
+
+```{r}
+head(datos)
+```
+
+# Datos de entrenamiento y de prueba
+
+```{r}
+
+division <- initial_split(datos, prop = 0.5, strata = clase)
+datos_train <- training(division)
+datos_test <- testing(division)
+```
+
+::: notes
+📌 Acá estamos dividiendo el dataset en dos partes: entrenamiento y prueba.
+
+✂️ Usamos initial_split() con prop = 0.5 para quedarnos con 50% de datos en el entrenamiento y 50% en el test.
+
+🔍 Importante: usamos strata = clase para asegurarnos de que ambas clases estén representadas proporcionalmente en cada conjunto.
+:::
+
+## Preprocesamiento y receta con bigramas y TF-IDF
+
+`{recipe}` permite definir una secuencia de pasos para procesar los datos
+
+```{r}
+receta <- recipe(clase ~ texto, data = datos_train) %>%
+  step_tokenize(texto, token = "ngrams") %>%
+  step_stopwords(texto, language = "es") %>%
+  step_tfidf(texto)
+```
+
+::: notes
+📌 En este bloque definimos cómo vamos a transformar el texto.
+
+🔤 Primero lo tokenizamos, y usamos bigramas (pares de palabras) para capturar contexto local. Esto puede mejorar la precisión en algunos modelos.
+
+🧹 Luego eliminamos stopwords, que son palabras muy comunes que no aportan mucho significado (“de”, “el”, “para”, etc.).
+
+📏 Finalmente calculamos TF-IDF, que nos da una medida ponderada de la importancia de cada bigrama en cada documento.
+:::
+
+# Modelo Naive Bayes
+
+```{r}
+modelo_nb <- naive_Bayes() %>%
+  set_engine("naivebayes") %>%
+  set_mode("classification")
+```
+
+::: notes
+📌 Declaramos que queremos usar un modelo naive_Bayes.
+
+⚙️ Le indicamos que vamos a usar la implementación del paquete naivebayes.
+
+🎯 Definimos que el objetivo es clasificación (no regresión).
+:::
+
+## Armo el flujo de trabajo (workflow)
+
+Un workflow en tidymodels es una estructura que combina dos cosas:
+
+Una receta + un modelo: que define qué algoritmo se va a usar
+
+Permite asegurarse de que el preprocesamiento y el modelo se apliquen juntos
+
+::: notes
+📌 Este es el paso que une todo: el modelo con el preprocesamiento.
+
+🧱 workflow() permite encapsular la receta y el modelo en un solo objeto.
+
+✅ Esto es clave para evitar errores y fugas de datos. Nos aseguramos de que cuando entrenamos, predicimos y evaluamos, se apliquen siempre las mismas transformaciones.
+:::
+
+```{r}
+flujo <- workflow() %>%
+  add_model(modelo_nb) %>%
+  add_recipe(receta)
+```
+
+## Entrenamiento y predicción final
+
+```{r}
+modelo_final <- fit(flujo, data = datos_train)
+
+predicciones <- predict(modelo_final, new_data = datos_test, type = "prob") %>%
+  bind_cols(predict(modelo_final, new_data = datos_test)) %>%
+  bind_cols(datos_test)
+```
+
+::: notes
+📌 Entrenamos el modelo con fit() usando solo los datos de entrenamiento.
+
+🔮 Luego predecimos sobre los datos de prueba. Usamos type = "prob" para obtener probabilidades, y después agregamos las clases predichas y los datos reales para evaluar.
+
+📦 bind_cols() nos permite juntar todas estas piezas en un solo data frame.
+:::
+
+## Evaluación del rendimiento
+
+```{r}
+predicciones %>%
+  conf_mat(truth = clase, estimate = .pred_class)
+
+predicciones %>%
+  metrics(truth = clase, estimate = .pred_class)
+```
+
+::: notes
+📌 Acá evaluamos qué tan bien le fue al modelo en el test.
+
+📊 conf_mat() nos da la matriz de confusión: cuántas veces acertó o se equivocó por clase.
+
+📈 metrics() calcula medidas como accuracy (exactitud) y kappa.
+
+🧠 Importante: no evaluamos sobre el entrenamiento, sino sobre el test. Así medimos cómo generaliza el modelo.
+
+📌 ¿Qué significa eso? ✅ Accuracy (exactitud): 0.40 Significa que el modelo acertó solo el 40% de las veces. Es bajo, considerando que el azar con clases balanceadas te daría 50%.
+
+⚠️ Kappa de Cohen: -0.2 Kappa mide el acuerdo corregido por el azar. Un valor negativo indica que el modelo rinde peor que el azar. Es una señal clara de que el modelo está sesgado o mal entrenado.
+:::
+
+# Regresión logística ¿Mejorará?
+
+::: notes
+📌 Ahora probamos con otro modelo: regresión logística.
+
+📦 Cambiamos el modelo en el workflow, pero mantenemos la misma receta. No necesitamos volver a escribirla.
+
+💡 Esto nos permite comparar modelos manteniendo constante el preprocesamiento.
+:::
+
+```{r}
+modelo_log <- logistic_reg() %>%
+  set_engine("glm") %>%
+  set_mode("classification")
+
+flujo <- workflow() %>%
+  add_model(modelo_log) %>%
+  add_recipe(receta)
+
+```
+
+## Aplico el modelo
+
+```{r}
+modelo_final <- fit(flujo, data = datos_train)
+
+predicciones <- predict(modelo_final, new_data = datos_test, type = "prob") %>%
+  bind_cols(predict(modelo_final, new_data = datos_test)) %>%
+  bind_cols(datos_test)
+
+predicciones %>%
+  conf_mat(truth = clase, estimate = .pred_class)
+
+predicciones %>%
+  metrics(truth = clase, estimate = .pred_class)
+```
+
+## Otros modelos para clasificación de texto
+
+-   logistic_reg()
+
+-   naive_Bayes()
+
+-   vm_linear()
+
+-   rand_forest()
+
+-   boost_tree() con engine = "xgboost"
+
+# N-grams
+
+::: notes
+Hasta ahora hemos considerado las palabras como unidades individuales y su relación con sentimientos o documentos. Sin embargo, muchos análisis textuales interesantes se basan en las relaciones entre palabras, ya sea examinando cuáles tienden a aparecer inmediatamente después de otras o cuáles tienden a coexistir en los mismos documentos.
+:::
+
+## Tokenización
+
+```{r}
+datos_bigrams <- datos %>%
+  unnest_tokens(bigram, texto, token = "ngrams", n = 2) %>%
+  filter(!is.na(bigram))
+
+datos_bigrams
+```
+
+## Bigramas más comunes
+
+```{r}
+
+datos_bigrams %>%
+  count(bigram, sort = TRUE)
+```
+
+# Eliminamos stopwords
+
+```{r}
+library(tidyr)
+
+bigrams_separated <- datos_bigrams %>%
+  separate(bigram, c("word1", "word2"), sep = " ")
+
+bigrams_filtered <- bigrams_separated %>%
+  filter(!word1 %in% stop_words$word) %>%
+  filter(!word2 %in% stop_words$word)
+
+bigram_counts <- bigrams_filtered %>% 
+  count(word1, word2, sort = TRUE)
+
+bigram_counts
+```
+
+## También puede interesar que sean 3 palabras consecutivas
+
+```{r}
+datos %>%
+  unnest_tokens(trigram, texto, token = "ngrams", n = 3) %>%
+  filter(!is.na(trigram)) %>%
+  separate(trigram, c("word1", "word2", "word3"), sep = " ") %>%
+  filter(!word1 %in% stop_words$word,
+         !word2 %in% stop_words$word,
+         !word3 %in% stop_words$word) %>%
+  count(word1, word2, word3, sort = TRUE)
+```
+
+## Es útil para análisis exploratorio de texto
+
+```{r}
+bigrams_filtered %>%
+  filter(word2 == "recomendable") %>%
+  count(word1, sort = TRUE)
+```
+
+## ¿Cómo se relacionan las palabras?
+
+```{r}
+library(igraph)
+library(ggraph)
+
+bigram_counts %>%
+  filter(n > 2) %>%
+  graph_from_data_frame() |> 
+  ggraph(layout = "fr") +
+  geom_edge_link() +
+  geom_node_point() +
+  geom_node_text(aes(label = name), vjust = 1, hjust = 1)
+```
+
+## Más bonito
+
+::: notes
+Tenga en cuenta que esta es una visualización de una cadena de Markov , un modelo común en el procesamiento de texto. En una cadena de Markov, cada palabra elegida depende únicamente de la palabra anterior. En este caso, un generador aleatorio que siga este modelo podría generar "querido", luego "señor" y luego "william/walter/thomas/de Thomas", siguiendo cada palabra hasta las palabras más comunes que la siguen. Para facilitar la interpretación de la visualización, optamos por mostrar solo las conexiones más comunes entre palabras, pero se podría imaginar un gráfico enorme que represente todas las conexiones que ocurren en el texto.
+:::
+
+```{r}
+a <- grid::arrow(type = "closed", length = unit(.15, "inches"))
+bigram_counts %>%
+  filter(n > 5) %>%
+  graph_from_data_frame() |> 
+  ggraph(layout = "fr") +
+  geom_edge_link(aes(edge_alpha = n), show.legend = FALSE,
+                 arrow = a, end_cap = circle(.07, 'inches')) +
+  geom_node_point(color = "lightblue", size = 5) +
+  geom_node_text(aes(label = name), vjust = 1, hjust = 1) +
+  theme_void()
+```
+
+## Correlación
+
+```{r}
+datos_corr <- datos |> 
+  mutate(tipo_comentario = ifelse(clase == "pos", 1, 2)) %>%
+  unnest_tokens(word, texto) %>%
+  filter(!word %in% stop_words$word)
+```
+
+## Conteo por pares
+
+::: notes
+Una función útil de widyr es la pairwise_count()función. El prefijo pairwise_implica que generará una fila por cada par de palabras en la wordvariable. Esto nos permite contar pares de palabras comunes que aparecen en la misma sección:
+:::
+
+```{r}
+library(widyr)
+
+word_pairs <- datos_corr %>%
+  pairwise_count(word, tipo_comentario, sort = TRUE)
+
+word_pairs %>%
+  filter(item1 == "producto")
+```
+
+## Correlación por pares - Coeficiente Phi
+
+El [coeficiente phi](https://en.wikipedia.org/wiki/Phi_coefficient) es una medida común de correlación binaria. El coeficiente phi se centra en la probabilidad de que aparezcan las **palabras** X e Y, o **ninguna** , que de que una aparezca sin la otra.
+
+::: notes
+En particular, nos centraremos en el coeficiente phi , una medida común de correlación binaria. El coeficiente phi se centra en la probabilidad de que aparezcan las palabras X e Y, o ninguna , que de que una aparezca sin la otra. Equivalente al R de pearson
+:::
+
+```{r}
+word_cors <- datos_corr %>%
+  group_by(word) %>%
+  filter(n() >= 5) %>%
+  pairwise_cor(word, tipo_comentario, sort = TRUE)
+
+word_cors
+```
+
+## Observamos
+
+```{r}
+word_cors %>%
+  filter(item1 == "atención")
+```
+
+## Palabras mas asociadas
+
+```{r}
+plot <- word_cors %>%
+  filter(item1 %in% c("comida", "servicio", "cliente")) %>%
+  group_by(item1) %>%
+  ungroup() %>%
+  drop_na(correlation) |> 
+  mutate(item2 = reorder(item2, correlation)) %>%
+  ggplot(aes(item2, correlation)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~ item1, scales = "free") +
+  coord_flip()
+```
+
+## Palabras mas asociadas
+
+```{r}
+plot
+```
+
+## Graficamos palabras más relacionadas
+
+```{r}
+set.seed(2016)
+plot <- word_cors %>%
+  drop_na(correlation) |> 
+  filter(correlation > .35) %>%
+  graph_from_data_frame() %>%
+  ggraph(layout = "fr") +
+  geom_edge_link(aes(edge_alpha = correlation), show.legend = FALSE) +
+  geom_node_point(color = "lightblue", size = 5) +
+  geom_node_text(aes(label = name), repel = TRUE) +
+  theme_void()
+```
+
+## Graficamos palabras más relacionadas
+
+```{r}
+plot
+```
+
+# Fin

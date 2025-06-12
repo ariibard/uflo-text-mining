@@ -75,6 +75,11 @@ book:
       chapters: 
         - clases/clase9_C.qmd
         
+    - part: "<b>Clase 10. Clasificación </b>"
+      chapters: 
+        - clases/clase10_A.qmd
+        - clases/clase10_C.qmd
+        
     - part: "**Referencias**"
       chapters:
         - bibliografia.qmd

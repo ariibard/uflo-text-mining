@@ -1,0 +1,14 @@
+---
+title: "C10. Antes de la clase"
+---
+
+## **1. Instalá los Paquetes**
+
+Instalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:
+
+``` r
+
+paquetes_lista <-  c("recipes", "prodlim", "workflowsets", "tidymodels", "textrecipes","discrim", "naivebayes")
+
+install.packages(paquetes_lista)
+```

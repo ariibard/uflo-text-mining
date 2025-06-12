@@ -139,5 +139,27 @@
       "<b>Clase 8. Representación vectorial de textos </b>",
       "<span class='chapter-number'>27</span>  <span class='chapter-title'>C7. Presentación</span>"
     ]
+  },
+  {
+    "objectID": "clases/clase10_A.html",
+    "href": "clases/clase10_A.html",
+    "title": "C10. Antes de la clase",
+    "section": "",
+    "text": "1. Instalá los Paquetes\nInstalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:",
+    "crumbs": [
+      "<b>Clase 10. Clasificación </b>",
+      "<span class='chapter-number'>29</span>  <span class='chapter-title'>C10. Antes de la clase</span>"
+    ]
+  },
+  {
+    "objectID": "clases/clase10_A.html#instalá-los-paquetes",
+    "href": "clases/clase10_A.html#instalá-los-paquetes",
+    "title": "C10. Antes de la clase",
+    "section": "",
+    "text": "paquetes_lista &lt;-  c(\"recipes\", \"prodlim\", \"workflowsets\", \"tidymodels\", \"textrecipes\",\"discrim\", \"naivebayes\")\n\ninstall.packages(paquetes_lista)",
+    "crumbs": [
+      "<b>Clase 10. Clasificación </b>",
+      "<span class='chapter-number'>29</span>  <span class='chapter-title'>C10. Antes de la clase</span>"
+    ]
   }
 ]

@@ -4,8 +4,7 @@ format:
     echo: true
     theme: custom.scss
     code-line-numbers: true
-    
-embed-resources: true
+    chalkboard: true
 revealjs-plugins:
   - codewindow
 ---
@@ -32,7 +31,23 @@ Al modelar las colecciones de documentos, no todas las palabras tienen la misma 
 
 ## Tipos de modelados de tópicos
 
-![](imagenes/2.png)
+![](imagenes/2.png) 
+
+::: notes
+
+existen diferentes métodos de modelado de tópicos. Estos se pueden dividir en función de si son probabilísticos, no probabilísticos o basados en embeddings y también según el uso de enfoques de bolsa de palabras o secuencia de palabras. Los enfoques no probabilísticos son enfoques algebraicos de factorización matricial y surgieron a
+
+Los modelos basados en la bolsa de palabras (Bag of Words - BOW en inglés) ignoran el orden de las palabras y solo se considera la frecuencia con la que aparecen en el documento. En otras palabras, los modelos basados en secuencias de palabras consideran el orden de las palabras, capturando así las relaciones entre términos en el contexto de una frase. Esto es útil para analizar temas cuando el contexto de una palabra cambia según su posición (Kherwa & Bansal, 2019)
+
+Los modelos probabilísticos incluyen métodos como Latent Dirichlet Allocation (LDA) y Probabilistic Latent Semantic Analysis (PLSA), que emplean principios de inferencia estadística para estimar la distribución de temas. El LDA asume que cada documento es una combinación de temas y cada tema es una combinación de palabras. Este modelo utiliza inferencia bayesiana para determinar la distribución de temas en los documentos, asignando una probabilidad a cada palabra dentro de un tema​. Similar a LDA, PLSA aplica un marco probabilístico para modelar la coocurrencia de palabras y detectar temas. Dentro de este tipo de modelos también se encuentra el Hierarchical Dirichlet Process (HDP) que extiende LDA al permitir un número indefinido de temas, adaptándose a la variabilidad del corpus sin necesidad de especificar el número de tópicos de antemano.
+
+Dentro de los modelos no probabilísticos, se encuentran técnicas como Latent Semantic Analysis (LSA) y Non-Negative Matrix Factorization (NMF) que utilizan técnicas algebraicas para descomponer la matriz de términos y captar relaciones semánticas. El LSA utiliza la descomposición en valores singulares para reducir la dimensionalidad de la matriz término-documento. Este proceso permite representar el espacio semántico de los documentos en un espacio de menor dimensión, donde las palabras y documentos con relaciones semánticas y contextuales tienden a agruparse más estrechamente.
+
+Así, LSA facilita la identificación de patrones y temas latentes en grandes colecciones de texto, ya que descubre asociaciones entre términos que no son evidentes en el análisis superficial de la frecuencia de palabras. En esta línea, el NMF incorpora en su modelo restricciones de no negatividad, lo que puede hacer que los resultados sean más interpretables.
+
+Por último, los modelos basados en embeddings, como BERTopic y TopVec2, se fundamentan en una arquitectura de redes neuronales conocida como Transformers, desarrollada en el artículo "Attention is All You Need". A diferencia de enfoques anteriores que analizan las palabras de manera secuencial, los Transformers evalúan todas las palabras en una oración simultáneamente, lo que les permite captar relaciones entre palabras a larga distancia.
+
+:::
 
 ## Latent Dirichlet Allocation (LDA)
 
@@ -104,7 +119,6 @@ cuentos |>
 
 ## Observamos {.smaller}
 
-::: codewindow
 ```{r echo = FALSE}
 library(highcharter)
 
@@ -120,7 +134,6 @@ cuentos |>
   hc_yAxis(title = list(text = "Cantidad")) |>
   hc_add_theme(hc_theme_flat())  # Similar a theme_minimal
 ```
-:::
 
 ## Recortamos
 
@@ -150,7 +163,6 @@ cuentos_anotados <- udpipe_annotate(
   doc_id = borges$id,
   trace = 20
   ) %>% as.data.frame(.)  
-
 ```
 :::
 
@@ -166,6 +178,7 @@ Convertimos a matriz
 
 ::: codewindow
 ```{r}
+
 library(tidytext)
 cuentos_anotados_limpios <- cuentos_anotados  %>% 
   filter(upos=="ADJ"| upos=="VERB"| upos=="NOUN") %>% 
@@ -185,7 +198,7 @@ Podemos utilizar la LDA() función del paquete topicmodels, configurando k = 5, 
 ```{r}
 library(topicmodels)
 
-cuentos_lda <- LDA(cuentos_anotados_limpios, k = 5, control = list(seed = 1234))
+cuentos_lda <- LDA(cuentos_anotados_limpios, k = 6, control = list(seed = 1234))
 cuentos_lda
 ```
 :::
@@ -200,10 +213,6 @@ cuentos_lda
 cuentos_lda_beta <- tidy(cuentos_lda, matrix = "beta")
 cuentos_lda_gamma <- tidy(cuentos_lda, matrix = "gamma")
 ```
-:::
-
-::: notes
-Observe que esto ha convertido el modelo a un formato de un tema por término por fila. Para cada combinación, el modelo calcula la probabilidad de que ese término se genere a partir de ese tema
 :::
 
 ## Beta {.smaller}
@@ -232,32 +241,17 @@ Como alternativa, podríamos considerar los términos que tenían la *mayor dif
 ## Eliminar palabras comunes
 
 ::: notes
-🎯 ¿Cuál es el objetivo?
-Identificar, para cada tópico, las palabras más características, es decir, aquellas que tienen una alta probabilidad 
-𝛽
-β en ese tópico en particular, comparadas con los otros.
+🎯 ¿Cuál es el objetivo? Identificar, para cada tópico, las palabras más características, es decir, aquellas que tienen una alta probabilidad 𝛽 β en ese tópico en particular, comparadas con los otros.
 
-🧠 ¿Qué estamos haciendo técnicamente?
-Expandimos la matriz 
-𝛽
-β
-La cuentos_lda_beta nos da las probabilidades de cada palabra en cada tópico. Al pivotearla a formato "ancho", obtenemos una fila por palabra con una columna para cada tópico.
+🧠 ¿Qué estamos haciendo técnicamente? Expandimos la matriz 𝛽 β La cuentos_lda_beta nos da las probabilidades de cada palabra en cada tópico. Al pivotearla a formato "ancho", obtenemos una fila por palabra con una columna para cada tópico.
 
-Detectamos el tópico dominante para cada palabra
-Usamos max.col() para encontrar, para cada término, el tópico en el que su 
-𝛽
-β es mayor. Esto lo guardamos como topico_max.
+Detectamos el tópico dominante para cada palabra Usamos max.col() para encontrar, para cada término, el tópico en el que su 𝛽 β es mayor. Esto lo guardamos como topico_max.
 
-Pivotamos de vuelta a formato largo
-Así podemos trabajar fácilmente con ggplot, filtrando solo las combinaciones (término, tópico) donde ese tópico es el dominante para esa palabra.
+Pivotamos de vuelta a formato largo Así podemos trabajar fácilmente con ggplot, filtrando solo las combinaciones (término, tópico) donde ese tópico es el dominante para esa palabra.
 
-Filtramos los términos más representativos por tópico
-De todos los términos que aparecen en un tópico, nos quedamos con los 10 de mayor 
-𝛽
-β, lo que representa las palabras más importantes para ese tópico.
+Filtramos los términos más representativos por tópico De todos los términos que aparecen en un tópico, nos quedamos con los 10 de mayor 𝛽 β, lo que representa las palabras más importantes para ese tópico.
 
-🧪 ¿Por qué no usar solo el top_n por tópico?
-Porque muchas veces los tópicos comparten palabras comunes ("dijo", "persona", "vida", etc.) y terminás viendo las mismas en todos. Este enfoque asegura que mostramos lo más distintivo de cada tópico, no solo lo más frecuente.
+🧪 ¿Por qué no usar solo el top_n por tópico? Porque muchas veces los tópicos comparten palabras comunes ("dijo", "persona", "vida", etc.) y terminás viendo las mismas en todos. Este enfoque asegura que mostramos lo más distintivo de cada tópico, no solo lo más frecuente.
 :::
 
 ::: codewindow
@@ -308,12 +302,14 @@ ggplot(beta_filtrada, aes(x = reorder(term, beta), y = beta, fill = topic)) +
 
 ::: codewindow
 ```{r}
+
 topicos_nombres <- rbind( 
-  c(topico_max = "topic1" , nombre = "Acciones"),
-  c(topico_max = "topic2" , nombre = "Tiempo y espacio"),
-  c(topico_max = "topic3" , nombre = "Existencia"),
-  c(topico_max = "topic4" , nombre = "Conocimiento"),
-  c(topico_max = "topic5" , nombre = "Reflexiones")
+  c(topico_max = "topic1" , nombre = "accion"),
+  c(topico_max = "topic2" , nombre = "suenio"),
+  c(topico_max = "topic3" , nombre = "onirico_horizonte"),
+  c(topico_max = "topic4" , nombre = "tragedia"),
+  c(topico_max = "topic5" , nombre = "existencialismo"),
+  c(topico_max = "topic6" , nombre = "ficcion_artistico")
 ) %>% as_tibble()
 
 # Agregar nombres al gráfico
@@ -338,7 +334,6 @@ ggplot(beta_filtrada, aes(x = reorder(term, beta), y = beta, fill = nombre)) +
 
 ```
 :::
-
 
 ## ¿Qué topico tiene cada cuento?
 
@@ -389,6 +384,6 @@ head(cuentos_clasificados)
 
 -   Blei, David. 2012. “Probabilistic topic models.” Communications of the ACM 55 (4): 77. https://doi.org/10.1145/2133806.2133826.
 
--   [https://www.tidytextmining.com/topicmodeling](https://www.tidytextmining.com/topicmodeling)
+-   <https://www.tidytextmining.com/topicmodeling>
 
-- [https://bookdown.org/gaston_becerra/curso-intro-r](https://bookdown.org/gaston_becerra/curso-intro-r)
+-   <https://bookdown.org/gaston_becerra/curso-intro-r>
