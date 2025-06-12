@@ -4,7 +4,7 @@ format:
     echo: true
     theme: custom.scss
     code-line-numbers: true
-    chalkboard: true
+embed-resources: true
 revealjs-plugins:
   - codewindow
 ---
@@ -31,10 +31,9 @@ Al modelar las colecciones de documentos, no todas las palabras tienen la misma 
 
 ## Tipos de modelados de tópicos
 
-![](imagenes/2.png) 
+![](imagenes/2.png)
 
 ::: notes
-
 existen diferentes métodos de modelado de tópicos. Estos se pueden dividir en función de si son probabilísticos, no probabilísticos o basados en embeddings y también según el uso de enfoques de bolsa de palabras o secuencia de palabras. Los enfoques no probabilísticos son enfoques algebraicos de factorización matricial y surgieron a
 
 Los modelos basados en la bolsa de palabras (Bag of Words - BOW en inglés) ignoran el orden de las palabras y solo se considera la frecuencia con la que aparecen en el documento. En otras palabras, los modelos basados en secuencias de palabras consideran el orden de las palabras, capturando así las relaciones entre términos en el contexto de una frase. Esto es útil para analizar temas cuando el contexto de una palabra cambia según su posición (Kherwa & Bansal, 2019)
@@ -46,7 +45,6 @@ Dentro de los modelos no probabilísticos, se encuentran técnicas como Latent S
 Así, LSA facilita la identificación de patrones y temas latentes en grandes colecciones de texto, ya que descubre asociaciones entre términos que no son evidentes en el análisis superficial de la frecuencia de palabras. En esta línea, el NMF incorpora en su modelo restricciones de no negatividad, lo que puede hacer que los resultados sean más interpretables.
 
 Por último, los modelos basados en embeddings, como BERTopic y TopVec2, se fundamentan en una arquitectura de redes neuronales conocida como Transformers, desarrollada en el artículo "Attention is All You Need". A diferencia de enfoques anteriores que analizan las palabras de manera secuencial, los Transformers evalúan todas las palabras en una oración simultáneamente, lo que les permite captar relaciones entre palabras a larga distancia.
-
 :::
 
 ## Latent Dirichlet Allocation (LDA)
