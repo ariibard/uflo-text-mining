@@ -1,4 +1,5 @@
 % Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
@@ -7,21 +8,22 @@
   letterpaper,
   DIV=11,
   numbers=noendperiod]{scrreprt}
-
+\usepackage{xcolor}
 \usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 \usepackage{lmodern}
-\ifPDFTeX\else  
-    % xetex/luatex font selection
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -39,9 +41,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\setcounter{secnumdepth}{5}
 % Make \paragraph and \subparagraph free-standing
 \makeatletter
 \ifx\paragraph\undefined\else
@@ -107,8 +106,7 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -133,6 +131,20 @@
 % Set default figure placement to htbp
 \def\fps@figure{htbp}
 \makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
 
 \KOMAoption{captions}{tableheading}
 \makeatletter
@@ -179,11 +191,9 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
-
 \usepackage{bookmark}
-
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={Taller de investigación IV - Minería de texto},
   pdfauthor={Ariana Bardauil},
@@ -205,7 +215,6 @@
 \subtitle{Licenciatura en sociología - UFLO}
 \author{Ariana Bardauil}
 \date{}
-
 \begin{document}
 \maketitle
 
@@ -583,6 +592,11 @@ También podemos realizar una nube de palabras:
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+Warning in wordcloud(names(frecuencia), frecuencia, max.words = 100, colors =
+brewer.pal(8, : harry could not be fit on page. It will not be plotted.
+\end{verbatim}
+
 \pandocbounded{\includegraphics[keepaspectratio]{clases/clase1_T_files/figure-pdf/unnamed-chunk-12-1.pdf}}
 
 \part{\textbf{Clase 2. Expresiones regulares}}
@@ -614,28 +628,24 @@ desde el 6 de agosto de 1996.
 \end{Shaded}
 
 \begin{verbatim}
-Warning: package 'tidyverse' was built under R version 4.3.3
+Warning: package 'ggplot2' was built under R version 4.4.3
 \end{verbatim}
 
 \begin{verbatim}
-Warning: package 'ggplot2' was built under R version 4.3.3
+Warning: package 'purrr' was built under R version 4.4.3
 \end{verbatim}
 
 \begin{verbatim}
-Warning: package 'readr' was built under R version 4.3.3
-\end{verbatim}
-
-\begin{verbatim}
-Warning: package 'dplyr' was built under R version 4.3.2
+Warning: package 'dplyr' was built under R version 4.4.3
 \end{verbatim}
 
 \begin{verbatim}
 -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
 v dplyr     1.1.4     v readr     2.1.5
-v forcats   1.0.0     v stringr   1.5.0
-v ggplot2   3.5.1     v tibble    3.2.1
-v lubridate 1.9.3     v tidyr     1.3.0
-v purrr     1.0.2     
+v forcats   1.0.0     v stringr   1.5.1
+v ggplot2   3.5.2     v tibble    3.2.1
+v lubridate 1.9.3     v tidyr     1.3.1
+v purrr     1.0.4     
 -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 x dplyr::filter() masks stats::filter()
 x dplyr::lag()    masks stats::lag()
@@ -649,12 +659,8 @@ i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all confl
 \end{Shaded}
 
 \begin{verbatim}
-Warning: package 'janitor' was built under R version 4.3.3
-\end{verbatim}
 
-\begin{verbatim}
-
-Attaching package: 'janitor'
+Adjuntando el paquete: 'janitor'
 
 The following objects are masked from 'package:stats':
 
@@ -698,17 +704,17 @@ un poco la base
 \begin{verbatim}
 Rows: 748,671
 Columns: 11
-$ norma_id                <dbl> 78404, 78405, 78406, 78407, 78408, 78409, 7841~
-$ norma_tipo              <chr> "DECRETO SINTETIZADO", "DECRETO SINTETIZADO", ~
-$ norma_numero            <dbl> 1570, 1574, 1576, 1577, 1579, 1591, 1596, 1597~
-$ norma_anio_sancion      <dbl> 2005, 2005, 2005, 2005, 2005, 2005, 2005, 2005~
-$ norma_anio_publicacion  <dbl> 2005, 2005, 2005, 2005, 2005, 2005, 2005, 2005~
-$ norma_organismo_emisor  <chr> "GOBIERNO DE LA CIUDAD AUTONOMA DE BUENOS AIRE~
-$ norma_fecha_sancion     <chr> "14/10/2005", "14/10/2005", "14/10/2005", "14/~
-$ norma_fecha_publicacion <chr> "31/10/2005", "31/10/2005", "31/10/2005", "31/~
+$ norma_id                <dbl> 12861, 12862, 12863, 12864, 12865, 12866, 1286~
+$ norma_tipo              <chr> "DECLARACION", "DECLARACION", "DECLARACION", "~
+$ norma_numero            <dbl> 108, 110, 112, 113, 114, 115, 119, 120, 123, 4~
+$ norma_anio_sancion      <dbl> 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001~
+$ norma_anio_publicacion  <dbl> 2001, 2001, 2001, 2001, 2001, 2001, 2001, 2001~
+$ norma_organismo_emisor  <chr> "LEGISLATURA DE LA CIUDAD AUTONOMA DE BUENOS A~
+$ norma_fecha_sancion     <chr> "05/07/2001", "05/07/2001", "05/07/2001", "05/~
+$ norma_fecha_publicacion <chr> "19/07/2001", "19/07/2001", "19/07/2001", "19/~
 $ norma_alcance           <chr> "PARTICULAR", "PARTICULAR", "PARTICULAR", "PAR~
 $ norma_gestion           <chr> "Aníbal Ibarra", "Aníbal Ibarra", "Aníbal Ibar~
-$ norma_sintesis          <chr> "SECRETARÍA JEFE DE GABINETE - DESIGNA A GENOV~
+$ norma_sintesis          <chr> "DECLARA DE INTERÉS CULTURAL LA HISTORIETA MAF~
 \end{verbatim}
 
 \begin{Shaded}
@@ -1616,7 +1622,7 @@ para tu trabajo final), aplicá las siguientes técnicas vistas en clase:
 
 \part{Clase 7. Sentiment Analisis y Medidas de similitud y distancia}
 
-\chapter{C6. Antes de la clase}\label{c6.-antes-de-la-clase-1}
+\chapter{C7. Antes de la clase}\label{c7.-antes-de-la-clase}
 
 \section{\texorpdfstring{\textbf{1. Instalá los
 Paquetes}}{1. Instalá los Paquetes}}\label{instaluxe1-los-paquetes-3}
@@ -1628,25 +1634,88 @@ en la consola de RStudio:
 \begin{Highlighting}[]
 
 \NormalTok{paquetes\_lista }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
-  \StringTok{"spacyr"}\NormalTok{, }\StringTok{"udpipe"}\NormalTok{)}
+  \StringTok{"tidytext"}\NormalTok{, }\StringTok{"janitor"}\NormalTok{,}\StringTok{"highcharter"}\NormalTok{, }\StringTok{"stringdist"}\NormalTok{,}\StringTok{"pheatmap"}\NormalTok{)}
 
 \FunctionTok{install.packages}\NormalTok{(paquetes\_lista)}
-
-\CommentTok{\# Instala spacyr}
-\FunctionTok{library}\NormalTok{(spacyr)}
-\FunctionTok{spacy\_install}\NormalTok{()}
-
-\CommentTok{\# Descarga el modelo}
-
-\FunctionTok{spacy\_download\_langmodel}\NormalTok{(}\StringTok{"es\_dep\_news\_trf"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\chapter{C6. Presentación}\label{c6.-presentaciuxf3n-1}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Descarga el siguiente
+  \href{https://drive.google.com/file/d/1wIUQbm1EscRhhjHfTIDCQi_h63nSzY3g/view?usp=drive_link}{CSV}
+\end{enumerate}
+
+\chapter{C7. Presentación}\label{c7.-presentaciuxf3n}
 
 En esta clase exploramos \textbf{tres técnicas fundamentales del
 procesamiento del lenguaje natural (NLP)} aplicadas a textos en español,
 utilizando herramientas del ecosistema R: POS tagging, WDS y NER
+
+\chapter{C7. Taller Practico}\label{c7.-taller-practico}
+
+Utilizando el dataset \texttt{tango}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Armar un sentiment analisis comparando autores y años
+\item
+  Compará las letras entre dos o más autores utilizando diferentes
+  medidas de distancia
+\item
+  Analiza los resultados
+\end{enumerate}
+
+\part{Clase 8. Representación vectorial de textos }
+
+\chapter{C8. Antes de la clase}\label{c8.-antes-de-la-clase}
+
+\section{\texorpdfstring{\textbf{1. Instalá los
+Paquetes}}{1. Instalá los Paquetes}}\label{instaluxe1-los-paquetes-4}
+
+Instalá los siguientes paquetes copiando y pegando el siguiente código
+en la consola de RStudio:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{paquetes\_lista }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+  \StringTok{"forcats"}\NormalTok{, }\StringTok{"text2vec"}\NormalTok{, }\StringTok{"umap"}\NormalTok{, }\StringTok{"plotly"}\NormalTok{)}
+
+\FunctionTok{install.packages}\NormalTok{(paquetes\_lista)}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{C8. Presentación}\label{c8.-presentaciuxf3n}
+
+\part{Clase 9. Modelado de tópicos }
+
+\chapter{C9. Presentación}\label{c9.-presentaciuxf3n}
+
+\part{Clase 10. Clasificación }
+
+\chapter{C10. Antes de la clase}\label{c10.-antes-de-la-clase}
+
+\section{\texorpdfstring{\textbf{1. Instalá los
+Paquetes}}{1. Instalá los Paquetes}}\label{instaluxe1-los-paquetes-5}
+
+Instalá los siguientes paquetes copiando y pegando el siguiente código
+en la consola de RStudio:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{paquetes\_lista }\OtherTok{\textless{}{-}}  \FunctionTok{c}\NormalTok{(}\StringTok{"recipes"}\NormalTok{, }\StringTok{"prodlim"}\NormalTok{, }\StringTok{"workflowsets"}\NormalTok{, }\StringTok{"tidymodels"}\NormalTok{, }\StringTok{"textrecipes"}\NormalTok{,}\StringTok{"discrim"}\NormalTok{, }\StringTok{"naivebayes"}\NormalTok{)}
+
+\FunctionTok{install.packages}\NormalTok{(paquetes\_lista)}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{C10. Presentación}\label{c10.-presentaciuxf3n}
 
 \part{\textbf{Referencias}}
 

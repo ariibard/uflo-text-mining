@@ -1,80 +1,5 @@
 [
   {
-    "objectID": "clases/clase7_C.html",
-    "href": "clases/clase7_C.html",
-    "title": "C7. Presentación",
-    "section": "",
-    "text": "En esta clase exploramos tres técnicas fundamentales del procesamiento del lenguaje natural (NLP) aplicadas a textos en español, utilizando herramientas del ecosistema R: POS tagging, WDS y NER",
-    "crumbs": [
-      "<b>Clase 7. Sentiment Analisis y Medidas de similitud y distancia</b>",
-      "<span class='chapter-number'>24</span>  <span class='chapter-title'>C7. Presentación</span>"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Taller de investigación IV - Minería de texto",
-    "section": "",
-    "text": "¡Bienvenidxs al curso de Minería de Texto aplicado a las Ciencias Sociales!\nEste curso tiene como objetivo introducirte en el análisis de datos no estructurados en formato textual. A lo largo de las semanas, aprenderás a aplicar herramientas de Text Mining, combinando metodologías cualitativas y análisis estadístico para procesar grandes volúmenes de texto.",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>**Inicio**</span>"
-    ]
-  },
-  {
-    "objectID": "index.html#información-general",
-    "href": "index.html#información-general",
-    "title": "Taller de investigación IV - Minería de texto",
-    "section": "Información General",
-    "text": "Información General\nCurso: Taller de Investigación IV - UFLO\nInicio: 20/03/2025\nFinaliza: 3/06/2025\nDía y hora: Jueves, 19:00 hs (On-line)\nPlataforma: Campus UFLO",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>**Inicio**</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase6_A.html",
-    "href": "clases/clase6_A.html",
-    "title": "C6. Antes de la clase",
-    "section": "",
-    "text": "1. Instalá los Paquetes\nInstalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:",
-    "crumbs": [
-      "<b>Clase 6. POS Tagging, WSD y NER</b>",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>C6. Antes de la clase</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase6_A.html#instalá-los-paquetes",
-    "href": "clases/clase6_A.html#instalá-los-paquetes",
-    "title": "C6. Antes de la clase",
-    "section": "",
-    "text": "paquetes_lista &lt;- c(\n  \"spacyr\", \"udpipe\")\n\ninstall.packages(paquetes_lista)\n\n# Instala spacyr\nlibrary(spacyr)\nspacy_install()\n\n# Descarga el modelo\n\nspacy_download_langmodel(\"es_dep_news_trf\")",
-    "crumbs": [
-      "<b>Clase 6. POS Tagging, WSD y NER</b>",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>C6. Antes de la clase</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase7_T.html",
-    "href": "clases/clase7_T.html",
-    "title": "C7. Taller Practico",
-    "section": "",
-    "text": "Utilizando el dataset tango\n\nArmar un sentiment analisis comparando autores y años\nCompará las letras entre dos o más autores utilizando diferentes medidas de distancia\nAnaliza los resultados",
-    "crumbs": [
-      "<b>Clase 7. Sentiment Analisis y Medidas de similitud y distancia</b>",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>C7. Taller Practico</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase5_C.html",
-    "href": "clases/clase5_C.html",
-    "title": "C5. Presentación",
-    "section": "",
-    "text": "En esta clase aprenderás a implementar técnicas para eliminar ruido textual (caracteres especiales, puntuación, normalización de texto) y procesar textos en R mediante tokenización, eliminación de stopwords y lematización.",
-    "crumbs": [
-      "<b>Clase 5. Preprocesamiento: tokenización, lematización, limpieza y eliminación de ruido textual</b>",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>C5. Presentación</span>"
-    ]
-  },
-  {
     "objectID": "clases/clase4_C.html",
     "href": "clases/clase4_C.html",
     "title": "C4. Presentación",
@@ -86,80 +11,14 @@
     ]
   },
   {
-    "objectID": "clases/clase4_TP.html",
-    "href": "clases/clase4_TP.html",
-    "title": "C4. Taller práctico",
+    "objectID": "clases/clase3_C.html",
+    "href": "clases/clase3_C.html",
+    "title": "C3. Presentación",
     "section": "",
-    "text": "Tarea: Scrapear una página web",
+    "text": "En esta clase aprenderás a consumir APIs utilizando CURL y R. Y, a descargar y trabajar con subtítulos de YouTube.",
     "crumbs": [
-      "**Clase 4. Webscrapping**",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>C4. Taller práctico</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase4_TP.html#tarea-scrapear-una-página-web",
-    "href": "clases/clase4_TP.html#tarea-scrapear-una-página-web",
-    "title": "C4. Taller práctico",
-    "section": "",
-    "text": "Elegir una página web\ngenerar un dataset a través de scrapeo con {rvest}\n\n\nEntregable:\nArchivo .R o rmd con el procesamiento",
-    "crumbs": [
-      "**Clase 4. Webscrapping**",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>C4. Taller práctico</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase8_A.html",
-    "href": "clases/clase8_A.html",
-    "title": "C8. Antes de la clase",
-    "section": "",
-    "text": "1. Instalá los Paquetes\nInstalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:",
-    "crumbs": [
-      "<b>Clase 8. Representación vectorial de textos </b>",
-      "<span class='chapter-number'>26</span>  <span class='chapter-title'>C8. Antes de la clase</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase8_A.html#instalá-los-paquetes",
-    "href": "clases/clase8_A.html#instalá-los-paquetes",
-    "title": "C8. Antes de la clase",
-    "section": "",
-    "text": "paquetes_lista &lt;- c(\n  \"forcats\", \"text2vec\", \"umap\", \"plotly\")\n\ninstall.packages(paquetes_lista)",
-    "crumbs": [
-      "<b>Clase 8. Representación vectorial de textos </b>",
-      "<span class='chapter-number'>26</span>  <span class='chapter-title'>C8. Antes de la clase</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase8_C.html",
-    "href": "clases/clase8_C.html",
-    "title": "C7. Presentación",
-    "section": "",
-    "text": "En esta clase exploramos tres técnicas fundamentales del procesamiento del lenguaje natural (NLP) aplicadas a textos en español, utilizando herramientas del ecosistema R: POS tagging, WDS y NER",
-    "crumbs": [
-      "<b>Clase 8. Representación vectorial de textos </b>",
-      "<span class='chapter-number'>27</span>  <span class='chapter-title'>C7. Presentación</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase10_A.html",
-    "href": "clases/clase10_A.html",
-    "title": "C10. Antes de la clase",
-    "section": "",
-    "text": "1. Instalá los Paquetes\nInstalá los siguientes paquetes copiando y pegando el siguiente código en la consola de RStudio:",
-    "crumbs": [
-      "<b>Clase 10. Clasificación </b>",
-      "<span class='chapter-number'>29</span>  <span class='chapter-title'>C10. Antes de la clase</span>"
-    ]
-  },
-  {
-    "objectID": "clases/clase10_A.html#instalá-los-paquetes",
-    "href": "clases/clase10_A.html#instalá-los-paquetes",
-    "title": "C10. Antes de la clase",
-    "section": "",
-    "text": "paquetes_lista &lt;-  c(\"recipes\", \"prodlim\", \"workflowsets\", \"tidymodels\", \"textrecipes\",\"discrim\", \"naivebayes\")\n\ninstall.packages(paquetes_lista)",
-    "crumbs": [
-      "<b>Clase 10. Clasificación </b>",
-      "<span class='chapter-number'>29</span>  <span class='chapter-title'>C10. Antes de la clase</span>"
+      "**Clase 3. Fuentes de datos textuales: APIS, Subtítulos y PDFs**",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>C3. Presentación</span>"
     ]
   }
 ]
